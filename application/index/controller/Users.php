@@ -1,8 +1,9 @@
 <?php
 namespace app\index\controller;
-use think\Controller;
 
-class Index extends Controller
+use think\Controller;
+use app\index\model\User as UsersModel;
+class Users extends Controller
 {
     /**
      * 首页
@@ -10,6 +11,8 @@ class Index extends Controller
      */
     public function index()
     {
-      return $this->fetch();
+
     }
+
+
 }

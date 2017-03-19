@@ -1,0 +1,202 @@
+<style>
+     .chz_spa{
+         color: #aaa;
+     }
+</style>
+<div class="header">
+    <div class="am-g">
+        <h1>Farer</h1>
+        <p>一个友好的旅游网站<br/>欢迎您注册</p>
+    </div>
+    <hr />
+</div>
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+        <hr>
+        <br>
+        <br>
+
+        <form method="post" class="am-form" action="{:url('index/Auth/doRegister')}" name="register"  method="post" onsubmit="false">
+            <label for="username">用户名:</label>
+            <input type="text" name="username" id="username" value="">
+            <br>
+            <span class="chz_spa spa1">用户名为数字字母6-10位</span>
+            <br>
+
+
+            <label for="email">邮箱:</label>
+            <input type="text" name="email" id="email" value="">
+            <br>
+            <span class="chz_spa spa2">请输入正确的邮箱</span>
+            <br>
+            <label for="password">密码:</label>
+            <input type="password" name="password" id="password" value="">
+            <br>
+            <span class="chz_spa spa3">以字母开头，长度在6-18之间，只能包含字符、数字和下划线。</span>
+            <br>
+            <label for="ifpassword">确认密码:</label>
+            <input type="password" name="ifpassword" id="ifpassword" value="">
+            <br>
+            <span class="chz_spa spa4">两次密码要一致</span>
+            <br>
+            <label for="remember-me">
+                <input id="remember-me" type="checkbox">
+                记住密码
+            </label>
+            <br />
+            <div class="am-cf">
+                <input type="submit" name="" value="注 册" class="am-btn am-btn-primary am-btn-sm am-fl" id="sub">
+                <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+            </div>
+        </form>
+        <hr>
+        <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC_URL__/js/jquery-1.12.4.js"></script>
+<script>
+    $("#username").focus();
+    var chz_flag = '';
+    $("input").blur(function(){
+//        $(".spa").css("color","#BD362F");
+        if($(this).is("#username")){             //姓名判断
+            var na= /^[a-zA-Z0-9]{3,20}$/;;
+            if($("#username").val()!=""){
+                if(!(na.test($("#username").val()))){
+
+                    $(".spa1").text("用户名长度输入错误").css("color","#BD362F");
+                    $(this).css("border","1px solid #BD362F");
+                    return false;
+                }else if(na){
+                    $(".spa1").text("用户名正确").css('color','green');
+                    chz_flag += 'a';
+                    return true;
+
+                }
+            }else{
+
+                $(".spa1").text("用户名不能为空").css('color','#BD362F');
+            }
+        }
+        if($(this).is("#email")){            //邮箱判断
+            var ph=/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+            if($("#email").val()!=""){
+                if(!(ph.test($("#email").val()))){
+                    $(".spa2").text("邮箱输入错误").css("color","#BD362F");
+                    $(this).css("border","1px solid #BD362F");
+                    return false;
+                }else if(ph){
+                    $(".spa2").text("邮箱正确").css('color','green');
+                    chz_flag += 'b';
+                    return true;
+
+                }
+            }else{
+                $(".spa2").text("邮箱不能为空").css("color","#BD362F");
+            }
+        }
+
+        if($(this).is("#password")){            //密码判断
+            var ad=/^[a-zA-Z]\w{5,17}$/;
+            if($("#password").val()!=""){
+                if(!(ad.test($("#password").val()))){
+                    $(".spa3").text("密码输入错误").css("color","#BD362F");
+                    $(this).css("border","1px solid #BD362F");
+                    return false;
+                }else if(ad){
+                    $(".spa3").text("密码正确").css('color','green');
+                    chz_flag += 'c';
+                    return true;
+
+                }
+            }else{
+                $(".spa3").text("密码不能为空").css("color","#BD362F");
+
+            }
+
+
+
+        }
+
+
+
+        if($(this).is("#ifpassword")){            //两次密码判断
+
+            if($("#password").val()!=""){
+                if($('#password').val() == $('#ifpassword').val())
+                {
+                    $(".spa4").text("两次密码一致").css('color','green');
+                    chz_flag += 'd';
+                    return true;
+
+                }else{
+                    $(".spa4").text("两次密码不一致").css("color","#BD362F");
+                    $(this).css("border","1px solid #BD362F");
+                    return false;
+                }
+            }else{
+                $(".spa4").text("请先输入密码").css("color","#BD362F");
+            }
+        }
+
+
+
+
+
+
+
+    });
+
+
+
+    $("input").focus(function(){
+        if($(this).is("#username")){
+            $(".spa1").text("用户名为数字字母3-20位").css("color","#aaa")
+            $(this).css("border","1px solid #aaa")
+        }
+        if($(this).is("#email")){
+            $(".spa2").text("请输入正确的格式").css("color","#aaa")
+            $(this).css("border","1px solid #aaa")
+        }
+        if($(this).is("#password")){
+            $(".spa3").text("以字母开头，长度在6-18之间，只能包含字符、数字和下划线。").css("color","#aaa")
+            $(this).css("border","1px solid #aaa")
+        }
+        if($(this).is("#password")){
+            $(".spa4").text("两次密码要一致").css("color","#aaa")
+            $(this).css("border","1px solid #aaa")
+        }
+    })
+
+
+
+
+
+
+
+
+    $('#sub').on('click',function(){
+
+        if(chz_flag === 'abcd'){
+
+            $.post($('form').attr('action'),$('form').serialize(),function(data){
+                if(!data.status)
+                {
+                    alert(data.msg);
+                }else{
+                    alert(data.url)
+                        location.href = data.url;
+
+                }
+            }, 'json');
+            return false;
+        }else {
+            return false;
+
+
+        }
+
+    })
+</script>
+
