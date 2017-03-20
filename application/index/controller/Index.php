@@ -2,7 +2,9 @@
 namespace app\index\controller;
 use think\Controller;
 
-class Index extends Controller
+//use think\Session;
+
+class Index extends Auth
 {
     /**
      * 首页
@@ -10,6 +12,17 @@ class Index extends Controller
      */
     public function index()
     {
-      return $this->fetch();
+//        dump(Session::get('user','auth'));
+//        die;
+        $this->assign('title','首页');
+        return $this->fetch();
     }
+
+    public function successLoad()
+    {
+        $this->assign('title','loadiing');
+        return $this->fetch();
+    }
+
+
 }

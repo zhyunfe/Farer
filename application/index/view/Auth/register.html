@@ -185,9 +185,7 @@
                 {
                     alert(data.msg);
                 }else{
-                    alert(data.url)
-                        location.href = data.url;
-
+                        location.href = '{:url("/index/index/successload")}';
                 }
             }, 'json');
             return false;

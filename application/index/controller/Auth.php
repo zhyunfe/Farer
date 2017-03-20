@@ -10,8 +10,10 @@ use think\Controller;
 use think\Request;
 use think\Validate;
 use app\index\model\Users;
+//use think\session;
 class Auth extends Controller
 {
+
     public function login()
     {
         $this->assign('title','登陆');
@@ -50,9 +52,25 @@ class Auth extends Controller
         }else{
             $data['password'] = md5($data['password']);
             $user->data($data);
-            $user->save();
-            return json(['status' => 1,'url'=>'../../../application/index/view/success.html']);
+            $neuser = $user->save();
+
+            if($neuser)
+            {
+                return json(['status' => 1]);
+            }
+
         }
+//        Session::init([
+//            'prefix' => '',
+//            'type' => '',
+//            'auto_start' => true,
+//        ]);
+//        $neid = $user->getLastInsId();
+//        $chz_user = $user->where("uid = $neid")->select();
+//        $chz_user = $chz_user->toArray();
+//        Session::set('user',$chz_user);
+
+
     }
     public function logOut()
     {
