@@ -44,6 +44,7 @@ class Auth extends Controller
 //        die;
         $ip = $_SERVER['REMOTE_ADDR'] === '::1'? '127.0.0.1':$_SERVER['REMOTE_ADDR'];
 
+
         $validate = new Validate([
             //定义验证规则
             'username'   => 'require|max:20',
@@ -60,30 +61,12 @@ class Auth extends Controller
         ];
         if (!$validate->check($data)) {
             return json(['status' => 0,'msg'=>$validate->getError()]);
-
         }else{
             $data['password'] = md5($data['password']);
             $userb = new Users($data);
-
-//            $user->data($data);
             $userb->allowField(true)->save();
-
-
             return json(['status' => 1]);
-
-
         }
-//        Session::init([
-//            'prefix' => '',
-//            'type' => '',
-//            'auto_start' => true,
-//        ]);
-//        $neid = $user->getLastInsId();
-//        $chz_user = $user->where("uid = $neid")->select();
-//        $chz_user = $chz_user->toArray();
-//        Session::set('user',$chz_user);
-
-
     }
 
     /**
@@ -100,18 +83,15 @@ class Auth extends Controller
         }else{
             return json(['status' => 0]);
         }
-
     }
     public function doEmail(Users $user)
     {
-
         if($user->where(['email'    => input('post.username')] )->find())
         {
             return json(['status'  => 1,'msg'=>'邮箱重复了']);
         }else{
             return json(['status'  => 0]);
         }
-
     }
 
     public function logOut()
