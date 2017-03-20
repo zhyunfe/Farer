@@ -85,6 +85,7 @@
 		  var email = $('#doc-ipt-email-1').val();
 		  var password = $('#doc-ipt-pwd-1').val();
 		  if (email == "" || password == "") {
+			  $('#notfound').css('display','none');
 			  $('#fill').addClass('am-animation-shake').css('color','cyan').css('display','block').css('font-size','1em').css('text-align','center');
 			  return false;
 		  } else {

@@ -6,10 +6,12 @@
  * Time: 下午2:22
  */
 namespace app\admin\controller;
+
 use think\Controller;
 use think\Request;
 use think\Validate;
 use app\admin\model\Users;
+
 class Auth extends Controller
 {
     //存储需要验证登录的模块
@@ -21,8 +23,8 @@ class Auth extends Controller
      */
     public function _initialize()
     {
-        if(!$this->checkLogin() && (in_array(Request::instance()->action(),$this->is_check_login) || $this->is_check_login[0] == '*')) {
-            $this->error('您还没有登录',url('admin/auth/login'));
+        if (!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*')) {
+            $this->error('您还没有登录', url('admin/auth/login'));
         }
     }
 
@@ -43,7 +45,7 @@ class Auth extends Controller
      */
     public function login()
     {
-        $this->assign('title','登陆|Farer后台管理系统');
+        $this->assign('title', '登陆|Farer后台管理系统');
         return $this->fetch();
     }
 
@@ -57,21 +59,25 @@ class Auth extends Controller
     {
         if ($_POST['type'] == 'email') {
             $email  = $_POST['email'];
-            $result = $users->where('email',$email)->select();
+            $result = $users->where('email', $email)->select();
+
             if ($result) {
                 return true;
             } else {
                 return false;
             }
+
         } else if ($_POST['type'] == 'submit') {
             $email    = $_POST['email'];
             $password = $_POST['password'];
-            $pwd = $users->field('password')->where('email',$email)->find()['password'];
+            $pwd = $users->field('password')->where('email', $email)->find()['password'];
+
             if ($pwd == md5($password)) {
                 return true;
             } else {
                 return false;
             }
+
         }
     }
 
