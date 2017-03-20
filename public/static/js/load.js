@@ -26,7 +26,7 @@ $(function(){
                 setTimeout(function(){
                     $("#pageLoad").fadeOut(400,function(){
                         $(this).remove();
-                        location.href="http://localhost/topLast/git/Farer/public";
+                        location.href="http://www.farer.com";
                     });
 
                 },200);

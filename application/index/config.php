@@ -22,7 +22,7 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        '__STATIC_URL__' => 'http://localhost/topLast/git/Farer/public/static',
+        '__STATIC_URL__' => 'http://www.farer.com/static',
 //        '__PUBLIC__URL__' => 'http://localhost/topLast/git/Farer/public'
     ],
 
