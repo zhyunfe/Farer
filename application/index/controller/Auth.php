@@ -46,16 +46,16 @@ class Auth extends Controller
 
         $validate = new Validate([
             //定义验证规则
-            'username' => 'require|max:20',
-            'email' => 'email',
-            'password'=>'require|length:3,50',
-            'ifpassword'=>'require|length:3,50',
+            'username'   => 'require|max:20',
+            'email'      => 'email',
+            'password'   =>'require|length:3,50',
+            'ifpassword' =>'require|length:3,50',
         ]);
         $data = [
-            'username' => input('post.username'),
-            'email' => input('post.email'),
-            'password'=>input('post.password'),
-            'create_ip' => ip2long($ip),
+            'username'   => input('post.username'),
+            'email'      => input('post.email'),
+            'password'   =>input('post.password'),
+            'create_ip'  => ip2long($ip),
             'ifpassword' => input('post.ifpassword')
         ];
         if (!$validate->check($data)) {
@@ -105,11 +105,11 @@ class Auth extends Controller
     public function doEmail(Users $user)
     {
 
-        if($user->where(['email' => input('post.username')] )->find())
+        if($user->where(['email'    => input('post.username')] )->find())
         {
-            return json(['status' => 1,'msg'=>'邮箱重复了']);
+            return json(['status'  => 1,'msg'=>'邮箱重复了']);
         }else{
-            return json(['status' => 0]);
+            return json(['status'  => 0]);
         }
 
     }
