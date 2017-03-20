@@ -12,8 +12,6 @@ class Index extends Auth
      */
     public function index()
     {
-//        dump(Session::get('user','auth'));
-//        die;
         $this->assign('title','首页');
         return $this->fetch();
     }

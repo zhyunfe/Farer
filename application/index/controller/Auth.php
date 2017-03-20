@@ -76,7 +76,6 @@ class Auth extends Controller
      */
     public function doUser(Users $user)
     {
-
         if ($user->where(['username' => input('post.username')])->find()) {
             return json(['status' => 1, 'msg' => '用户名重复了']);
         } else {
@@ -86,13 +85,11 @@ class Auth extends Controller
 
     public function doEmail(Users $user)
     {
-
-
-        if($user->where(['email'    => input('post.username')] )->find())
+        if($user->where(['email'  => input('post.username')] )->find())
         {
-            return json(['status'  => 1,'msg'=>'邮箱重复了']);
+            return json(['status' => 1,'msg'=>'邮箱重复了']);
         }else{
-            return json(['status'  => 0]);
+            return json(['status' => 0]);
         }
     }
 
