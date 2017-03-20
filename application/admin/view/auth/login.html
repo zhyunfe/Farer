@@ -1,0 +1,110 @@
+{__NOLAYOUT__}
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Farer主要是搭建一个智能手机上的随心行服务平台，以“随心行”为核心，提供全国旅游目的的旅游攻略、旅游问答、旅游点评咨询，以及酒店、交通、当地游等随心行产品及服务
+">
+	<meta name="keywords" content="Farer|随心行|旅行攻略|">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{$title}</title>
+	<meta name="description" content="这是一个 index 页面">
+	<meta name="keywords" content="index">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="icon" type="image/png" href="__STATIC_URL__/assets/i/favicon.png">
+	<link rel="apple-touch-icon-precomposed" href="__STATIC_URL__/assets/i/app-icon72x72@2x.png">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+	<link rel="stylesheet" href="__STATIC_URL__/assets/css/amazeui.min.css" />
+	<link rel="stylesheet" href="__STATIC_URL__/assets/css/admin.css">
+	<link rel="stylesheet" href="__STATIC_URL__/assets/css/app.css">
+	<script src="__STATIC_URL__/assets/js/echarts.min.js"></script>
+</head>
+<body data-type="login">
+
+  <div class="am-g myapp-login">
+	<div class="myapp-login-logo-block  tpl-login-max">
+		<div class="myapp-login-logo-text">
+			<div class="myapp-login-logo-text">
+				Farer后台管理<i class="am-icon-skyatlas"></i>
+			</div>
+		</div>
+
+		<div class="login-font">
+			<i>Log In </i>
+		</div>
+		<div class="am-u-sm-10 login-am-center">
+			<form class="am-form" action="{:url('admin/auth/doLogin')}" method="post">
+				<div class="am-form-group" id="notfound" style="display: none">用户不存在</div>
+				<div class="am-form-group" id="passerror" style="display: none">密码错误</div>
+				<div class="am-form-group" id="fill" style="display: none">请输入用户名和密码</div>
+				<fieldset>
+					<div class="am-form-group">
+						<input type="email" class="" id="doc-ipt-email-1" placeholder="请输入邮箱" name="email">
+					</div>
+					<div class="am-form-group">
+						<input type="password" class="" id="doc-ipt-pwd-1" placeholder="请输入密码">
+					</div>
+					<p><button type="submit" class="am-btn am-btn-default" id="submit">登录</button></p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+  <script src="__STATIC_URL__/js/jquery-1.12.4.js"></script>
+  <script src="__STATIC_URL__/assets/js/amazeui.min.js"></script>
+  <script src="__STATIC_URL__/assets/js/iscroll.js"></script>
+  <script src="__STATIC_URL__/assets/js/app.js"></script>
+  <script>
+	  $('#doc-ipt-email-1').focus(function(){
+		  $('#notfound').css('display','none');
+		  $('#fill').css('display','none');
+	  });
+
+	  $('#doc-ipt-pwd-1').focus(function(){
+		  $('#passerror').css('display','none');
+		  $('#fill').css('display','none');
+	  });
+
+	  $('#doc-ipt-email-1').blur(function(){
+
+		  var email = $('#doc-ipt-email-1').val();
+		  if (email != "") {
+			  $.ajax({method: 'post',url:"{:url('admin/auth/doLogin')}",data:{email:email,type:'email'},success:function(data){
+				  if (!data) {
+					  $('#notfound').addClass('am-animation-shake').css('color','cyan').css('display','block').css('font-size','1em').css('text-align','center');
+				  }
+			  },fail:function(data){
+				  alert('请求失败');
+			  },asyn:true,dataType:'json'});
+		  }
+	  });
+	  $('#submit').on('click',function(){
+		  var email = $('#doc-ipt-email-1').val();
+		  var password = $('#doc-ipt-pwd-1').val();
+		  if (email == "" || password == "") {
+			  $('#fill').addClass('am-animation-shake').css('color','cyan').css('display','block').css('font-size','1em').css('text-align','center');
+			  return false;
+		  } else {
+			  $.ajax({method: 'post',url:"{:url('admin/auth/doLogin')}",data:{email:email,password:password,type:'submit'},success:function(data){
+				  if (!data) {
+					  $('#passerror').addClass('am-animation-shake').css('color','cyan').css('display','block').css('font-size','1em').css('text-align','center');
+					  return false;
+				  } else {
+					  location.href = '{:url("/admin/index/index")}';
+					  return false;
+				  }
+			  },fail:function(data){
+				  alert('请求失败');
+			  },asyn:true,dataType:'json'});
+
+			  return false;
+		  }
+		  return false;
+	  });
+  </script>
+</body>
+
+</html>
