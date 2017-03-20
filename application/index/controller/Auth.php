@@ -48,8 +48,10 @@ class Auth extends Controller
 //        die;
         $ip = $_SERVER['REMOTE_ADDR'] === '::1' ? '127.0.0.1' : $_SERVER['REMOTE_ADDR'];
 
+
         $validate = new Validate([
             //定义验证规则
+<<<<<<< HEAD
             'username' => 'require|max:20',
             'email' => 'email',
             'password' => 'require|length:3,50',
@@ -66,28 +68,28 @@ class Auth extends Controller
             return json(['status' => 0, 'msg' => $validate->getError()]);
 
         } else {
+=======
+            'username'   => 'require|max:20',
+            'email'      => 'email',
+            'password'   =>'require|length:3,50',
+            'ifpassword' =>'require|length:3,50',
+        ]);
+        $data = [
+            'username'   => input('post.username'),
+            'email'      => input('post.email'),
+            'password'   =>input('post.password'),
+            'create_ip'  => ip2long($ip),
+            'ifpassword' => input('post.ifpassword')
+        ];
+        if (!$validate->check($data)) {
+            return json(['status' => 0,'msg'=>$validate->getError()]);
+        }else{
+>>>>>>> 04fca1ca80454a7cd93ea9940a123a588e0e0366
             $data['password'] = md5($data['password']);
             $userb = new Users($data);
-
-//            $user->data($data);
             $userb->allowField(true)->save();
-
-
             return json(['status' => 1]);
-
-
         }
-//        Session::init([
-//            'prefix' => '',
-//            'type' => '',
-//            'auto_start' => true,
-//        ]);
-//        $neid = $user->getLastInsId();
-//        $chz_user = $user->where("uid = $neid")->select();
-//        $chz_user = $chz_user->toArray();
-//        Session::set('user',$chz_user);
-
-
     }
 
     /**
@@ -103,18 +105,24 @@ class Auth extends Controller
         } else {
             return json(['status' => 0]);
         }
-
     }
 
     public function doEmail(Users $user)
     {
+<<<<<<< HEAD
 
         if ($user->where(['email' => input('post.username')])->find()) {
             return json(['status' => 1, 'msg' => '邮箱重复了']);
         } else {
             return json(['status' => 0]);
+=======
+        if($user->where(['email'    => input('post.username')] )->find())
+        {
+            return json(['status'  => 1,'msg'=>'邮箱重复了']);
+        }else{
+            return json(['status'  => 0]);
+>>>>>>> 04fca1ca80454a7cd93ea9940a123a588e0e0366
         }
-
     }
 
     public function logOut()
