@@ -40,4 +40,9 @@ class Index extends Controller
         $this->assign('title','用户管理');
         return $this->fetch();
     }
+    public function test()
+    {
+        $this->assign('title','测试界面');
+        var_dump($this->fetch());
+    }
 }

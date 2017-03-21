@@ -10,13 +10,24 @@
     <meta name="keywords" content="Farer|随心行|旅行攻略|">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
     <link rel="icon" type="image/png" href="__STATIC_URL__/assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="__STATIC_URL__/assets/i/app-icon72x72@2x.png">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <meta name="apple-mobile-web-app-title" content="Amaze UI">
+    <script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
     <link rel="stylesheet" href="__STATIC_URL__/assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="__STATIC_URL__/assets/css/admin.css">
     <link rel="stylesheet" href="__STATIC_URL__/assets/css/app.css">
+    <!--加载地图-->
+    <link rel="stylesheet" href="__STATIC_URL__/map/css/MapCtrl.css" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tzAcIFZ5xCoRwm63NcBGfoVB"></script>
+    <!--加载鼠标绘制工具-->
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+    <!--加载检索信息窗口-->
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+    <!--加载地图结束-->
     <script src="__STATIC_URL__/assets/js/echarts.min.js"></script>
 </head>
 <body data-type="generalComponents">
@@ -233,7 +244,7 @@
                     </a>
                     <ul class="tpl-left-nav-sub-menu" style="display: none;">
                         <li>
-                            <a class="add">
+                            <a class="add" id="addHome">
                                 <i class="am-icon-angle-right"></i>
                                 <span>添加酒店</span>
                             </a>
@@ -277,8 +288,6 @@
 
         </div>
     </div>
-
-    <script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
     <script src="__STATIC_URL__/assets/js/amazeui.min.js"></script>
     <script src="__STATIC_URL__/assets/js/iscroll.js"></script>
     <script src="__STATIC_URL__/assets/js/app.js"></script>
@@ -301,7 +310,7 @@
                         fail: function (data) {
 
                         },
-                        async: true,
+                        async: false,
                         dataType: 'json'
                     });
 
@@ -314,7 +323,7 @@
                     $(this).addClass('active').siblings().removeClass('active');
                     var add = $(this).attr('add');
                     console.log(add);
-                    var type = ['user','hotel','case','note'];
+                    var type = ['addHotel','addCase','addNote'];
 
                     $.ajax({
                         method: 'post',
@@ -326,7 +335,7 @@
                         fail: function (data) {
 
                         },
-                        async: true,
+                        async: false,
                         dataType: 'json'
                     });
                 });
@@ -344,20 +353,27 @@
                         url: '{:url("admin/index/index")}',
                         data: {type: type[num]},
                         success: function (data) {
-//                            console.log(data);
                             $('#content').html(data);
                         },
                         fail: function (data) {
 
                         },
-                        async: true,
+                        async: false,
                         dataType: 'json'
-                    })
+                    });
                 })
             })
         });
     </script>
+    <script type="text/javascript" src="__STATIC_URL__/map/js/MapCtrl_info.js"></script>
 </div>
+<script>
+    $('#hotel_add_next').on('click',function () {
+        console.log($(this));
+        alert(124);
+        $('#baiduMap').addClass('am-animation-slide-left');
+    });
+</script>
 </body>
 {include file="baidu_js_push.php" /}
 </html>
