@@ -54,7 +54,7 @@
   <div class="order_nav">
     <ul class="box_nav am-avg-sm-4">
       <li>
-        <a title="" href="trip_list.html">
+        <a title="" href="{:url('index/farercase/triplist')}">
           <img src="__STATIC_URL__/index/images/index_icon01.png"/>
           <p>攻略</p>
         </a>
@@ -97,7 +97,7 @@
             <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
               <img src="__STATIC_URL__/index/gonglue/{$value['header_image']}"  alt="{$value['title']}"/>
               <h3 class="am-gallery-title">{$value['title']}</h3>
-              <div class="am-gallery-desc">2375-09-26</div>
+              <div class="am-gallery-desc am-gallery-title">{$value['content']}</div>
               <div class="am-gallery-desc">浏览次数<span>&nbsp;&nbsp;&nbsp;23</span></div>
             </a>
           </div>
