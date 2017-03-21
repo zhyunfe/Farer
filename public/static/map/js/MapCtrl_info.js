@@ -129,6 +129,12 @@ $('#addHome').on('click',function (){
 		},
 		async: false,
 		dataType: 'xml'
+	}).always(function () {
+		$('#hotel_add_next').on('click',function () {
+			console.log($(this));
+			alert(124);
+			$('#baiduMap').addClass('am-animation-slide-left');
+		});
 	});
 	if(!ShowAdress){
 		document.getElementById("r-result").style.display = "none";  //区域地址、详细地址显示隐藏
