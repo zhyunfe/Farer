@@ -56,25 +56,25 @@
       <li>
         <a title="" href="trip_list.html">
           <img src="__STATIC_URL__/index/images/index_icon01.png"/>
-          <p>孟津旅游</p>
+          <p>攻略</p>
         </a>
       </li>
       <li>
         <a title="" href="specialty_mall.html">
           <img src="__STATIC_URL__/index/images/index_icon02.png"/>
-          <p>特产商城</p>
+          <p>酒店</p>
         </a>
       </li>
       <li>
         <a title="" href="beautiful_detail.html">
           <img src="__STATIC_URL__/index/images/index_icon03.png"/>
-          <p>美丽乡村</p>
+          <p>游记</p>
         </a>
       </li>
       <li>
         <a title="" href="news_list.html">
           <img src="__STATIC_URL__/index/images/index_icon04.png"/>
-          <p>新闻资讯</p>
+          <p>商城</p>
         </a>
       </li>
       <div class="clear"></div>
@@ -87,262 +87,33 @@
     <div class="am-tabs" data-am-tabs>
       <div id="item_name">
         <img src="__STATIC_URL__/index/images/index_icon05.png">
-        <span>孟津旅游</span>
+        <span>热门攻略</span>
       </div>
-      <ul class="am-tabs-nav am-nav am-nav-tabs am-avg-sm-2">
-        <li class="am-active"><a href="#tab1">旅游活动</a></li>
-        <li><a href="#tab2">旅游景区</a></li>
+      <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+        {foreach $content as $value}
+        <li>
+          <div class="am-gallery-item">
+            <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+              <img src="__STATIC_URL__/index/gonglue/{$value['header_image']}"  alt="{$value['title']}"/>
+              <h3 class="am-gallery-title">{$value['title']}</h3>
+              <div class="am-gallery-desc">2375-09-26</div>
+              <div class="am-gallery-desc">浏览次数<span>&nbsp;&nbsp;&nbsp;23</span></div>
+            </a>
+          </div>
+        </li>
+        {/foreach}
       </ul>
-
-      <div class="am-tabs-bd">
-        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-          <ul>
-            <li class="view">
-              <div class="pic">
-                <img src="__STATIC_URL__/index/images/trip_list_02.jpg">
-                <div class="cont">
-                  <a title="" class="button" href="activity_detail.html">查看详情</a>
-                  <div class="num">
-                    <p><span>20/30</span>人报名</p>
-                    <p>出发时间<span>2017/10/02</span></p>
-                  </div>
-                </div>
-                <div class="clear"></div>
-              </div>
-              <div class="con">
-                <span>黄河小浪底</span>
-                <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
-              </div>
-            </li>
-            <li class="view">
-              <div class="pic">
-                <img src="__STATIC_URL__/index/images/trip_list_02.jpg">
-                <div class="cont">
-                  <a title="" class="button" href="activity_detail.html">查看详情</a>
-                  <div class="num">
-                    <p><span>20/30</span>人报名</p>
-                    <p>出发时间<span>2017/10/02</span></p>
-                  </div>
-                </div>
-                <div class="clear"></div>
-              </div>
-              <div class="con">
-                <span>黄河小浪底</span>
-                <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="am-tab-panel am-fade" id="tab2">
-          <ul>
-            <li class="view">
-              <div class="pic">
-                <img src="__STATIC_URL__/index/images/trip_list_01.jpg">
-                <div class="cont">
-                  <a title="" class="button" href="view_detail.html">查看购票</a>
-                </div>
-              </div>
-              <div class="con">
-                <span>黄河小浪底</span>
-                <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
-              </div>
-            </li>
-            <li class="view">
-              <div class="pic">
-                <img src="__STATIC_URL__/index/images/trip_list_02.jpg">
-                <div class="cont">
-                  <a title="" class="button" href="view_detail.html">查看购票</a>
-                </div>
-              </div>
-              <div class="con">
-                <span>黄河小浪底</span>
-                <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
-              </div>
-            </li>
-          </ul>
-        </div>
+      <div id="more">
+        <a title=""  href="specialty_mall.html">
+          <span>更多特产 </span>
+          <i class="am-icon-angle-right" ></i>
+        </a>
       </div>
     </div>
   </div>
 
-  <!-----------特产商城----------->
-  <div id="specialty_mall">
-    <div id="item_name">
-      <img src="__STATIC_URL__/index/images/index_icon06.png">
-      <span>特产商城</span>
-    </div>
-    <ul>
-      <li>
-        <a class="project" href="project_basic.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/index/images/project_01.jpg"/>
-          </div>
-          <div class="project_cont">
-            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-          </div>
-          <div class="price">
-            <label>￥300</label>
-            <span>杰尔逊西瓜庄园</span>
-            <div class="clear"></div>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="project"  href="project_basic.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/index/images/project_02.jpg"/>
-          </div>
-          <div class="project_cont">
-            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-          </div>
-          <div class="price">
-            <label>￥300</label>
-            <span>杰尔逊西瓜庄园</span>
-            <div class="clear"></div>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="project"  href="project_basic.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/index/images/project_03.jpg"/>
-          </div>
-          <div class="project_cont">
-            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-          </div>
-          <div class="price">
-            <label>￥300</label>
-            <span>杰尔逊西瓜庄园</span>
-            <div class="clear"></div>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="project"  href="project_basic.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/index/images/project_04.jpg"/>
-          </div>
-          <div class="project_cont">
-            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-          </div>
-          <div class="price">
-            <label>￥300</label>
-            <span>杰尔逊西瓜庄园</span>
-            <div class="clear"></div>
-          </div>
-        </a>
-      </li>
-    </ul>
-    <div id="more">
-      <a title=""  href="specialty_mall.html">
-        <span>更多特产 </span>
-        <i class="am-icon-angle-right" ></i>
-      </a>
-    </div>
-  </div>
-  <!-----------美丽乡村----------->
-  <div id="beautiful_country">
-    <div id="item_name">
-      <img src="__STATIC_URL__/index/images/index_icon07.png">
-      <span>美丽乡村</span>
-    </div>
-    <ul class="am-avg-sm-2">
-      <li class="beautiful_list">
-        <a  title="" href="beautiful_detail.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/index/images/beautiful_01.jpg"/>
-          </div>
-          <div class="name">
-            <img alt="" class="head" src="__STATIC_URL__/index/images/head.jpg">
-            <span>181***5241</span>
-            <div class="num">
-              <i class="am-icon-eye"></i>
-              <span>2</span>
-              <i class="am-icon-comments"></i>
-              <span>0</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-          <label>偶遇洛阳</label>
-          <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
-        </a>
-      </li>
-      <li class="beautiful_list">
-        <a  title="" href="beautiful_detail.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/index/images/beautiful_02.jpg"/>
-          </div>
-          <div class="name">
-            <img alt="" class="head" src="__STATIC_URL__/index/images/head.jpg">
-            <span>181***5241</span>
-            <div class="num">
-              <i class="am-icon-eye"></i>
-              <span>2</span>
-              <i class="am-icon-comments"></i>
-              <span>0</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-          <label>偶遇洛阳</label>
-          <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
-        </a>
-      </li>
-    </ul>
-    <div id="more">
-      <a title=""  href="trip_list.html">
-        <span>更多景点</span>
-        <i class="am-icon-angle-right" ></i>
-      </a>
-    </div>
-  </div>
-  <!-----------新闻资讯----------->
-  <div id="news_list">
-    <div id="item_name">
-      <img src="__STATIC_URL__/index/images/index_icon08.png">
-      <span>新闻资讯</span>
-    </div>
-    <ul>
-      <li>
-        <a title="" class="news" href="news_detail.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/index/images/project_02.jpg"/>
-          </div>
-          <div class="project_cont">
-            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-          </div>
-          <div class="price">
-            <p>2015/04/16</p>
-            <span>12</span>
-            <i class="am-icon-eye"></i>
-            <div class="clear"></div>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a title="" class="news" href="news_detail.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/index/images/project_02.jpg"/>
-          </div>
-          <div class="project_cont">
-            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-          </div>
-          <div class="price">
-            <p>2015/04/16</p>
-            <span>12</span>
-            <i class="am-icon-eye"></i>
-            <div class="clear"></div>
-          </div>
-        </a>
-      </li>
-    </ul>
-    <div id="more">
-      <a title=""  href="news_list.html">
-        <span>更多资讯</span>
-        <i class="am-icon-angle-right" ></i>
-      </a>
-    </div>
-  </div>
-</div>
+
 <script>
     $(function () {
         $('.am-slider').flexslider({

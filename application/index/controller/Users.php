@@ -12,10 +12,7 @@ class Users extends Auth
      */
 //    private $is_check_login = [];
     protected $is_check_login = ['*'];
-    public function ppt()
-    {
 
-    }
 
 
 }
