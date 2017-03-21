@@ -16,6 +16,9 @@ use app\index\model\Users;
 //use think\session;
 class Auth extends Controller
 {
+    // +----------------------------------------------------------------------
+    // | 判断该类名是否需要用户登录
+    // +----------------------------------------------------------------------
     protected $is_check_login = [''];
 
     public function _initialize()
@@ -39,7 +42,9 @@ class Auth extends Controller
     }
 
 
-
+    // +----------------------------------------------------------------------
+    // | 用户登录的逻辑处理
+    // +----------------------------------------------------------------------
     public function login()
     {
         $this->assign('title', '登陆');
@@ -63,6 +68,43 @@ class Auth extends Controller
        }
     }
 
+    public function doLogEmail(Users $user)
+    {
+
+        if(empty(input('post.email')))
+        {
+            return json(['msg' => '用户名不能为空','status'=>0]);
+        }elseif ($user->where(['email' => input('post.email')])->find())
+        {
+            return json(['msg' => '用户名正确','status'=>1]);
+        }else{
+            return json(['msg' => '用户名不正确','status'=>2]);
+        }
+
+
+    }
+
+    public function doLogPwd(Users $user)
+    {
+
+        if(empty(input('post.pwd')))
+        {
+            return json(['msg' => '密码不能为空','status'=>0]);
+        }elseif ($user->where(['email' => input('post.email'),'password' => md5(input('post.pwd'))])->find())
+        {
+            return json(['msg' => '密码正确','status'=>1]);
+        }else{
+            return json(['msg' => '用户名和密码不匹配','status'=>2]);
+        }
+
+
+    }
+
+
+
+    // +----------------------------------------------------------------------
+    // | 用户注册的逻辑处理
+    // +----------------------------------------------------------------------
     public function register()
     {
         $this->assign('title', '注册');
@@ -130,7 +172,9 @@ class Auth extends Controller
             return json(['status' => 0]);
         }
     }
-
+    // +----------------------------------------------------------------------
+    // | 用户退出
+    // +----------------------------------------------------------------------
     public function logOut()
     {
         session(null);

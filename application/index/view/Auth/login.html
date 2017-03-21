@@ -13,13 +13,20 @@
 
     <br>
     <br>
-
+    <style>
+        #chz_yh,#chz_pw{
+            color: #aaa;
+        }
+        </style>
     <form method="post" class="am-form" action="{:url('index/auth/doLogin')}">
       <label for="email">邮箱:</label>
       <input type="email" name="email" id="email" value="">
+        <span id="chz_yh">请输入邮箱</span>
       <br>
+
       <label for="password">密码:</label>
       <input type="password" name="password" id="password" value="">
+        <span id="chz_pw">请输入密码</span>
       <br>
       <label for="remember-me">
         <input id="remember-me" type="checkbox">
@@ -31,6 +38,76 @@
         <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
       </div>
     </form>
+    <script type="text/javascript" src="__STATIC_URL__/js/jquery-1.12.4.js"></script>
+    <script>
+        var chz_flg = 1;
+        $('#email').focus();
+
+        $('#email').on('blur',function () {
+            $.post("{:url('index/auth/doLogEmail')}",{email:$(this).val()},function (data) {
+                $('#chz_yh').text(data.msg)
+                switch (data.status)
+                {
+                    case 0:
+                        $('#chz_yh').css('color','#BD362F');
+                        chz_flg = 0;
+
+                        break;
+                    case 1:
+                        $('#chz_yh').css('color','green');
+                        chz_flg = 1;
+                        break;
+                    case 2:
+                        $('#chz_yh').css('color','#BD362F');
+                        chz_flg = 0;
+                        break;
+
+
+                }
+            },'json');
+        })
+        $('#password').on('blur',function () {
+            $.post("{:url('index/auth/doLogPwd')}",{pwd:$(this).val(),email:$('#email').val()},function (data) {
+                $('#chz_pw').text(data.msg)
+                switch (data.status)
+                {
+                    case 0:
+                        $('#chz_pw').css('color','#BD362F');
+                        chz_flg = 0;
+
+                        break;
+                    case 1:
+                        $('#chz_pw').css('color','green');
+                        chz_flg = 1;
+                        break;
+                    case 2:
+                        $('#chz_pw').css('color','#BD362F');
+                        chz_flg = 0;
+                        break;
+
+
+                }
+            },'json');
+        })
+
+
+        $("input").focus(function(){
+            if($(this).is("#password")){
+
+                $("#chz_pw").text("请输入密码").css("color","#aaa")
+//                $(this).css("border","1px solid #aaa")
+            }
+            if($(this).is("#email")){
+                $("#chz_yh").text("请输入邮箱").css("color","#aaa")
+//                $(this).css("border","1px solid #aaa")
+            }
+
+
+        })
+
+
+
+    </script>
     <hr>
     <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
   </div>
