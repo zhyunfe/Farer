@@ -28,6 +28,13 @@ class Index extends Controller
                 case 'note':
                     return '游记管理界面';
                 break;
+                case 'addCase':
+                    $add = file_get_contents('../application/admin/view/index/addCase.html');
+                    return $add;
+                    break;
+                case 'addNote':
+                    return '添加游记';
+                    break;
             }
         } else {
             $this->assign('title','首页 - Farer后台管理系统');

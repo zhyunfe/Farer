@@ -38,15 +38,15 @@ $('#addHome').on('click',function (){
 		'<form class="am-form">'+
 		'<fieldset>'+
 		'<div class="am-form-group">'+
-		'<label for="doc-ipt-email-1">酒店名称</label>'+
-		'<input type="text" class="" id="doc-ipt-email-1" placeholder="酒店名称">'+
+		'<label for="hotel_name">酒店名称</label>'+
+		'<input type="text"  id="hotel_name" placeholder="酒店名称">'+
 		'</div>'+
 		'<div class="am-form-group">'+
 		'<label for="doc-select-1">酒店类型</label>'+
-		'<select id="doc-select-1">'+
-		'<option value="option1">主题型</option>'+
-		'<option value="option2">经济型</option>'+
-		'<option value="option3">豪华型</option>'+
+		'<select id="hotel_type">'+
+		'<option value="2">主题型</option>'+
+		'<option value="0">经济型</option>'+
+		'<option value="1">豪华型</option>'+
 		'</select>'+
 		'<span class="am-form-caret"></span>'+
 		'</div>'+
@@ -59,8 +59,8 @@ $('#addHome').on('click',function (){
 		'<input type="file" id="doc-ipt-file-2">'+
 		'</div>'+
 		'<div class="am-form-group">'+
-		'<label for="doc-ipt-email-1">联系方式</label>'+
-		'<input type="email" class="" id="doc-ipt-phone-1" placeholder="联系方式">'+
+		'<label for="hotel_phone">联系方式</label>'+
+		'<input type="text" class="" id="hotel_phone" placeholder="联系方式">'+
 		'</div>'+
 		'<div class="am-form-group">'+
 		'<label class="am-checkbox-inline">'+
@@ -87,7 +87,7 @@ $('#addHome').on('click',function (){
 		'</div>'+
 		'<div class="am-form-group">'+
 		'<label for="doc-ta-1">酒店描述</label>'+
-		'<textarea class="" rows="5" id="doc-ta-1"></textarea>'+
+		'<textarea class="desciption" rows="5" id="doc-ta-1"></textarea>'+
 		'</div>'+
 		'</fieldset>'+
 		'</form>'+
@@ -131,9 +131,42 @@ $('#addHome').on('click',function (){
 		dataType: 'xml'
 	}).always(function () {
 		$('#hotel_add_next').on('click',function () {
-			console.log($(this));
-			alert(124);
-			$('#baiduMap').addClass('am-animation-slide-left');
+			var province = $('#s_province').val();
+			var city = $('#s_city').val();
+			var county = $('#s_county').val();
+			var location = $('.address').val();
+			var name = $('#hotel_name').val();
+			var type = $('#hotel_type').val();
+			var phone = $('#hotel_phone').val();
+			var  description = $('.desciption').val();
+			var step1 = {
+				'desc':description,
+				'city':city,
+				'county':county,
+				'location':location,
+				'name':name,
+				'type':type,
+				'phone':phone
+			};
+
+			$('#baiduMap').addClass('am-animation-fade am-animation-reverse').hide(0);
+			$('<div>').delay('600').appendTo($('#content')).attr('id','hotel_step2');
+			var step2 = '<legend>添加酒店攻略</legend>'+
+			'<div class="am-u-md-12" >'+
+				'<textarea id="editor" placeholder="这里输入酒店攻略" autofocus></textarea>'+
+			'</div>'+
+			'<p>&nbsp;</p>'+
+			'<p class="am-g">' +
+				'<a class="am-u-md-5" id="hotel_add_next">&nbsp;</a>' +
+				'<a class="am-btn am-btn-secondary am-u-md-1" id="hotel_add_next">上一步</a>' +
+				'<a class="am-btn am-btn-warning am-u-md-1" id="hotel_add_next">保存</a>'+
+				'<a class="am-u-md-5" id="hotel_add_next">&nbsp;</a>' +
+				'</p>';
+			$('#hotel_step2').html(step2).attr('class','am-g');
+			var editor = new Simditor({
+				textarea: $('#editor')
+			});
+				console.log(step1);
 		});
 	});
 	if(!ShowAdress){
