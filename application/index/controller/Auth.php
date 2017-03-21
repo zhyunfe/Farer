@@ -9,12 +9,36 @@ namespace app\index\controller;
 
 use think\Controller;
 use think\Request;
+use think\Session;
 use think\Validate;
 use app\index\model\Users;
 
 //use think\session;
 class Auth extends Controller
 {
+    protected $is_check_login = [''];
+
+    public function _initialize()
+    {
+        if(!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*'))
+        {
+            $this->error('您还没有登录请先登录', url('index/auth/login'));
+        }
+    }
+
+    public function checkLogin()
+    {
+        // if(session('?user'))
+        // {
+        // 	return true;
+        // }else{
+        // 	return false;
+        // }
+
+        return session('?user');
+    }
+
+
 
     public function login()
     {
@@ -24,7 +48,19 @@ class Auth extends Controller
 
     public function doLogin()
     {
+       $info =  Users::where(['email' => input('post.email'),'password' => md5(input('post.password'))])->find();
+       if(!empty($info))
+       {
+           $this->assign('title','登录成功');
+           $this->assign('url',$_SERVER['HTTP_REFERER']);
 
+           $this->success();
+       }else{
+           $this->assign('title','登录失败');
+           $this->assign('url',$_SERVER['HTTP_REFERER']);
+
+           $this->error();
+       }
     }
 
     public function register()
@@ -36,7 +72,7 @@ class Auth extends Controller
     /**
      *   这是一个后台处理注册逻辑的方法，结合前台的ajax提交，当数据进来的时候先定义验证规则，在去获取ajax
      * 提交的数据，并用定义好的规则去匹配，如果全部匹配的话就去数据库插入数据，需要注意的是把数据库没有的
-     * 字段过滤掉
+     * 字段过滤掉,直接获取到最新的id并查出数据进行toArray处理并存入到session里
      * @param Request $request
      * @param Users $user
      * @return \think\response\Json
@@ -65,6 +101,8 @@ class Auth extends Controller
             $data['password'] = md5($data['password']);
             $userb = new Users($data);
             $userb->allowField(true)->save();
+            $userc = Users::find($user->getLastInsID());
+            Session::set('user',$userc->toArray());
             return json(['status' => 1]);
         }
     }
@@ -95,6 +133,9 @@ class Auth extends Controller
 
     public function logOut()
     {
-
+        session(null);
+        $this->assign('title','退出成功');
+        $this->assign('url',$_SERVER['HTTP_REFERER']);
+        $this->success();
     }
 }

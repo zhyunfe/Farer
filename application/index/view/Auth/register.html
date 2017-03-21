@@ -62,6 +62,7 @@
     //return false
     $("#username").focus();
     var chz_flag = 1;
+    var mima_flag;
     $("input").blur(function(){
 //        $(".spa").css("color","#BD362F");
         if($(this).is("#username")){             //姓名判断
@@ -155,15 +156,18 @@
                 if(!(ad.test($("#password").val()))){
                     $(".spa3").text("密码输入错误").css("color","#BD362F");
                     $(this).css("border","1px solid #BD362F");
+                    mima_flag = 0;
                     chz_flag = 0;
                     return false;
                 }else if(ad){
+                    mima_flag = 1;
                     $(".spa3").text("密码正确").css('color','green');
                     chz_flag = 1;
                     return true;
 
                 }
             }else{
+                mima_flag = 0;
                 chz_flag = 0;
                 $(".spa3").text("密码不能为空").css("color","#BD362F");
 
@@ -184,7 +188,7 @@
                 return false;
             }else{
                 if($("#password").val()!=""){
-                    if($('#password').val() == $('#ifpassword').val())
+                    if($('#password').val() == $('#ifpassword').val() && mima_flag == 1)
                     {
                         $(".spa4").text("两次密码一致").css('color','green');
                         chz_flag = 1;
