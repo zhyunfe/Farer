@@ -1,81 +1,44 @@
-{__NOLAYOUT__}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>首页</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta content="telephone=no" name="format-detection">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <!--库-->
-    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/amazeui.css">
-    <script type="text/javascript" src="__STATIC_URL__/index/js/jquery.min.js"></script>
-    <script type="text/javascript" src="__STATIC_URL__/index/js/amazeui.js"></script>
-    <!-- 样式 -->
-    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/style.css">
-</head>
 
-<body>
 <div id="index">
     <!-----------首页头部----------->
-    <div class="index_head">
-        <div class="logo">
-            <a href="#"><img src="__STATIC_URL__/index/images/logo.png"></a>
-        </div>
-        <!----------------搜索------------------>
-        <div class="search">
-            <select>
-                <option value="option1">特产</option>
-                <option value="option2">景点</option>
-            </select>
-            <i class="am-icon-caret-down"></i>
-            <input class="text" type="search" placeholder="要买什么？" />
-            <input class="submit " type="submit" value=" " />
-            <i class="am-icon-search"></i>
-            <div class="clear"></div>
-        </div>
-        <a class="phone">
-            <img src="__STATIC_URL__/index/images/phone.png">
-        </a>
-    </div>
+    {include file="public/top" /}
     <!-----------轮播banner----------->
     <div style="height: 80px;width: 100%"></div>
     <section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }'>
+
+
+
+
+
+
+        {foreach $biglist as $key=>$value}
         <dl class="am-accordion-item am-active">
+
             <dt class="am-accordion-title">
-                就这样恣意的活着
+                {$value['dname']}
             </dt>
+
             <dd class="am-accordion-bd am-collapse am-in">
                 <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
                 <div class="am-accordion-content">
-                    置身人群中 <br/> 你只需要被淹没 享受 沉默 <br/> 退到人群后 <br/> 你只需给予双手 微笑 等候
+                    {foreach $smllist as $k=>$v}
+                    {if $v['ifcity'] == $value['did']}
+
+                    <a href='javascript:;'>{$v['dname']} </a><br/>
+
+                    {/if}
+                    {/foreach}
                 </div>
             </dd>
+
         </dl>
-        <dl class="am-accordion-item">
-            <dt class="am-accordion-title">
-                让生命去等候，去等候，去等候，去等候
-            </dt>
-            <dd class="am-accordion-bd am-collapse ">
-                <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
-                <div class="am-accordion-content">
-                    <a href="jjjjj">dddddd</a> <br/> 徘徊在茫然中 <br/> 在我的人生旅途 <br/> 选择了多少错误 <br/> 我在睡梦中惊醒 <br/> 感叹悔言无尽 <br/> 恨我不能说服自己 <br/> 接受一切教训 <br/> 让生命去等候 <br/> 等候下一个漂流 <br/> 让生命去等候 <br/>等候下一个伤口
-                </div>
-            </dd>
-        </dl>
-        <dl class="am-accordion-item">
-            <dt class="am-accordion-title">
-                我就这样告别山下的家
-            </dt>
-            <dd class="am-accordion-bd am-collapse ">
-                <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
-                <div class="am-accordion-content">
-                    我就这样告别山下的家，我实在不愿轻易让眼泪留下。我以为我并不差不会害怕，我就这样自己照顾自己长大。我不想因为现实把头低下，我以为我并不差能学会虚假。怎样才能够看穿面具里的谎话？别让我的真心散的像沙。如果有一天我变得更复杂，还能不能唱出歌声里的那幅画？
-                </div>
-            </dd>
-        </dl>
+        {/foreach}
+
+
     </section>
+
+
+
 
 
 
@@ -90,45 +53,5 @@
         });
     </script>
     <!--footer-->
-    <div id="footer">
-        <div class="first">
-            <ul class="am-avg-sm-2">
-                <li class="active">
-                    <a title=""  href="index.html">
-                        <img src="__STATIC_URL__/index/images/icon-footer01-a.png"/>
-                        <p>首页</p>
-                    </a>
-                </li>
-                <li>
-                    <a title="" href="trip_list.html">
-                        <img alt="" src="__STATIC_URL__/index/images/icon-footer2-a.png"/>
-                        <p>孟津旅游</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="beautiful">
-            <a title=""  href="beautiful_list.html">
-                <img alt="" src="__STATIC_URL__/index/images/icon-footer3-a.png"/>
-            </a>
-        </div>
-        <div class="last">
-            <ul class="am-avg-sm-2">
-                <li >
-                    <a title="" href="specialty_mall.html">
-                        <img alt="" src="__STATIC_URL__/index/images/icon-footer4-a.png"/>
-                        <p>特产商城</p>
-                    </a>
-                </li>
-                <li>
-                    <a title="" href="user_center.html">
-                        <img alt="" src="__STATIC_URL__/index/images/icon-footer5-a.png"/>
-                        <p>我的</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    {include file="public/foot" /}
 
-</body>
-</html>

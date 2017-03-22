@@ -11,7 +11,7 @@ use think\View;
 use think\Request;
 use think\Validate;
 use app\admin\controller\Auth;
-use app\admin\model\FarerCase as FCase;
+use app\admin\model\Farercase as FCase;
 
 class FarerCase extends Auth
 {
