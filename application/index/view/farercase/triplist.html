@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <title>旅游活动</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,98 +13,136 @@
     <script type="text/javascript" src="__STATIC_URL__/index/js/jquery.min.js"></script>
     <script type="text/javascript" src="__STATIC_URL__/index/js/amazeui.js"></script>
     <!-- 样式 -->
-    <!--<link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/style.css">-->
     <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/style.css">
 </head>
 <body>
 <!-----------公共版头----------->
-<div id="header">
-    <span>孟津旅游</span>
-</div>
-<!-----------孟津旅游----------->
-<div id="trip_list">
-    <div id="item_name">
-    </div>
-    <div class="nav">
-        <ul class="am-avg-sm-2">
-            <li><a title="" class="cur" href="triplist.html">旅游活动</a></li>
-            <li><a title="" href="view_list.html">景点展示</a></li>
+<div id="index">
+	<!-----------首页头部----------->
+	<div class="index_head">
+		<div class="logo">
+			<a href="#"><img src="__STATIC_URL__/index/images/logo.png"></a>
+		</div>
+		<!----------------搜索------------------>
+		<div class="search">
+			<select>
+				<option value="option1">特产</option>
+				<option value="option2">景点</option>
+			</select>
+			<i class="am-icon-caret-down"></i>
+			<input class="text" type="search" placeholder="要买什么？" />
+			<input class="submit " type="submit" value=" " />
+			<i class="am-icon-search"></i>
+			<div class="clear"></div>
+		</div>
+		<a class="phone">
+			<img src="__STATIC_URL__/index/images/phone.png">
+		</a>
+	</div>
+	<!-----------轮播banner----------->
+    <div data-am-widget="slider" class="am-slider am-slider-d3" data-am-slider='{&quot;controlNav&quot;:&quot;thumbnails&quot;,&quot;directionNav&quot;:false}' >
+        <ul class="am-slides" >
+            <li data-thumb="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+                <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+                <div class="am-slider-desc"><h2 class="am-slider-title" style="color: grey;">远方 有一个地方 那里种有我们的梦想</h2><p style="color: grey;">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内</p></div>
+
+            </li>
+            <li data-thumb="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+                <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+                <div class="am-slider-desc"><h2 class="am-slider-title" style="color: grey;">远方 有一个地方 那里种有我们的梦想</h2><p style="color: grey;">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内</p></div>
+
+            </li>
+            <li data-thumb="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+                <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+                <div class="am-slider-desc"><h2 class="am-slider-title" style="color: grey;">远方 有一个地方 那里种有我们的梦想</h2><p style="color: grey;">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内</p></div>
+
+            </li>
+            <li data-thumb="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+                <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+                <div class="am-slider-desc"><h2 class="am-slider-title" style="color: grey;">远方 有一个地方 那里种有我们的梦想</h2><p style="color: grey;">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内</p></div>
+
+            </li>
+
+
         </ul>
     </div>
-    <ul>
-		<li class="view">
-			<div class="pic">
-				<img src="__STATIC_URL__/index/images/trip_list_02.jpg">
-				<div class="cont">
-					<a title="" class="button" href="activity_detail.html">查看详情</a>
-					<div class="num">
-						<p><span>20/30</span>人报名</p>
-						<p>出发时间<span>2017/10/02</span></p>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="con">
-				<span>黄河小浪底</span>
-				<p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
-			</div>
-		</li>
-		<li class="view">
-			<div class="pic">
-				<img src="__STATIC_URL__/index/images/trip_list_02.jpg">
-				<div class="cont">
-					<a title="" class="button" href="activity_detail.html">查看详情</a>
-					<div class="num">
-						<p><span>20/30</span>人报名</p>
-						<p>出发时间<span>2017/10/02</span></p>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="con">
-				<span>黄河小浪底</span>
-				<p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
-			</div>
-		</li>
-		<li class="view">
-			<div class="pic">
-				<img src="__STATIC_URL__/index/images/trip_list_02.jpg">
-				<div class="cont">
-					<a title="" class="button" href="activity_detail.html">查看详情</a>
-					<div class="num">
-						<p><span>20/30</span>人报名</p>
-						<p>出发时间<span>2017/10/02</span></p>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="con">
-				<span>黄河小浪底</span>
-				<p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
-			</div>
-		</li>
-		<li class="view">
-			<div class="pic">
-				<img src="__STATIC_URL__/index/images/trip_list_02.jpg">
-				<div class="cont">
-					<a title="" class="button" href="activity_detail.html">查看详情</a>
-					<div class="num">
-						<p><span>20/30</span>人报名</p>
-						<p>出发时间<span>2017/10/02</span></p>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="con">
-				<span>黄河小浪底</span>
-				<p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
-			</div>
-		</li>
-	</ul>
-    <div id="none">
-        没有更多了
-    </div>
-</div>
+
+    <!-----------目的地展示----------->
+    <h2 style="margin: 0 auto;width: 100%;padding-top: 5px;padding-bottom: 5px;text-align: center;cursor: pointer"><a href="{:url('index/Farercase/regionslist')}">热门目的地(更多)</a></h2>
+    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
+  am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
+        <li>
+            <div class="am-gallery-item">
+                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                    <h3 class="am-gallery-title" style="text-align: center;">北京</h3>
+
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="am-gallery-item">
+                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                    <h3 class="am-gallery-title" style="text-align: center;">北京</h3>
+
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="am-gallery-item">
+                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                    <h3 class="am-gallery-title" style="text-align: center;">北京</h3>
+
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="am-gallery-item">
+                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                    <h3 class="am-gallery-title" style="text-align: center;">北京</h3>
+
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="am-gallery-item">
+                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                    <h3 class="am-gallery-title" style="text-align: center;">北京</h3>
+
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="am-gallery-item">
+                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                    <h3 class="am-gallery-title" style="text-align: center;">北京</h3>
+
+                </a>
+            </div>
+        </li>
+
+    </ul>
+
+
+
+
+
+<!-----------孟津旅游----------->
+
+	<script>
+        $(function () {
+            $('.am-slider').flexslider({
+                controlNav: true,               // Boolean: 是否创建控制点
+                directionNav: false,             // Boolean: 是否创建上/下一个按钮（previous/next）
+                touch: true,                    // Boolean: 允许触摸屏触摸滑动滑块
+            });
+        });
+	</script>
 <!--footer-->
 <div class="foot_h"></div>
 <div id="footer">
