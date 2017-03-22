@@ -9,6 +9,7 @@ namespace app\admin\controller;
 
 use think\Controller;
 use think\Request;
+use think\Session;
 use think\Validate;
 use app\admin\model\Users;
 
@@ -73,6 +74,7 @@ class Auth extends Controller
             $pwd = $users->field('password')->where('email', $email)->find()['password'];
 
             if ($pwd == md5($password)) {
+                Session::set('user',$email);
                 return true;
             } else {
                 return false;

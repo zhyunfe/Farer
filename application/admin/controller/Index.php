@@ -1,9 +1,12 @@
 <?php
 namespace app\admin\controller;
 use think\Controller;
+use think\Request;
 
-class Index extends Controller
+class Index extends Auth
 {
+    protected $is_check_login = ['*'];
+
     public function index()
     {
         if (isset($_POST['type'])) {
@@ -41,6 +44,22 @@ class Index extends Controller
             return $this->fetch();
         }
 
+    }
+
+    public function upload(){
+        $file = request()->file('image');
+        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+        if($info){
+//            echo $info->getExtension();
+//            echo $info->getFilename();
+            return true;
+        }else{
+//            echo $file->getError();
+            return false;
+        }
+    }
+    public function caseUpload(){
+        var_dump('传入图片');
     }
     public function user()
     {

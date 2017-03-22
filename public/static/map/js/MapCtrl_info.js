@@ -164,7 +164,17 @@ $('#addHome').on('click',function (){
 				'</p>';
 			$('#hotel_step2').html(step2).attr('class','am-g');
 			var editor = new Simditor({
-				textarea: $('#editor')
+				textarea: $('#editor'),
+
+				placeholder : '这里输入内容...',
+				toolbar : toolbar,  //工具栏
+				upload : {
+					url : 'upload', //文件上传的接口地址
+					params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+					fileKey: 'image', //服务器端获取文件数据的参数名
+					connectionCount: 3,
+					leaveConfirm: '正在上传文件'
+				}
 			});
 				console.log(step1);
 		});

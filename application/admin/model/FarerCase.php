@@ -7,11 +7,12 @@
  */
 
 namespace app\admin\model;
+
 use think\Model;
 use traits\model\SoftDelete;
 
-class FarerCase
+class FarerCase extends Model
 {
-    protected $autoWriteTimestamp = true;
+//    protected $autoWriteTimestamp = true;
     use SoftDelete;
 }

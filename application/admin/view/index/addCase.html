@@ -3,13 +3,25 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <link href="../../static/hAdmin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="../../static/hAdmin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="./../static/hAdmin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="../../static/hAdmin/css/animate.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../static/hAdmin/css/plugins/markdown/bootstrap-markdown.min.css" />
+    <link href="../../static/hAdmin/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="../../static/hAdmin/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
     <link href="../../static/hAdmin/css/style.css?v=4.1.0" rel="stylesheet">
-
+    <script src="../../static/js/Popt.js"></script>
+    <script src="../../static/js/cityJson.js"></script>
+    <script src="../../static/js/citySet.js"></script>
+    <style type="text/css">
+        ._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position: relative;background-color: white }
+        ._citys span { color: #56b4f8; height: 15px; width: 15px; line-height: 15px; text-align: center; border-radius: 3px; position: absolute; right: 10px; top: 10px; border: 1px solid #56b4f8; cursor: pointer; }
+        ._citys0 { width: 100%; height: 34px; display: inline-block; border-bottom: 2px solid #56b4f8; padding: 0; margin: 0; }
+        ._citys0 li { display: inline-block; line-height: 34px; font-size: 15px; color: #888; width: 80px; text-align: center; cursor: pointer; }
+        .citySel { background-color: #56b4f8; color: #fff !important; }
+        ._citys1 { width: 100%; display: inline-block; padding: 10px 0; }
+        ._citys1 a { width: 83px; height: 35px; display: inline-block; background-color: #f5f5f5; color: #666; margin-left: 6px; margin-top: 3px; line-height: 35px; text-align: center; cursor: pointer; font-size: 13px; overflow: hidden; }
+        ._citys1 a:hover { color: #fff; background-color: #56b4f8; }
+        .AreaS { background-color: #56b4f8 !important; color: #fff !important; }
+    </style>
 </head>
 <div class="tpl-portlet-components">
                 <div class="tpl-block">
@@ -17,32 +29,24 @@
                         <div class="tpl-form-body tpl-form-line">
                             <form class="am-form tpl-form-line-form" method="post" action="http://www.baidu.com">
                                 <div class="am-form-group">
-                                    <label for="user-name" class="am-u-sm-3 am-form-label">标题 <span class="tpl-form-line-small-title">Title</span></label>
+                                    <label for="case_title" class="am-u-sm-3 am-form-label">标题 <span class="tpl-form-line-small-title">Title</span></label>
                                     <div class="am-u-sm-9">
-                                        <input type="text" class="tpl-form-input" id="user-name" placeholder="请输入标题文字">
+                                        <input type="text" class="tpl-form-input" id="case_title" placeholder="请输入标题文字">
                                         <small>请填写标题文字10-20字左右。</small>
-                                    </div>
-                                </div>
-
-                                <div class="am-form-group">
-                                    <label for="user-email" class="am-u-sm-3 am-form-label">发布时间 <span class="tpl-form-line-small-title">Time</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" class="am-form-field tpl-form-no-bg" placeholder="发布时间" data-am-datepicker=""/>
-                                        <small>发布时间为必填</small>
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
                                     <label for="user-phone" class="am-u-sm-3 am-form-label">作者 <span class="tpl-form-line-small-title">Author</span></label>
                                     <div class="am-u-sm-9">
-                                        <input type="text">
+                                        <input type="text" id="author">
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-form-label">关键字 <span class="tpl-form-line-small-title">KeyWords</span></label>
                                     <div class="am-u-sm-9">
-                                        <input type="text" placeholder="旅游攻略、住宿攻略、问答">
+                                        <input type="text" placeholder="旅游攻略、住宿攻略、问答" id="keywords">
                                     </div>
                                 </div>
 
@@ -50,9 +54,6 @@
                                     <label for="user-weibo" class="am-u-sm-3 am-form-label">封面图 <span class="tpl-form-line-small-title">Images</span></label>
                                     <div class="am-u-sm-9">
                                         <div class="am-form-group am-form-file">
-                                            <div class="tpl-form-file-img">
-                                                <img src="assets/img/a5.png" alt="">
-                                            </div>
                                             <button type="button" class="am-btn am-btn-danger am-btn-sm">
                                             <i class="am-icon-cloud-upload"></i> 添加封面图片</button>
                                             <input id="doc-form-file" type="file" multiple>
@@ -64,42 +65,155 @@
                                 <div class="am-form-group">
                                     <label for="user-weibo" class="am-u-sm-3 am-form-label">描述 <span class="tpl-form-line-small-title">Type</span></label>
                                     <div class="am-u-sm-9">
-                                        <input type="text" id="location" placeholder="地区">
+                                        <div class="place">
+                                            <input type="text" id="location" placeholder="地区">
+                                        </div>
                                         <input type="text" id="num" placeholder="出行天数">
+                                        <input type="text" id="price" placeholder="门票价格">
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
-                                    <label for="user-intro" class="am-u-sm-3 am-form-label">文章正文</label>
+                                    <label for="user-intro" class="am-u-sm-3 am-form-label">游玩攻略</label>
                                     <div class="am-u-sm-9">
-                                        <div class="ibox-content">
-                                            <textarea name="content" data-provide="markdown" rows="10"></textarea>
+                                        <div class="summernote" id="ywcase">
+                                            <p>游玩攻略</p>
+                                    </div>
+                                </div>
+                                    </div>
+                                    <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
+                                    <div class="am-form-group">
+                                    <label for="user-intro" class="am-u-sm-3 am-form-label">交通攻略</label>
+                                    <div class="am-u-sm-9">
+                                        <div class="summernote" id="jtcase">
+                                            <p>交通攻略</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="am-form-group">
+                                    <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
+
+                                    <div class="am-form-group">
+                                    <label for="user-intro" class="am-u-sm-3 am-form-label">住宿攻略</label>
+                                    <div class="am-u-sm-9">
+                                        <div class="summernote" id="zscase">
+                                            <p>住宿攻略</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <div class="am-form-group">
                                     <div class="am-u-sm-9 am-u-sm-push-3">
-                                        <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+                                        <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " id="case_up">提交</button>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
 <script src="../../static/hAdmin/js/bootstrap.min.js?v=3.3.6"></script>
 
-<!-- 自定义js -->
+<!--&lt;!&ndash; 自定义js &ndash;&gt;-->
 <script src="../../static/hAdmin/js/content.js?v=1.0.0"></script>
+<!-- SUMMERNOTE -->
+<script src="../../static/hAdmin/js/plugins/summernote/summernote.min.js"></script>
+<script src="../../static/hAdmin/js/plugins/summernote/summernote-zh-CN.js"></script>
 
-<!-- simditor -->
-<script type="text/javascript" src="../../static/hAdmin/js/plugins/markdown/markdown.js"></script>
-<script type="text/javascript" src="../../static/hAdmin/js/plugins/markdown/to-markdown.js"></script>
-<script type="text/javascript" src="../../static/hAdmin/js/plugins/markdown/bootstrap-markdown.js"></script>
-<script type="text/javascript" src="../../static/hAdmin/js/plugins/markdown/bootstrap-markdown.zh.js"></script>
+<script>
+//    编辑器开始
+    $(document).ready(function () {
+        $('.summernote').summernote({
+            lang: 'zh-CN', // default: 'en-US'
+            focus:true,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['picture', 'video']]
+            ],
+            /*  image: {
 
+             selectFromFiles: '选择文件'
+
+             }, */
+            /*onImageUpload: function(files, editor, welEditable) {
+             sendFile(files[0], editor,welEditable);
+             }*/
+            onImageUpload: function(files, editor, $editable) {
+                sendFile(files[0],editor,$editable);
+            }
+        });
+        function sendFile(file, editor, $editable) {
+            $(".note-toolbar.btn-toolbar").append('正在上传图片');
+            var filename = false;
+            try {
+                filename = file['name'];
+                alert(filename);
+            } catch (e) {
+                filename = false;
+            }
+            if (!filename) {
+                $(".note-alarm").remove();
+            }
+            //以上防止在图片在编辑器内拖拽引发第二次上传导致的提示错误
+            var ext = filename.substr(filename.lastIndexOf("."));
+            ext = ext.toUpperCase();
+            var timestamp = new Date().getTime();
+            data = new FormData();
+            data.append("file", file);
+
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "caseUpload", //图片上传出来的url，返回的是图片上传后的路径，http格式
+                contentType: "json",
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    //data是返回的hash,key之类的值，key是定义的文件名
+                    alert(data);
+                    //把图片放到编辑框中。editor.insertImage 是参数，写死。后面的http是网上的图片资源路径。
+                    //网上很多就是这一步出错。
+                    $('.summernote').summernote('editor.insertImage', "http://res.cloudinary.com/demo/image/upload/butterfly.jpg");
+
+                    $(".note-alarm").html("上传成功,请等待加载");
+                    setTimeout(function () {
+                        $(".note-alarm").remove();
+                    }, 3000);
+                    alert('上传成功');
+                },
+                error: function () {
+                    $(".note-alarm").html("上传失败");
+                    setTimeout(function () {
+                        $(".note-alarm").remove();
+                    }, 3000);
+                }
+            });
+        }
+    });
+
+//    var edit = function () {
+//        $("#eg").addClass("no-padding");
+//        $('.click2edit').summernote({
+//            lang: 'zh-CN',
+//            focus: true
+//        });
+//    };
+//    var save = function () {
+//        $("#eg").removeClass("no-padding");
+//        var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+//        $('.click2edit').destroy();
+//    };
+
+//    编辑器结束
+//    城市的三级联动
+    $("#location").click(function (e) {
+        SelCity(this,e);
+    });
+</script>
 
 
 
