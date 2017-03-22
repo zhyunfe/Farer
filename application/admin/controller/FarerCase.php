@@ -19,12 +19,22 @@ class FarerCase extends Auth
 
     public function addCase(FCase $case)
     {
-        $obj = $_POST['obj'];
-        var_dump($obj);
-        $case->data(['pid'    =>1,'title'=>$obj['title'],
-                    'seecount'=>1,'day'  =>$obj['num'],
-                    'location'=>$obj['location'],
-                    'hotel'   =>$obj['zscase']]);
-        $case->save();
+        var_dump($_FILES);
+        var_dump(input('post.'));
+//        $obj = $_POST['obj'];
+//        var_dump($obj);
+//        $case->data(['pid'    =>1,'title'=>$obj['title'],
+//                    'seecount'=>1,'day'  =>$obj['num'],
+//                    'price'=>$obj['price'],
+//                    'href'=>$obj['trail'],
+//                    'location'=>$obj['location'],
+//                    'traffic'=>$obj['traffic'],
+//                    'hotel'   =>$obj['hotel']]);
+//        $result = $case->save();
+//        if($result) {
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 }

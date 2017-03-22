@@ -353,30 +353,41 @@
                             var ywcase = $('#ywcase').val();
                             var jtcase = $('#jtcase').val();
                             var zscase = $('#zscase').val();
+                            var file = document.getElementById("doc-form-file").files[0]
 
-                            var addCase = {
-                              'title':case_title,
-                                'author':author,
-                                'keywords':keywords,
-                                'location':location,
-                                'num':num,
-                                'price':price,
-                                'ywcase':ywcase,
-                                'jtcase':jtcase,
-                                'zscase':zscase
-                            };
+//                            var addCase = {
+//                              'title':case_title,
+//                                'author':author,
+//                                'keywords':keywords,
+//                                'location':location,
+//                                'num':num,
+//                                'price':price,
+//                                'trail':ywcase,
+//                                'traffic':jtcase,
+//                                'hotel':zscase
+//                            };
+//                            console.log(addCase);
+
+                            var form = new FormData();
+                            form.append('case_title',case_title);
+                            form.append('author',author);
+                            form.append('keywords',keywords);
+                            form.append('location',location);
+                            form.append('price',price);
+                            form.append('num',num);
+                            form.append('file',file);
+                            alert(form);
                             $.ajax({
                                 method:'POST',
                                 url:'{:url("admin/farercase/addcase")}',
-                                data:{obj:addCase},
+                                data:form,
+                                processData: false,
+                                contentType: false,
                                 success:function (data) {
-                                    alert('data');
+                                    console.log(data);
                                 },
                                 fail:function (data) {
-                                    alert('data');
-                                },
-                                async:false,
-                                dataType:'json'
+                                }
                             });
                         })
                     });

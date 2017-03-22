@@ -19,6 +19,7 @@ return [
     // 视图输出字符串内容替换
     'view_replace_str'       => [
         '__STATIC_URL__'     => 'http://www.farer.com/static',
+        '__STATIC_UPLOAD_URL__'=> 'http://www.farer.com/uploads',
         '__STATIC_CONTENT__' => 'http://www.farer.com/application/admin/view/index'
     ],
 
