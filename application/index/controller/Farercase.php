@@ -52,4 +52,8 @@ class Farercase extends Controller
     {
         return $this->fetch();
     }
+
+
+
+
 }

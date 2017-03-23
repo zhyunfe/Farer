@@ -9,5 +9,20 @@ namespace app\index\controller;
 use think\Controller;
 class Hotel extends Controller
 {
+    public function choose()
+    {
+        return $this->fetch();
+    }
 
+
+    public function holist()
+    {
+        return $this->fetch();
+    }
+
+
+    public function hodetail()
+    {
+        return $this->fetch();
+    }
 }
