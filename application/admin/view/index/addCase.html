@@ -31,22 +31,16 @@
                                 <div class="am-form-group">
                                     <label for="case_title" class="am-u-sm-3 am-form-label">标题 <span class="tpl-form-line-small-title">Title</span></label>
                                     <div class="am-u-sm-9">
-                                        <input type="text" class="tpl-form-input" id="case_title" placeholder="请输入标题文字">
+                                        <input type="text" class="tpl-form-input" id="case_title" name="title1" placeholder="请输入标题文字">
                                         <small>请填写标题文字10-20字左右。</small>
-                                    </div>
-                                </div>
-
-                                <div class="am-form-group">
-                                    <label for="user-phone" class="am-u-sm-3 am-form-label">作者 <span class="tpl-form-line-small-title">Author</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" id="author">
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-form-label">关键字 <span class="tpl-form-line-small-title">KeyWords</span></label>
                                     <div class="am-u-sm-9">
-                                        <input type="text" placeholder="旅游攻略、住宿攻略、问答" id="keywords">
+                                        <input type="radio" name="keywords" value="0" checked><label class="am-form-label" >自由行攻略</label>
+                                        <input type="radio" name="keywords" value="1" ><label class="am-form-label">景点攻略</label>
                                     </div>
                                 </div>
 
@@ -66,10 +60,10 @@
                                     <label for="user-weibo" class="am-u-sm-3 am-form-label">描述 <span class="tpl-form-line-small-title">Type</span></label>
                                     <div class="am-u-sm-9">
                                         <div class="place">
-                                            <input type="text" id="location" placeholder="地区">
+                                            <input type="text" name="area" id="location" placeholder="地区">
                                         </div>
-                                        <input type="text" id="num" placeholder="出行天数">
-                                        <input type="text" id="price" placeholder="门票价格">
+                                        <input type="text" name="tian" id="num" placeholder="出行天数">
+                                        <input type="text" name="price" id="price" placeholder="门票价格">
                                     </div>
                                 </div>
 

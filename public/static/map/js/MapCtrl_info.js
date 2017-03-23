@@ -1,5 +1,9 @@
 // 百度地图API功能
 $('#addHome').on('click',function (){
+	refresh();
+});
+
+function refresh() {
 	$(this).addClass('active');
 
 	$('#content').html('');
@@ -58,35 +62,36 @@ $('#addHome').on('click',function (){
 		'</div>'+
 		'<input type="file" id="doc-ipt-file-2">'+
 		'</div>'+
+		'<div id="file-list"></div>'+
 		'<div class="am-form-group">'+
 		'<label for="hotel_phone">联系方式</label>'+
 		'<input type="text" class="" id="hotel_phone" placeholder="联系方式">'+
 		'</div>'+
 		'<div class="am-form-group">'+
 		'<label class="am-checkbox-inline">'+
-		'<input type="checkbox" value="option1"> 免费wifi'+
+		'<input type="checkbox" value="1" name="service"> 免费wifi'+
 		'</label>'+
 		'<label class="am-checkbox-inline">'+
-		'<input type="checkbox" value="option2"> 停车场'+
+		'<input type="checkbox" value="2" name="service"> 停车场'+
 		'</label>'+
 		'<label class="am-checkbox-inline">'+
-		'<input type="checkbox" value="option3"> 行李寄存'+
+		'<input type="checkbox" value="3" name="service"> 行李寄存'+
 		'</label>'+
 		'<label class="am-checkbox-inline">'+
-		'<input type="checkbox" value="option1"> 热水壶'+
+		'<input type="checkbox" value="4" name="service"> 热水壶'+
 		'</label>'+
 		'<label class="am-checkbox-inline">'+
-		'<input type="checkbox" value="option2"> 24小时服务'+
+		'<input type="checkbox" value="5" name="service"> 24小时服务'+
 	'</label>'+
 	'<label class="am-checkbox-inline">'+
-		'<input type="checkbox" value="option3"> 餐厅'+
+		'<input type="checkbox" value="6" name="service"> 餐厅'+
 		'</label>'+
 		'<label class="am-checkbox-inline">'+
-		'<input type="checkbox" value="option3"> 推送机'+
+		'<input type="checkbox" value="7" name="service"> 推送机'+
 		'</label>'+
 		'</div>'+
 		'<div class="am-form-group">'+
-		'<label for="doc-ta-1">酒店描述</label>'+
+		'<label for="doc-ta-1">酒店介绍</label>'+
 		'<textarea class="desciption" rows="5" id="doc-ta-1"></textarea>'+
 		'</div>'+
 		'</fieldset>'+
@@ -130,39 +135,139 @@ $('#addHome').on('click',function (){
 		async: false,
 		dataType: 'xml'
 	}).always(function () {
+		$('#doc-ipt-file-2').on('change', function() {
+			var fileNames = '';
+			$.each(this.files, function() {
+				fileNames += '<span class="am-badge">' + this.name + '</span> ';
+			});
+			$('#file-list').html(fileNames);
+		});
 		$('#hotel_add_next').on('click',function () {
-			var province = $('#s_province').val();
-			var city = $('#s_city').val();
-			var county = $('#s_county').val();
-			var location = $('.address').val();
-			var name = $('#hotel_name').val();
-			var type = $('#hotel_type').val();
-			var phone = $('#hotel_phone').val();
-			var  description = $('.desciption').val();
-			var step1 = {
-				'desc':description,
-				'city':city,
-				'county':county,
-				'location':location,
-				'name':name,
-				'type':type,
-				'phone':phone
-			};
+			if($('#file-list').html() == "") {
+				alert('先给酒店添加一张照片吧');
+				return;
+			} else {
+				//获取所有的input值
+				var province = $('#s_province').val();
+				var city = $('#s_city').val();
+				var county = $('#s_county').val();
+				var location = $('#suggestId').val();
+				var name = $('#hotel_name').val();
+				var type = $('#hotel_type').val();
+				var phone = $('#hotel_phone').val();
+				var file = document.getElementById("doc-ipt-file-2").files[0];
+				var obj = document.getElementsByName('service');
+				var service = '';
+				for (var i=0;i<obj.length;i++) {
+					if(obj[i].checked) {
+						service += obj[i].value + ',';
+					}
+				}
+				var  description = $('.desciption').val();
+				var step1 = {
+					'desc':description,
+					'city':city,
+					'county':county,
+					'location':location,
+					'name':name,
+					'type':type,
+					'service':service,
+					'phone':phone
+				};
+				//当点击step1的下一步的时候，step1隐藏，并且将step2添加到content上
+				$('#baiduMap').addClass('am-animation-scale-up am-animation-reverse').hide(0);
+				$('<div>').delay('600').appendTo($('#content')).attr('id','hotel_step2');
 
-			$('#baiduMap').addClass('am-animation-fade am-animation-reverse').hide(0);
-			$('<div>').delay('600').appendTo($('#content')).attr('id','hotel_step2');
-			var step2 = '<legend>添加酒店攻略</legend>'+
-			'<div class="am-u-md-12" >'+
-				'<textarea id="editor" placeholder="这里输入酒店攻略" autofocus></textarea>'+
-			'</div>'+
-			'<p>&nbsp;</p>'+
-			'<p class="am-g">' +
-				'<a class="am-u-md-5" id="hotel_add_next">&nbsp;</a>' +
-				'<a class="am-btn am-btn-secondary am-u-md-1" id="hotel_add_next">上一步</a>' +
-				'<a class="am-btn am-btn-warning am-u-md-1" id="hotel_add_next">保存</a>'+
-				'<a class="am-u-md-5" id="hotel_add_next">&nbsp;</a>' +
-				'</p>';
-			$('#hotel_step2').html(step2).attr('class','am-g');
+				//第二步的html代码
+				var step2 =
+					'<legend>添加酒店攻略</legend>'+
+					'<div class="am-u-md-12" >'+
+					'<textarea id="editor" placeholder="这里输入酒店攻略" autofocus></textarea>'+
+					'</div>'+
+					'<p>&nbsp;</p>'+
+					'<p class="am-g">' +
+					'<a class="am-u-md-5">&nbsp;</a>' +
+					'<a class="am-btn am-btn-secondary am-u-md-1" id="add_last">上一步</a>' +
+					'<a class="am-btn am-btn-warning am-u-md-1" id="add_save">保存</a>'+
+					'<a class="am-u-md-5">&nbsp;</a>' +
+					'</p>'+
+					'<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">' +
+						'<div class="am-modal-dialog">' +
+						'<div class="am-modal-hd" id="msg"></div>' +
+					'<div class="am-modal-bd" id="msg1">' +
+					'</div>' +
+					'<div class="am-modal-footer">' +
+						'<span class="am-modal-btn" data-am-modal-cancel id="cancle">取消</span>' +
+					'<span class="am-modal-btn" data-am-modal-confirm id="yes">确定</span>' +
+					'</div>' +
+					'</div>' +
+					'</div>';
+
+				$('#hotel_step2').html(step2).attr('class','am-g');
+				//当点击上一步的时候，step2隐藏，step1显示
+				$('#add_last').on('click',function () {
+						$('#hotel_step2').addClass('am-animation-scale-up am-animation-reverse').hide(0);
+						$('#baiduMap').removeClass('am-animation-reverse').show();
+				});
+				//交叉点击step1的下一步时step1和step2交叉显示
+				var flag = true;
+				if (flag) {
+					$('#hotel_step2').removeClass('am-animation-reverse').show();
+					$('#baiduMap').removeClass('am-animation-reverse').hide();
+					flag = !flag;
+				}
+
+				//点击保存按钮，获取到所有的元素值，提交到服务器
+				$('#add_save').on('click',function () {
+					var gl = $('.simditor-body').html();
+					var form = new FormData();
+					form.append('desc',description);
+					form.append('city',city);
+					form.append('county',county);
+					form.append('location',location);
+					form.append('name',name);
+					form.append('type',type);
+					form.append('file',file);
+					form.append('service',service);
+					form.append('phone',phone);
+					form.append('gl',gl);
+					$.ajax({
+						method:'post',
+						data:form,
+						url:'../hotel/addHotel',
+						processData: false,
+						contentType: false,
+						success:function (data) {
+							var data  = JSON.parse(data);
+							if (!data.error) {
+								$('#msg').html('<h2>'+data.msg+'</h2>');
+								$('#msg1').html('去添加房间').css('color','red');
+								$('#cancle').html('不了,谢谢');
+								$('#yes').html('添加房间');
+								$('#my-confirm').modal({
+									relatedTarget: this,
+									onConfirm: function() {
+										$('body').removeClass('am-dimmer-active');
+										$('.am-dimmer').removeClass('am-active').css('display','none');
+										$('#addRoom').trigger('click');
+									},
+									onCancel: function() {
+										$('body').removeClass('am-dimmer-active');
+										$('.am-dimmer').removeClass('am-active').css('display','none');
+										refresh();
+
+									}
+								});
+							} else {
+								alert(data.msg);
+							}
+						},
+						fail:function (data) {
+
+						}
+					});
+				});
+			}
 			var editor = new Simditor({
 				textarea: $('#editor'),
 
@@ -565,4 +670,4 @@ $('#addHome').on('click',function (){
 		case 2:
 		map = new AMap.Map("container"); break;
 	}
-});
+};

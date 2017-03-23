@@ -253,7 +253,10 @@
                                 <i class="am-icon-angle-right"></i>
                                 <span>添加酒店</span>
                             </a>
-
+                            <a class="add" id="addRoom">
+                                <i class="am-icon-angle-right"></i>
+                                <span>添加房间</span>
+                            </a>
                             <a class="add">
                                 <i class="am-icon-angle-right"></i>
                                 <span>添加攻略</span>
@@ -328,7 +331,7 @@
                     $(this).addClass('active').siblings().removeClass('active');
                     var add = $(this).attr('add');
                     console.log(add);
-                    var type = ['addHotel','addCase','addNote'];
+                    var type = ['addHotel','addRoom','addCase','addNote'];
 
                     $.ajax({
                         method: 'post',
@@ -345,7 +348,6 @@
                     }).always(function () {
                         $('#case_up').on('click',function () {
                             var case_title = $('#case_title').val();
-                            var author = $('#author').val();
                             var keywords = $('#keywords').val();
                             var location = $('#location').val();
                             var num = $('#num').val();
@@ -353,29 +355,17 @@
                             var ywcase = $('#ywcase').val();
                             var jtcase = $('#jtcase').val();
                             var zscase = $('#zscase').val();
-                            var file = document.getElementById("doc-form-file").files[0]
-
-//                            var addCase = {
-//                              'title':case_title,
-//                                'author':author,
-//                                'keywords':keywords,
-//                                'location':location,
-//                                'num':num,
-//                                'price':price,
-//                                'trail':ywcase,
-//                                'traffic':jtcase,
-//                                'hotel':zscase
-//                            };
-//                            console.log(addCase);
-
+                            var file = document.getElementById("doc-form-file").files[0];
                             var form = new FormData();
-                            form.append('case_title',case_title);
-                            form.append('author',author);
-                            form.append('keywords',keywords);
-                            form.append('location',location);
+                            form.append('title',case_title);
+                            form.append('type',keywords);
                             form.append('price',price);
-                            form.append('num',num);
                             form.append('file',file);
+                            form.append('day',num);
+                            form.append('location',location);
+                            form.append('href',ywcase);
+                            form.append('traffic',jtcase);
+                            form.append('hotel',zscase);
                             alert(form);
                             $.ajax({
                                 method:'POST',

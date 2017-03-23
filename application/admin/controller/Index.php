@@ -2,12 +2,12 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Request;
-
+use app\admin\model\Farercase;
 class Index extends Auth
 {
     protected $is_check_login = ['*'];
 
-    public function index()
+    public function index(Farercase $case)
     {
         if (isset($_POST['type'])) {
             switch ($_POST['type']) {
@@ -38,6 +38,9 @@ class Index extends Auth
                 case 'addNote':
                     return '添加游记';
                     break;
+                case 'addRoom':
+                    return '添加房间';
+                    break;
             }
         } else {
             $this->assign('title','首页 - Farer后台管理系统');
@@ -50,11 +53,8 @@ class Index extends Auth
         $file = request()->file('image');
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
         if($info){
-//            echo $info->getExtension();
-//            echo $info->getFilename();
             return true;
         }else{
-//            echo $file->getError();
             return false;
         }
     }
@@ -64,13 +64,6 @@ class Index extends Auth
         // 移动到框架应用根目录/public/uploads/ 目录下
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
         if($info){
-        // 成功上传后 获取上传信息
-        // 输出 jpg
-//            return $info->getPathname();
-        // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
-            // echo $info->getSaveName();
-        // 输出 42a79759f284b767dfcb2a0197904287.jpg
-
             return '/uploads/'.$info->getSaveName();
         }else{
         // 上传失败获取错误信息
