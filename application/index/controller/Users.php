@@ -13,6 +13,16 @@ class Users extends Auth
 //    private $is_check_login = [];
     protected $is_check_login = ['*'];
 
+    public function test()
+    {
+        echo 123;
+    }
+    public function zhifu()
+    {
+        $this->assign('title','zhifu');
+       dump( $this->fetch());
+    }
+
 
 
 }

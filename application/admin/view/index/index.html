@@ -196,9 +196,6 @@
                     <a class="nav-link tpl-left-nav-link-list select">
                         <i class="am-icon-bar-chart"></i>
                         <span>数据表</span>
-                        <i class="tpl-left-nav-content tpl-badge-danger">
-                            12
-                        </i>
                     </a>
                 </li>
 
@@ -219,17 +216,11 @@
                             <a class="info">
                                 <i class="am-icon-angle-right"></i>
                                 <span>酒店列表</span>
-                                <i class="tpl-left-nav-content tpl-badge-success">
-                                    18
-                                </i>
                             </a>
 
                             <a class="info">
                                 <i class="am-icon-angle-right"></i>
                                 <span>攻略列表</span>
-                                <i class="tpl-left-nav-content tpl-badge-primary">
-                                    5
-                                </i>
                             </a>
 
 
@@ -257,14 +248,14 @@
                                 <i class="am-icon-angle-right"></i>
                                 <span>添加房间</span>
                             </a>
-                            <a class="add">
+                            <a class="add" id="addCase">
                                 <i class="am-icon-angle-right"></i>
                                 <span>添加攻略</span>
                             </a>
 
-                            <a class="add">
+                            <a class="add" id="addGoods">
                                 <i class="am-icon-angle-right"></i>
-                                <span>添加商品</span>
+                                <span>添加套餐</span>
                             </a>
                         </li>
                     </ul>
@@ -295,95 +286,32 @@
         <div id="content">
 
         </div>
+        <div class="am-u-lg-12">
+            <div class="am-cf">
+
+                <div class="am-fr">
+                    <ul class="am-pagination tpl-pagination" id="page">
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd">Amaze UI</div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="__STATIC_URL__/assets/js/amazeui.min.js"></script>
     <script src="__STATIC_URL__/assets/js/iscroll.js"></script>
     <script src="__STATIC_URL__/assets/js/app.js"></script>
     <script>
         $(function () {
-            $('.info').each(function (i, obj) {
-                $(obj).attr('info', i).click(function () {
-                    $(this).addClass('active').siblings().removeClass('active');
-                    var info = $(this).attr('info');
-                    console.log(info);
-                    var type = ['user','hotel','case','note'];
-                    $.ajax({
-                        method: 'post',
-                        url: '{:url("admin/index/index")}',
-                        data: {type: type[info]},
-                        success: function (data) {
-                            console.log(data);
-                            $('#content').html(data);
-                        },
-                        fail: function (data) {
 
-                        },
-                        async: false,
-                        dataType: 'json'
-                    });
-
-                });
-            });
-
-            $('.add').each(function (i, obj) {
-
-                $(obj).attr('add',i).click(function () {
-                    $(this).addClass('active').siblings().removeClass('active');
-                    var add = $(this).attr('add');
-                    console.log(add);
-                    var type = ['addHotel','addRoom','addCase','addNote'];
-
-                    $.ajax({
-                        method: 'post',
-                        url: '{:url("admin/index/index")}',
-                        data: {type: type[add]},
-                        success: function (data) {
-                            $('#content').html(data);
-                        },
-                        fail: function (data) {
-
-                        },
-                        async: false,
-                        dataType: 'json'
-                    }).always(function () {
-                        $('#case_up').on('click',function () {
-                            var case_title = $('#case_title').val();
-                            var keywords = $('#keywords').val();
-                            var location = $('#location').val();
-                            var num = $('#num').val();
-                            var price = $('#price').val();
-                            var ywcase = $('#ywcase').val();
-                            var jtcase = $('#jtcase').val();
-                            var zscase = $('#zscase').val();
-                            var file = document.getElementById("doc-form-file").files[0];
-                            var form = new FormData();
-                            form.append('title',case_title);
-                            form.append('type',keywords);
-                            form.append('price',price);
-                            form.append('file',file);
-                            form.append('day',num);
-                            form.append('location',location);
-                            form.append('href',ywcase);
-                            form.append('traffic',jtcase);
-                            form.append('hotel',zscase);
-                            alert(form);
-                            $.ajax({
-                                method:'POST',
-                                url:'{:url("admin/farercase/addcase")}',
-                                data:form,
-                                processData: false,
-                                contentType: false,
-                                success:function (data) {
-                                    console.log(data);
-                                },
-                                fail:function (data) {
-                                }
-                            });
-                        })
-                    });
-                });
-            });
-
+            //通过点击左侧栏刷新右侧内容页面
             $('.select').each(function (i, obj) {
                 $(obj).attr('num', i).click(function () {
                     $('.select').removeClass('active');
@@ -405,7 +333,267 @@
                         dataType: 'json'
                     });
                 })
-            })
+            });
+
+
+            //信息列表点击事件
+            $('.info').each(function (i, obj) {
+                var type = ['user','hotel','case','note'];
+                $(obj).attr('info', i).click(function () {
+                    $('#page').html('');
+                    $(this).addClass('active').siblings().removeClass('active');
+                    var info = $(this).attr('info');
+                    console.log(info);
+                    $.ajax({
+                        method: 'post',
+                        url: '{:url("admin/index/index")}',
+                        data: {type: type[info]},
+                        success: function (data) {
+                            $('#content').html(data.tmp);
+                        },
+                        fail: function (data) {},
+                        async: false,
+                        dataType: 'json'
+                    }).always(function (data) {
+                        //分页数据处理
+                        pageController(data,type,info)
+                        //显示用户详情
+                        showDetail();
+                        //用户锁定事件
+                        userLock();
+                    });
+
+                });
+            });
+
+            //添加列表的点击事件开始
+            $('.add').each(function (i, obj) {
+
+                $(obj).attr('add',i).click(function () {
+                    $(this).addClass('active').siblings().removeClass('active');
+                    var add = $(this).attr('add');
+                    var type = ['addHotel','addRoom','addCase','addNote'];
+
+                    $.ajax({
+                        method: 'post',
+                        url: '{:url("admin/index/index")}',
+                        data: {type: type[add]},
+                        success: function (data) {
+                            $('#content').html(data);
+                        },
+                        fail: function (data) {},
+                        async: false,
+                        dataType: 'json'
+                    }).always(function () {
+                            //添加攻略处理方法
+                            addCaseClick();
+                            //添加房间的方法
+                            //添加商品的方法
+                    });
+                });
+            });
+
+
+            /**
+             * 显示用户详情页
+             *
+             * 通过each方法判断用户的uid
+             * ajax请求到该用户的相关信息，刷新到当前页面上
+             */
+            function showDetail()
+            {
+                $('.user_detail').each(function (i,obj) {
+                    $(this).on('click',function () {
+                        var uid = $(this).attr('value');
+                        $('#page').html('');
+                        $.ajax({
+                            method:'post',
+                            data:{type:'detail',uid:uid},
+                            url:'{:url("admin/users/details")}',
+                            success:function (data) {
+                                $('#content').html(data);
+                            }
+                        })
+                    });
+                });
+            }
+
+            /**
+             * 用户锁定的方法
+             */
+            function userLock()
+            {
+                $('.user_dele').each(function (i,obj) {
+                    console.log(i);
+                    $(this).on('click',function () {
+                        var uid = $(this).attr('value');
+                        $.ajax({
+                            method:'post',
+                            data:{uid:uid},
+                            url:'{:url("admin/users/lock")}',
+                            success:function (data) {
+                                alert(data);
+                                $('#content').html(data);
+                            }
+                        })
+                    })
+                })
+            }
+
+            /**
+             * 分页绘制
+             * 通过请求得到的总数据条数和每页规定的显示页数
+             * 动态创建页面按键
+             * @param data   请求过来的数据
+             * @param type   存放了对应控制器的值，控制器通过type值来返回不同的数据
+             * @param info   左侧按钮的info值
+             * 通过点击每一个分页按键，通过所带的属性
+             * 通过ajax请求到对应页数的数据，刷新到当前页面
+             */
+            function pageController(data,type,info)
+            {
+                var num = Math.ceil(data.pageCount/data.limit);
+                //如果是第一次加载，就讲分页图标绘画出来，不是的就不加载
+
+                for(i=0;i<num;i++) {
+                    $('<li>').appendTo($('#page')).attr('value',i).append('<a>');
+                    $('li[value='+i+'] a').html(i + 1);
+                }
+
+                $('li[value=0]').addClass('am-active').addClass('am-disabled');
+
+                //分页点击发起ajax请求开始
+                $('#page li').each(function (i,obj) {
+                    $(this).click(function () {
+                        if ($(this).attr('value') != 0) {
+                            start = obj.value * data.limit;
+                        } else {
+                            start = 0;
+                        }
+                        console.log(start);
+                        $(this).addClass('am-active').siblings().removeClass('am-active');
+                        $.ajax({
+                            method: 'post',
+                            url: '{:url("admin/index/index")}',
+                            data: {start: start,type:type[info]},
+                            success: function (data) {
+                                $('#content').html(data.tmp);
+                            },
+                            fail: function (data) {
+
+                            },
+                            async: false,
+                            dataType: 'json'
+                        }).always(function () {
+                            showDetail();
+                        })
+                    })
+                });
+                //分页发起ajax结束
+            }
+
+            /**
+             * 添加攻略页面的点击事件
+             *
+             * 1、上传图片之后显示图片名称
+             * 2、点击提交之后判断是否上传了封面图片
+             * 3、通过formData方式使用ajax提交数据
+             * 4、根据返回来的状态码判断是否添加成功
+             * 5、模态框显示提示信息
+             */
+            function addCaseClick()
+            {
+                //当上传了文件之后显示图片名称
+                $('#doc-form-file').on('change', function() {
+                    var fileNames = '';
+                    $.each(this.files, function() {
+                        fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                    });
+                    $('#file-list').html(fileNames);
+                });
+                //点击提交攻略按钮的事件
+                $('#case_up').on('click',function () {
+                    alert('提交');
+                    //判断是否已经上传了图片
+                    if($('#file-list').html() == '') {
+                        $('.am-modal-hd').html('小主是不是忘了上传图片啊！');
+                        $('#my-alert').modal();
+                        return;
+                    }
+                    //获取各个表单的值
+                    var case_title = $('#case_title').val();
+                    var keywords = $('#keywords').val();
+                    var location = $('#location').val();
+                    var num = $('#num').val();
+                    var price = $('#price').val();
+                    var ywcase = $('#ywcase').val();
+                    var jtcase = $('#jtcase').val();
+                    var zscase = $('#zscase').val();
+                    var file = document.getElementById("doc-form-file").files[0];
+
+                    //创建formData对象，并将表单的数据添加到里面
+                    var form = new FormData();
+                    form.append('title',case_title);
+                    form.append('type',keywords);
+                    form.append('price',price);
+                    form.append('file',file);
+                    form.append('day',num);
+                    form.append('location',location);
+                    form.append('href',ywcase);
+                    form.append('traffic',jtcase);
+                    form.append('hotel',zscase);
+
+                    //通过ajax提交数据
+                    $.ajax({
+                        method:'POST',
+                        url:'{:url("admin/farercase/addcase")}',
+                        data:form,
+                        processData: false,
+                        contentType: false,
+                        success:function (data) {
+                            addCaseData(data);
+                        },
+                        //没有连接成功，弹出模态框和错误信息
+                        fail:function (data) {
+                            $('.am-modal-hd').html('502');
+                            $('#my-alert').modal();
+                        }
+                    });
+                })
+            }
+
+            /**
+             * 根据ajax请求回来的数据判断是否添加成功
+             * 通过模态框显示提示信息
+             * @param data
+             */
+            function addCaseData(data)
+            {
+                data = JSON.parse(data);
+                if(!data.error){
+
+                    //提交成功，弹出模态框
+                    $('.am-modal-hd').html(data.msg);
+                    $('#my-confirm').modal({
+                        relatedTarget: this,
+                        onConfirm: function() {
+
+                            //点击确定按钮之后，模态框消失，模拟点击事件，重新加载当前页
+                            $('body').removeClass('am-dimmer-active');
+                            $('.am-dimmer').removeClass('am-active').css('display','none');
+                            $('.am-modal-hd').html(data.msg);
+                            $('#addCase').trigger('click');
+                        },
+                        onCancel: function() {
+                        }
+                    })
+
+                } else {
+                    //提交失败，弹出模态框和错误信息
+                    $('.am-modal-hd').html(data.msg);
+                    $('#my-alert').modal();
+                }
+            }
         });
     </script>
     <script type="text/javascript" src="__STATIC_URL__/map/js/MapCtrl_info.js"></script>

@@ -13,6 +13,6 @@ use traits\model\SoftDelete;
 
 class Farercase extends Model
 {
-//    protected $autoWriteTimestamp = true;
+    protected $autoWriteTimestamp = true;
     use SoftDelete;
 }

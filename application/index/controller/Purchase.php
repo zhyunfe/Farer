@@ -8,7 +8,31 @@
 
 namespace app\index\controller;
 use think\Controller;
+use think\Model\Purchzse as PurModel;
 class Purchase extends Controller
 {
-    
+    public function Purlist()
+    {
+        return $this->fetch();
+    }
+
+
+
+    public function Purzhifu()
+    {
+        return $this->fetch();
+    }
+
+
+    public function Purrealzhifu()
+    {
+        return $this->fetch();
+    }
+
+
+    public function Purmoney()
+    {
+        return $this->fetch();
+    }
+
 }

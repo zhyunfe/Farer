@@ -28,7 +28,7 @@ class Hotel extends Auth {
         $file = request()->file('file');
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads/hotel');
         if($info){
-            $header_image = $info->getFilename();
+            $header_image = $info->getSaveName();
             $obj = input('post.');
 
 

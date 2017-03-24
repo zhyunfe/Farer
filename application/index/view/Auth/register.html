@@ -75,7 +75,7 @@
     //return false
     $("#username").focus();
     var chz_flag = 1;
-    var mima_flag;
+    var mima_flag = 1;
     $("input").blur(function(){
 //        $(".spa").css("color","#BD362F");
         if($(this).is("#username")){             //姓名判断
@@ -233,19 +233,23 @@
 
     $("input").focus(function(){
         if($(this).is("#username")){
-
+            chz_flag = 0;
+            mima_flag = 0;
             $(".spa1").text("用户名为数字字母3-20位").css("color","#aaa")
             $(this).css("border","1px solid #aaa")
         }
         if($(this).is("#email")){
+            chz_flag = 0;mima_flag = 0;
             $(".spa2").text("请输入正确的格式").css("color","#aaa")
             $(this).css("border","1px solid #aaa")
         }
         if($(this).is("#password")){
+            chz_flag = 0;mima_flag = 0;
             $(".spa3").text("以字母开头，长度在6-18之间，只能包含字符、数字和下划线。").css("color","#aaa")
             $(this).css("border","1px solid #aaa")
         }
         if($(this).is("#password")){
+            chz_flag = 0;mima_flag = 0;
             $(".spa4").text("两次密码要一致").css("color","#aaa")
             $(this).css("border","1px solid #aaa")
         }
@@ -259,7 +263,9 @@
 
 
     $('#sub').on('click',function(){
-//        alert(chz_flag)
+
+        alert(chz_flag)
+
         if(chz_flag == 1){
 
             $.post($('form').attr('action'),$('form').serialize(),function(data){

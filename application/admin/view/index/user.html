@@ -28,51 +28,34 @@
                                     <th class="table-set">操作</th></tr>
                                 </thead>
                                 <tbody>
+                                {foreach $result as $key=>$value}
                                 <tr>
                                     <td>
                                         <input type="checkbox"></td>
-                                    <td>1</td>
+                                    <td>{$value->uid}</td>
                                     <td>
-                                        <a href="#">头像</a></td>
+                                        <a href="#">{$value->photo}</a></td>
                                     <td>
-                                        <a href="#">zhyunfe</a></td>
-                                    <td class="am-hide-sm-only">127.0.0.1</td>
-                                    <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-                                    <td class="am-hide-sm-only">2017年3月20日 7:28:47</td>
+                                        <a href="#">{$value->username}</a></td>
+                                    <td class="am-hide-sm-only">{$value->create_ip|long2ip}</td>
+                                    <td class="am-hide-sm-only">{$value->create_time}</td>
+                                    <td class="am-hide-sm-only">{$value->update_time}</td>
                                     <td>
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
-                                                    <span class="am-icon-pencil-square-o"></span>详情</button>
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                                    <span class="am-icon-trash-o"></span>锁定用户</button>
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary user_detail" value="{$value->uid}">
+                                                    <span class="am-icon-pencil-square-o"></span>详情</a>
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only user_dele" value="{$value->uid}">
+                                                    <span class="am-icon-lock"></span>锁定用户</a>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
+                                {/foreach}
                                 </tbody>
                             </table>
-                            <div class="am-cf">
-                                <div class="am-fr">
-                                    <ul class="am-pagination tpl-pagination">
-                                        <li class="am-disabled">
-                                            <a href="#">«</a></li>
-                                        <li class="am-active">
-                                            <a href="#">1</a></li>
-                                        <li>
-                                            <a href="#">2</a></li>
-                                        <li>
-                                            <a href="#">3</a></li>
-                                        <li>
-                                            <a href="#">4</a></li>
-                                        <li>
-                                            <a href="#">5</a></li>
-                                        <li>
-                                            <a href="#">»</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <hr></form>
+                            <hr>
+                        </form>
                     </div>
                 </div>
             </div>

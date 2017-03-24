@@ -3,11 +3,12 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\admin\model\Farercase;
+use app\admin\model\Users;
 class Index extends Auth
 {
     protected $is_check_login = ['*'];
 
-    public function index(Farercase $case)
+    public function index(Farercase $caseModel,Users $users)
     {
         if (isset($_POST['type'])) {
             switch ($_POST['type']) {
@@ -21,12 +22,32 @@ class Index extends Auth
                     return '这个是酒店管理';
                 break;
                 case 'user':
-                    $user = file_get_contents("../application/admin/view/index/user.html");
-                    return $user;
+                    $count = $users->count('uid');
+                    if(isset($_POST['start'])) {
+                        $start = $_POST['start'];
+                    } else {
+                        $start = 0;
+                    }
+                    $result = $users->field(['uid','username','photo','create_ip','create_time','update_time'])->limit($start,3)->select();
+                    foreach ($result as $value) {
+                        $value->uid += 100000;
+                    }
+                    $this->assign('result',$result);
+                    $tmp = $this->fetch(APP_PATH."/admin/view/index/user.html");
+                    return ['tmp'=>$tmp,'pageCount'=>$count,'limit'=>3];
                 break;
                 case 'case':
-                    $case = file_get_contents("../application/admin/view/index/case.html");
-                    return $case;
+
+                    $count = $caseModel->count('case_id');
+                    if(isset($_POST['start'])) {
+                        $start = $_POST['start'];
+                    } else {
+                        $start = 0;
+                    }
+                    $result = $caseModel->field(['case_id','pid','title','header_image','location','href','create_time','user_star','seecount'])->limit($start,6)->select();
+                    $this->assign('result',$result);
+                    $tmp = $this->fetch(APP_PATH.'/admin/view/index/case.html');
+                    return ['tmp'=>$tmp,'pageCount'=>$count,'limit'=>6];
                 break;
                 case 'note':
                     return '游记管理界面';

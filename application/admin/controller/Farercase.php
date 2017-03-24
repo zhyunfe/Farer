@@ -23,19 +23,19 @@ class Farercase extends Auth
         $file = request()->file('file');
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads/farercase');
         if($info){
-            $header_image = $info->getFilename();
+            $header_image = $info->getSaveName();
             $obj = input('post.');
-            $result = $case->save(['pid'=>1,'title'=>$obj['title'],
-                'type'=>$obj['type'],'header_image'=>$header_image,
-                'day'=>$obj['day'],'location'=>$obj['location'],
-                'href'=>$obj['href'],'traffic'=>$obj['traffic'],'hotel'=>$obj['hotel']]);
+            $result = $case->save(['pid'=>1,'title'=>addslashes($obj['title']),
+                'type'=>addslashes($obj['type']),'header_image'=>addslashes($header_image),
+                'day'=>addslashes($obj['day']),'location'=>addslashes($obj['location']),
+                'href'=>addslashes($obj['href']),'traffic'=>addslashes($obj['traffic']),'hotel'=>addslashes($obj['hotel'])]);
             if ($result) {
-                return ['error'=>1,'msg'=>'添加成功'];
+                return json_encode(['error'=>0,'msg'=>'添加成功']);
             } else {
-                return ['error'=>0,'msg'=>'添加失败'];
+                return json_encode(['error'=>1,'msg'=>'添加失败']);
             }
         }else{
-            return ['error'=>2,'msg'=>$file->getError()];
+            return json_encode(['error'=>2,'msg'=>$file->getError()]);
         }
     }
 }

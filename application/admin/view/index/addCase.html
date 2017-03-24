@@ -51,11 +51,11 @@
                                             <button type="button" class="am-btn am-btn-danger am-btn-sm">
                                             <i class="am-icon-cloud-upload"></i> 添加封面图片</button>
                                             <input id="doc-form-file" type="file">
+                                            <div id="file-list"></div>
                                         </div>
 
                                     </div>
                                 </div>
-
                                 <div class="am-form-group">
                                     <label for="user-weibo" class="am-u-sm-3 am-form-label">描述 <span class="tpl-form-line-small-title">Type</span></label>
                                     <div class="am-u-sm-9">
@@ -92,11 +92,21 @@
 
                                     <div class="am-form-group">
                                     <div class="am-u-sm-9 am-u-sm-push-3">
-                                        <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " id="case_up">提交</button>
+                                        <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success" id="case_up">提交</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+                <div class="am-modal-dialog">
+                    <div class="am-modal-hd">添加成功</div>
+                    <div class="am-modal-bd">
+                    </div>
+                    <div class="am-modal-footer">
+                        <span class="am-modal-btn">确定</span>
                     </div>
                 </div>
             </div>
