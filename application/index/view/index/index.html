@@ -63,7 +63,7 @@
             <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
               <img src="__STATIC_URL__/index/gonglue/{$value['header_image']}"  alt="{$value['title']}"/>
               <h3 class="am-gallery-title">{$value['title']}</h3>
-              <div class="am-gallery-desc am-gallery-title">{$value['content']}</div>
+              <div class="am-gallery-desc am-gallery-title">{$value['title']}</div>
               <div class="am-gallery-desc">浏览次数<span>&nbsp;&nbsp;&nbsp;23</span></div>
             </a>
           </div>
@@ -84,7 +84,7 @@
     $(function () {
         $('.am-slider').flexslider({
             controlNav: true,               // Boolean: 是否创建控制点
-            directionNav: false,             // Boolean: 是否创建上/下一个按钮（previous/next）
+            directionNav: true,             // Boolean: 是否创建上/下一个按钮（previous/next）
             touch: true,                    // Boolean: 允许触摸屏触摸滑动滑块
         });
     });

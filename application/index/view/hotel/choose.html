@@ -8,10 +8,10 @@
     </div>
     <div class="am-g">
         <div class="am-u-sm-6">
-            <button type="button" class="am-btn am-btn-default am-margin-right" id="my-start">开始日期</button><span id="my-startDate">2014-12-20</span>
+            <button type="button" class="am-btn am-btn-default am-margin-right" id="my-start">开始日期</button><span id="my-startDate"><br>2014-12-20</span>
         </div>
         <div class="am-u-sm-6">
-            <button type="button" class="am-btn am-btn-default am-margin-right" id="my-end">结束日期</button><span id="my-endDate">2014-12-25</span>
+            <button type="button" class="am-btn am-btn-default am-margin-right" id="my-end">结束日期</button><span id="my-endDate"><br>2014-12-25</span>
         </div>
     </div>
     <script>
@@ -185,24 +185,21 @@
                 }
                 ajaxJsonp( 'http://api.map.baidu.com/geocoder?location='+position.coords.longitude+','+position.coords.latitude+'&key=XIA9o1gtCBpCGYC8fTKAgO0C3O98f9ho');
 
-//                $.get('http://api.map.baidu.com/geocoder?location='+position.coords.longitude+','+position.coords.latitude+'&key=XIA9o1gtCBpCGYC8fTKAgO0C3O98f9ho',{},function(data){
-//
-//                    alert(data)
-//
-//
-//
-//
-//
-//                },'json');
-//            }, function(err) {
-//                $demoArea.html('获取地理位置时发生错误，错误信息：<br>' + err);
-//                console.log(err);
-//            });
+               $.get('http://api.map.baidu.com/geocoder?location='+position.coords.longitude+','+position.coords.latitude+'&key=XIA9o1gtCBpCGYC8fTKAgO0C3O98f9ho',{},function(data){
+
+                   alert(data)
+
+
+               },'json');
+           }, function(err) {
+               $demoArea.html('获取地理位置时发生错误，错误信息：<br>' + err);
+               console.log(err);
+            });
 
 
 
 
-//        });
+        });
     </script>
 
 <script>
