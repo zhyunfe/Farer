@@ -521,7 +521,7 @@
                     }
                     //获取各个表单的值
                     var case_title = $('#case_title').val();
-                    var keywords = $('#keywords').val();
+                    var keywords = $("input[name='keywords']").val();
                     var location = $('#location').val();
                     var num = $('#num').val();
                     var price = $('#price').val();
@@ -529,7 +529,7 @@
                     var jtcase = $('#jtcase').val();
                     var zscase = $('#zscase').val();
                     var file = document.getElementById("doc-form-file").files[0];
-
+                    alert(keywords);
                     //创建formData对象，并将表单的数据添加到里面
                     var form = new FormData();
                     form.append('title',case_title);
