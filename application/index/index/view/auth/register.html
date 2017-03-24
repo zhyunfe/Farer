@@ -1,0 +1,287 @@
+<style>
+     .chz_spa{
+         color: #aaa;
+     }
+
+
+    .header {
+        text-align: center;
+    }
+    .header h1 {
+        font-size: 200%;
+        color: #333;
+        margin-top: 30px;
+    }
+    .header p {
+        font-size: 14px;
+    }
+</style>
+<div class="header">
+    <div class="am-g">
+        <h1>Farer</h1>
+        <p>一个友好的旅游网站<br/>欢迎您注册</p>
+    </div>
+    <hr />
+</div>
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+        <hr>
+        <br>
+        <br>
+
+        <form method="post" class="am-form" action="{:url('index/Auth/doRegister')}" name="register"  method="post" onsubmit="false">
+            <label for="username">用户名:</label>
+            <input type="text" name="username" id="username" value="">
+            <br>
+            <span class="chz_spa spa1">用户名包含数字字母6-10位</span>
+            <br>
+
+
+            <label for="email">邮箱:</label>
+            <input type="text" name="email" id="email" value="">
+            <br>
+            <span class="chz_spa spa2">请输入正确的邮箱</span>
+            <br>
+            <label for="password">密码:</label>
+            <input type="password" name="password" id="password" value="">
+            <br>
+            <span class="chz_spa spa3">以字母开头，长度在6-18之间，只能包含字符、数字和下划线。</span>
+            <br>
+            <label for="ifpassword">确认密码:</label>
+            <input type="password" name="ifpassword" id="ifpassword" value="">
+            <br>
+            <span class="chz_spa spa4">两次密码要一致</span>
+            <br>
+            <label for="remember-me">
+                <input id="remember-me" type="checkbox">
+                记住密码
+            </label>
+            <br />
+            <div class="am-cf">
+                <input type="submit" name="" value="注 册" class="am-btn am-btn-primary am-btn-sm am-fl" id="sub">
+                <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+            </div>
+        </form>
+        <hr>
+        <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC_URL__/js/jquery-1.12.4.js"></script>
+<script>
+    //处理用户注册的前台验证信息，当失去焦点的时候验证内容，其中用户名和邮箱需要用ajax向后台发起请求
+    //即时判断是否重复，用chz_flag定义状态，只有return true的时候才为1，并在提交的时候判断开关，为1
+    //的时候再发起提交的ajax请求，需要注意的是一定要把表单自动提交关掉，onsubmit = false 或者在事件中
+    //return false
+    $("#username").focus();
+    var chz_flag = 1;
+    var mima_flag = 1;
+    $("input").blur(function(){
+//        $(".spa").css("color","#BD362F");
+        if($(this).is("#username")){             //姓名判断
+            var na= /^[a-zA-Z0-9]{3,20}$/;
+            if($("#username").val()!=""){
+
+                if($("#username").val()){
+                    if((na.test($("#username").val()))){
+                        $.post("{:url('index/Auth/doUser')}",{username:$('#username').val()},function(data){
+                            if(data.status)
+                            {
+                                $(".spa1").text(data.msg).css("color","#BD362F");
+                                $(this).css("border","1px solid #BD362F");
+                                chz_flag = 0;
+                                return false;
+                            }else {
+                                $(".spa1").text("用户名正确").css('color','green');
+                                chz_flag = 1;
+                                return true;
+                            }
+                        }, 'json');
+                    }else{
+                        $(".spa1").text("用户名长度输入错误").css("color","#BD362F");
+                        $(this).css("border","1px solid #BD362F");
+                        chz_flag = 0;
+                        return false;
+                    }
+                }else if(na){
+                    $(".spa1").text("用户名正确").css('color','green');
+                    chz_flag = 1;
+                    return true;
+                }
+            }else{
+                chz_flag = 0;
+                $(".spa1").text("用户名不能为空").css('color','#BD362F');
+            }
+        }
+
+
+
+
+
+
+        if($(this).is("#email")){             //姓名判断
+            var ph=/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+            if($("#email").val()!=""){
+
+                if($("#email").val()){
+                    if((ph.test($("#email").val()))){
+                        $.post("{:url('index/Auth/doEmail')}",{username:$('#email').val()},function(data){
+                            if(data.status)
+                            {
+                                $(".spa2").text(data.msg).css("color","#BD362F");
+                                $(this).css("border","1px solid #BD362F");
+                                chz_flag = 0;
+                                return false;
+                            }else {
+                                $(".spa2").text("邮箱正确").css('color','green');
+                                chz_flag = 1
+                                return true;
+                            }
+                        }, 'json');
+                    }else{
+                        $(".spa2").text("邮箱输入错误").css("color","#BD362F");
+                        $(this).css("border","1px solid #BD362F");
+                        chz_flag = 0;
+                        return false;
+                    }
+                }else if(na){
+                    $(".spa2").text("邮箱正确").css('color','green');
+                    chz_flag=1
+                    return true;
+                }
+            }else{
+                chz_flag = 0;
+                $(".spa2").text("邮箱不能为空").css('color','#BD362F');
+            }
+        }
+
+
+
+
+
+
+
+
+
+        if($(this).is("#password")){            //密码判断
+            var ad=/^[a-zA-Z]\w{5,17}$/;
+            if($("#password").val()!=""){
+                if(!(ad.test($("#password").val()))){
+                    $(".spa3").text("密码输入错误").css("color","#BD362F");
+                    $(this).css("border","1px solid #BD362F");
+                    mima_flag = 0;
+                    chz_flag = 0;
+                    return false;
+                }else if(ad){
+                    mima_flag = 1;
+                    $(".spa3").text("密码正确").css('color','green');
+                    chz_flag = 1;
+                    return true;
+
+                }
+            }else{
+                mima_flag = 0;
+                chz_flag = 0;
+                $(".spa3").text("密码不能为空").css("color","#BD362F");
+
+            }
+
+
+
+        }
+
+
+
+        if($(this).is("#ifpassword")){            //两次密码判断
+            if($("#ifpassword").val()=="")
+            {
+
+                chz_flag = 0;
+                $(".spa4").text("密码不能为空").css("color","#BD362F");
+                return false;
+            }else{
+                if($("#password").val()!=""){
+                    if($('#password').val() == $('#ifpassword').val() && mima_flag == 1)
+                    {
+                        $(".spa4").text("两次密码一致").css('color','green');
+                        chz_flag = 1;
+                        return true;
+
+                    }else{
+                        $(".spa4").text("两次密码不一致").css("color","#BD362F");
+                        $(this).css("border","1px solid #BD362F");
+                        chz_flag = 0;
+                        return false;
+                    }
+                }else{
+                    chz_flag = 0;
+                    $(".spa4").text("请先输入密码").css("color","#BD362F");
+                }
+            }
+
+        }
+
+
+
+
+
+
+
+    });
+
+
+
+    $("input").focus(function(){
+        if($(this).is("#username")){
+            chz_flag = 0;
+            mima_flag = 0;
+            $(".spa1").text("用户名为数字字母3-20位").css("color","#aaa")
+            $(this).css("border","1px solid #aaa")
+        }
+        if($(this).is("#email")){
+            chz_flag = 0;mima_flag = 0;
+            $(".spa2").text("请输入正确的格式").css("color","#aaa")
+            $(this).css("border","1px solid #aaa")
+        }
+        if($(this).is("#password")){
+            chz_flag = 0;mima_flag = 0;
+            $(".spa3").text("以字母开头，长度在6-18之间，只能包含字符、数字和下划线。").css("color","#aaa")
+            $(this).css("border","1px solid #aaa")
+        }
+        if($(this).is("#password")){
+            chz_flag = 0;mima_flag = 0;
+            $(".spa4").text("两次密码要一致").css("color","#aaa")
+            $(this).css("border","1px solid #aaa")
+        }
+    })
+
+
+
+
+
+
+
+
+    $('#sub').on('click',function(){
+
+        alert(chz_flag)
+
+        if(chz_flag == 1){
+
+            $.post($('form').attr('action'),$('form').serialize(),function(data){
+//                alert(data.status)
+                if(!data.status)
+                {
+//                    alert(data.msg);
+                }else{
+                    location.href = '{:url("/index/index/successload")}';
+                }
+            }, 'json');
+            return false;
+        }else {
+            return false;
+        }
+
+    })
+</script>
+

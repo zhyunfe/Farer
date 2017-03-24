@@ -11,38 +11,29 @@ use think\Controller;
 use think\Model\Purchzse as PurModel;
 class Purchase extends Controller
 {
-
     public function purList()
-
     {
         return $this->fetch();
     }
-
 
 
 
     public function purZhifu()
-
     {
         return $this->fetch();
     }
-
 
 
     public function purrealZhifu()
-
     {
         return $this->fetch();
     }
-
 
 
     public function purMoney()
-
     {
         return $this->fetch();
     }
-
 
     public function zhiFu()
     {
@@ -54,5 +45,4 @@ class Purchase extends Controller
     {
         return $this->fetch();
     }
-
 }

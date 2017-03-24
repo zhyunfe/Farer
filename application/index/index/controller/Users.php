@@ -12,23 +12,13 @@ class Users extends Auth
      */
 //    private $is_check_login = [];
 
+//    需要session验证
+//    protected $is_check_login = ['*'];
 
     public function test()
     {
         echo 123;
     }
-    public function zhifu()
-    {
-        $this->assign('title','zhifu');
-       dump( $this->fetch());
-    }
-
-
-//    需要session验证
-//    protected $is_check_login = ['*'];
-
-
-
     public function center()
     {
 
@@ -45,5 +35,8 @@ class Users extends Auth
     {
         return $this->fetch();
     }
-
+    public function zhifu()
+    {
+        return $this->fetch();
+    }
 }

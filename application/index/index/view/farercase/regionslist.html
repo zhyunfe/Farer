@@ -1,0 +1,57 @@
+
+<div id="index">
+    <!-----------首页头部----------->
+    {include file="public/top" /}
+    <!-----------轮播banner----------->
+    <div style="height: 80px;width: 100%"></div>
+    <section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }'>
+
+
+
+
+
+
+        {foreach $biglist as $key=>$value}
+        <dl class="am-accordion-item am-active">
+
+            <dt class="am-accordion-title">
+                {$value['dname']}
+            </dt>
+
+            <dd class="am-accordion-bd am-collapse am-in">
+                <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+                <div class="am-accordion-content">
+                    {foreach $smllist as $k=>$v}
+                    {if $v['ifcity'] == $value['did']}
+
+                    <a href="{:url('index/farercase/regiondetail')}">{$v['dname']} </a><br/>
+
+                    {/if}
+                    {/foreach}
+                </div>
+            </dd>
+
+        </dl>
+        {/foreach}
+
+
+    </section>
+
+
+
+
+
+
+
+    <script>
+        $(function () {
+            $('.am-slider').flexslider({
+                controlNav: true,               // Boolean: 是否创建控制点
+                directionNav: false,             // Boolean: 是否创建上/下一个按钮（previous/next）
+                touch: true,                    // Boolean: 允许触摸屏触摸滑动滑块
+            });
+        });
+    </script>
+    <!--footer-->
+    {include file="public/foot" /}
+

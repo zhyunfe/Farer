@@ -15,15 +15,21 @@ class Hotel extends Controller
     }
 
 
-
-    public function holist()
+    public function hoList()
     {
         return $this->fetch();
     }
 
 
-    public function hodetail()
+    public function hoDetail()
     {
         return $this->fetch();
     }
+
+
+    public function zhiFu()
+    {
+        return $this->fetch();
+    }
+
 }

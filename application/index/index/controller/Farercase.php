@@ -53,7 +53,6 @@ class Farercase extends Controller
         return $this->fetch();
     }
 
-
     // +----------------------------------------------------------------------
     // |所有攻略列表
     // +----------------------------------------------------------------------
@@ -61,6 +60,5 @@ class Farercase extends Controller
     {
         return $this->fetch();
     }
-
 
 }
