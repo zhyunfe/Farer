@@ -45,5 +45,9 @@ class Users extends Auth
     {
         return $this->fetch();
     }
+    public function text()
+    {
+        echo 666;
+    }
 
 }
