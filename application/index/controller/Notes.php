@@ -2,34 +2,25 @@
 /**
  * Created by PhpStorm.
  * User: 11870
- * Date: 2017/3/21
- * Time: 23:22
+ * Date: 2017/3/24
+ * Time: 10:44
  */
+
 namespace app\index\controller;
 use think\Controller;
-class Hotel extends Controller
+class Notes extends Controller
 {
-    public function choose()
+    public function noList()
     {
         return $this->fetch();
     }
 
-
-    public function hoList()
+    public function noDetail()
     {
         return $this->fetch();
     }
-
-
-    public function hoDetail()
+    public  function writeNote()
     {
         return $this->fetch();
     }
-
-
-    public function zhiFu()
-    {
-        return $this->fetch();
-    }
-
 }

@@ -11,18 +11,29 @@ class Users extends Auth
      *
      */
 //    private $is_check_login = [];
-    protected $is_check_login = ['*'];
+
+//    需要session验证
+//    protected $is_check_login = ['*'];
 
     public function test()
     {
         echo 123;
     }
-    public function zhifu()
+    public function center()
     {
-        $this->assign('title','zhifu');
-       dump( $this->fetch());
+
+       return $this->fetch();
     }
 
+    public function orderList()
+    {
+        return $this->fetch();
+    }
 
+    //添加联系人
+    public function addUser()
+    {
+        return $this->fetch();
+    }
 
 }

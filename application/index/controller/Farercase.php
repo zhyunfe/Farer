@@ -11,7 +11,7 @@ use app\index\model\Farerdiqu;
 use think\Controller;
 class Farercase extends Controller
 {
-    public function triplist()
+    public function tripList()
     {
 
 
@@ -25,7 +25,7 @@ class Farercase extends Controller
     // +----------------------------------------------------------------------
     // | 攻略相关的景区列表
     // +----------------------------------------------------------------------
-    public function Regionslist()
+    public function regionsList()
     {
         $bgfc = [];
         $smfc = [];
@@ -48,12 +48,17 @@ class Farercase extends Controller
     // +----------------------------------------------------------------------
     // |景区详情攻略
     // +----------------------------------------------------------------------
-    public function Regiondetail()
+    public function regionDetail()
     {
         return $this->fetch();
     }
 
-
-
+    // +----------------------------------------------------------------------
+    // |所有攻略列表
+    // +----------------------------------------------------------------------
+    public function allList()
+    {
+        return $this->fetch();
+    }
 
 }

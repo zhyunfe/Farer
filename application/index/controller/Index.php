@@ -19,6 +19,7 @@ class Index extends Auth
 //        dump(Session::get('user'));
 //        die;
         $far = Farercase::all();
+
         $arr = [];
         foreach ($far as $value)
         {

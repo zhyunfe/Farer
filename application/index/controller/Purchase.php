@@ -11,28 +11,38 @@ use think\Controller;
 use think\Model\Purchzse as PurModel;
 class Purchase extends Controller
 {
-    public function Purlist()
+    public function purList()
     {
         return $this->fetch();
     }
 
 
 
-    public function Purzhifu()
+    public function purZhifu()
     {
         return $this->fetch();
     }
 
 
-    public function Purrealzhifu()
+    public function purrealZhifu()
     {
         return $this->fetch();
     }
 
 
-    public function Purmoney()
+    public function purMoney()
     {
         return $this->fetch();
     }
 
+    public function zhiFu()
+    {
+        return $this->fetch();
+    }
+
+
+    public function allList()
+    {
+        return $this->fetch();
+    }
 }
