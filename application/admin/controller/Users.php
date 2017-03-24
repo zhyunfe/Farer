@@ -17,7 +17,6 @@ class Users extends Auth
 
     public function details(UsersModel $usersModel)
     {
-        $type   = $_POST['type'];
         $uid    = $_POST['uid'] - 100000;
         $result = $usersModel->where(['uid'=>$uid])->find();
         $this->assign('result',$result);

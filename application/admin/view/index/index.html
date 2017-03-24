@@ -368,8 +368,8 @@
 
             //添加列表的点击事件开始
             $('.add').each(function (i, obj) {
-
                 $(obj).attr('add',i).click(function () {
+                    $('#page').html('');
                     $(this).addClass('active').siblings().removeClass('active');
                     var add = $(this).attr('add');
                     var type = ['addHotel','addRoom','addCase','addNote'];
@@ -513,7 +513,6 @@
                 });
                 //点击提交攻略按钮的事件
                 $('#case_up').on('click',function () {
-                    alert('提交');
                     //判断是否已经上传了图片
                     if($('#file-list').html() == '') {
                         $('.am-modal-hd').html('小主是不是忘了上传图片啊！');
