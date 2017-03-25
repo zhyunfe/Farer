@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
-
+use think\Session;
+use think\Request;
 use think\Controller;
 use app\index\model\User as UsersModel;
 use app\index\controller\Auth;
@@ -11,7 +12,12 @@ class Users extends Auth
      *
      */
 //需要session验证
-    protected $is_check_login = ['wirteNote'];
+    protected $is_check_login = ['writenote','collect','prolist','triplist','shopcar','notelist','tripcomment'];
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 
     public function zhifu()
@@ -49,6 +55,10 @@ class Users extends Auth
         }else{
             $this->assign('iflo',0);
         }
+
+
+
+        $this->assign('info', Session::get('user'));
         return $this->fetch();
     }
 
@@ -68,5 +78,33 @@ class Users extends Auth
         return $this->fetch();
     }
 
+
+    public  function collect()
+    {
+        return $this->fetch();
+    }
+    public  function proList()
+    {
+        return $this->fetch();
+    }
+
+    public  function tripList()
+    {
+        return $this->fetch();
+    }
+    public  function shopCar()
+    {
+        return $this->fetch();
+    }
+
+    public  function noteList()
+    {
+        return $this->fetch();
+    }
+
+    public  function tripComment()
+    {
+        return $this->fetch();
+    }
 
 }

@@ -13,7 +13,7 @@ use think\Session;
 use think\Validate;
 use app\index\model\Users;
 
-//use think\session;
+
 class Auth extends Controller
 {
 
@@ -22,11 +22,14 @@ class Auth extends Controller
     // +----------------------------------------------------------------------
     protected $is_check_login = [''];
 
-    public function _initialize()
+    public function __construct()
     {
+        parent::__construct();
         if(!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*'))
         {
-            $this->error('您还没有登录请先登录', url('index/auth/login'));
+
+            $this->assign('aurl',"javascript:location=history.go(-1);");
+            $this->error();
         }
     }
 
@@ -39,7 +42,7 @@ class Auth extends Controller
         // 	return false;
         // }
 
-        return session('?user');
+        return Session::get('user');
     }
 
 

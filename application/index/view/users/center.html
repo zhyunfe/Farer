@@ -93,19 +93,19 @@
                     </a>
                 </li>
                 <li>
-                    <a title="" href="collect.html">
+                    <a title="" href="{:url('index/users/collect')}">
                         <img src="__STATIC_URL__/index/images/user_center_icon2.png"/>
                         <p>我的收藏</p>
                     </a>
                 </li>
                 <li>
-                    <a title="" href="project_order.html">
+                    <a title="" href="{:url('index/users/prolist')}">
                         <img src="__STATIC_URL__/index/images/user_center_icon3.png"/>
                         <p>商品订单</p>
                     </a>
                 </li>
                 <li>
-                    <a title="" href="trip_order.html">
+                    <a title="" href="{:url('index/users/triplist')}">
                         <img src="__STATIC_URL__/index/images/user_center_icon4.png"/>
                         <p>旅游订单</p>
                     </a>
@@ -121,7 +121,7 @@
                     <p>积分<span>580</span></p>
                 </li>
                 <li>
-                    <a href="my_project_cart.html">
+                    <a href="{:url('index/users/shopcar')}">
                         <img src="__STATIC_URL__/index/images/icon-shop_car2.png" />
                         <p>购物车<label>9</label></p>
                     </a>
@@ -131,13 +131,13 @@
         <ul class="list_nav">
 
             <li>
-                <a title="" href="my_note.html">
+                <a title="" href="{:url('index/users/notelist')}">
                     <img src="__STATIC_URL__/index/images/user_center_icon6.png">我的游记
                     <i class="am-icon-angle-right"></i>
                 </a>
             </li>
             <li>
-                <a title="" href="trip_comment.html">
+                <a title="" href="{:url('index/users/tripcomment')}">
                     <img src="__STATIC_URL__/index/images/user_center_icon7.png">我的评论
                     <i class="am-icon-angle-right"></i>
                 </a>
@@ -146,38 +146,42 @@
     </div>
 </div>
 <!--footer-->
+
+
+
 <div id="footer">
     <div class="first">
         <ul class="am-avg-sm-2">
             <li>
-                <a title=""  href="index.html">
+                <a title=""  href="{:url('index/index/index')}">
                     <img src="__STATIC_URL__/index/images/icon-footer1-a.png"/>
                     <p>首页</p>
                 </a>
             </li>
+
             <li>
-                <a title="" href="trip_list.html">
+                <a title="" href="{:url('index/farercase/triplist')}">
                     <img alt="" src="__STATIC_URL__/index/images/icon-footer2-a.png"/>
-                    <p>孟津旅游</p>
+                    <p>攻略</p>
                 </a>
             </li>
         </ul>
     </div>
     <div class="beautiful">
-        <a title=""  href="beautiful_list.html">
+        <a title=""  href="javascript:;">
             <img alt="" src="__STATIC_URL__/index/images/icon-footer3-a.png"/>
         </a>
     </div>
     <div class="last">
         <ul class="am-avg-sm-2">
             <li >
-                <a title="" href="specialty_mall.html">
+                <a title="" href="{:url('index/notes/nolist')}">
                     <img alt="" src="__STATIC_URL__/index/images/icon-footer4-a.png"/>
-                    <p>特产商城</p>
+                    <p>游记</p>
                 </a>
             </li>
-            <li class="active">
-                <a title="" href="user_center.html">
+            <li  class="active">
+                <a title="" href="{:url('index/users/center')}">
                     <img alt="" src="__STATIC_URL__/index/images/icon-footer05-a.png"/>
                     <p>我的</p>
                 </a>
