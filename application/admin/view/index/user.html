@@ -1,7 +1,8 @@
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span>用户列表</span></div>
+                    <span>用户列表</span>
+                </div>
                 <div class="tpl-portlet-input tpl-fz-ml">
                     <div class="portlet-input input-small input-inline">
                         <div class="input-icon right">
@@ -45,8 +46,9 @@
                                             <div class="am-btn-group am-btn-group-xs">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-secondary user_detail" value="{$value->uid}">
                                                     <span class="am-icon-pencil-square-o"></span>详情</a>
-                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only user_dele" value="{$value->uid}">
-                                                    <span class="am-icon-lock"></span>锁定用户</a>
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only user_dele" value="{$value->uid}" tag={if $value->delete_time}0{else}1{/if}>
+                                                    {if $value->delete_time}已锁定{else}锁定用户{/if}
+                                                    </a>
                                             </div>
                                         </div>
                                     </td>

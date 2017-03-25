@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="__STATIC_URL__/assets/css/app.css">
     <!--加载地图-->
     <link rel="stylesheet" href="__STATIC_URL__/map/css/MapCtrl.css" />
+    <link rel="stylesheet" href="__STATIC_URL__/js/addRoom.js">
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tzAcIFZ5xCoRwm63NcBGfoVB"></script>
     <!--加载鼠标绘制工具-->
     <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
@@ -360,7 +361,7 @@
                         //显示用户详情
                         showDetail();
                         //用户锁定事件
-                        userLock();
+                        userLock(data);
                     });
 
                 });
@@ -388,12 +389,23 @@
                             //添加攻略处理方法
                             addCaseClick();
                             //添加房间的方法
+
+                            addRoom();
                             //添加商品的方法
                     });
                 });
             });
+            function addRoom()
+            {
+                var province = $('#s_province').children('option:selected').val();
+                var city = $('#s_city').children('option:selected').val();
+                var county = $('#s_county').children('option:selected').val();
 
-
+                var location = province+city+county;
+                $('#hoteltype').click(function () {
+                    alert(location);
+                });
+            }
             /**
              * 显示用户详情页
              *
@@ -421,21 +433,43 @@
             /**
              * 用户锁定的方法
              */
-            function userLock()
+            function userLock(data)
             {
                 $('.user_dele').each(function (i,obj) {
-                    console.log(i);
                     $(this).on('click',function () {
                         var uid = $(this).attr('value');
-                        $.ajax({
-                            method:'post',
-                            data:{uid:uid},
-                            url:'{:url("admin/users/lock")}',
-                            success:function (data) {
-                                alert(data);
-                                $('#content').html(data);
-                            }
-                        })
+                        var tag = $(this).attr('tag');
+                        //0代表已经锁定用户，1代表还没锁定用户
+                        //0走恢复用户，1走锁定用户
+                        var tag = ($(this).attr('tag'));
+                        var btn = $(this);
+                        if($(this).attr('tag') == 1) {
+                            $.ajax({
+                                method:'post',
+                                data:{uid:uid},
+                                url:'{:url("admin/users/lock")}',
+                                success:function (data) {
+                                    btn.attr('tag',0);
+                                    btn.text('已锁定');
+                                },fail: function (data) {
+                                },
+                                async: false,
+                                dataType: 'json'
+                            });
+                        } else {
+                            $.ajax({
+                                method:'post',
+                                data:{uid:uid},
+                                url:'{:url("admin/users/unlock")}',
+                                success:function (data) {
+                                    btn.attr('tag',1);
+                                    btn.text('锁定用户');
+                                },fail: function (data) {
+                                },
+                                async: false,
+                                dataType: 'json'
+                            });
+                        }
                     })
                 })
             }
@@ -484,8 +518,9 @@
                             },
                             async: false,
                             dataType: 'json'
-                        }).always(function () {
+                        }).always(function (data) {
                             showDetail();
+                            userLock(data);
                         })
                     })
                 });
@@ -529,7 +564,6 @@
                     var jtcase = $('#jtcase').val();
                     var zscase = $('#zscase').val();
                     var file = document.getElementById("doc-form-file").files[0];
-                    alert(keywords);
                     //创建formData对象，并将表单的数据添加到里面
                     var form = new FormData();
                     form.append('title',case_title);

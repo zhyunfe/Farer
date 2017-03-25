@@ -1,0 +1,24 @@
+<div id="info">
+    <form class="am-form">
+        <fieldset>
+        <div class="am-form-group">
+            <legend>添加房间</legend>
+            <span class="address">区域地址：</span>
+            <select id="s_province" name="s_province" style="display: inline-block"></select>
+            <select id="s_city" name="s_city" style="display: inline-block"></select>
+            <select id="s_county" name="s_county" style="display: inline-block"></select>
+            <script class="resources library" src="http://www.farer.com/static/map/js/area.js" type="text/javascript"></script>
+            <script type="text/javascript">_init_area();</script>
+        </div>
+        <div class="am-form-group">
+            <span class="hotellist">酒店列表：</span>
+            <select name="type" id="hoteltype" style="display: inline-block">
+                <option value="0">经济</option>
+                <option value="1">豪华</option>
+                <option value="2">主题</option>
+            </select>
+            <select name="list" id="hotellist" style="display: inline-block"></select>
+        </div>
+        </fieldset>
+    </form>
+</div>

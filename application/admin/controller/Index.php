@@ -22,13 +22,13 @@ class Index extends Auth
                     return '这个是酒店管理';
                 break;
                 case 'user':
-                    $count = $users->count('uid');
+                    $count = $users->withTrashed()->count('uid');
                     if(isset($_POST['start'])) {
                         $start = $_POST['start'];
                     } else {
                         $start = 0;
                     }
-                    $result = $users->field(['uid','username','photo','create_ip','create_time','update_time'])->limit($start,3)->select();
+                    $result = $users->withTrashed()->field(['uid','username','photo','create_ip','create_time','update_time','delete_time'])->limit($start,3)->select();
                     foreach ($result as $value) {
                         $value->uid += 100000;
                     }
@@ -43,7 +43,7 @@ class Index extends Auth
                         $start = $_POST['start'];
                     } else {
                         $start = 0;
-                    }
+                      }
                     $result = $caseModel->field(['case_id','pid','title','header_image','location','href','create_time','user_star','seecount'])->limit($start,6)->select();
                     $this->assign('result',$result);
                     $tmp = $this->fetch(APP_PATH.'/admin/view/index/case.html');
@@ -60,7 +60,8 @@ class Index extends Auth
                     return '添加游记';
                     break;
                 case 'addRoom':
-                    return '添加房间';
+                    $add = file_get_contents('../application/admin/view/room/addroom.html');
+                    return $add;
                     break;
             }
         } else {

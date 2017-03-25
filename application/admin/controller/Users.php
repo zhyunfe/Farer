@@ -25,8 +25,21 @@ class Users extends Auth
     public function lock(UsersModel $usersModel)
     {
         $uid    = $_POST['uid'] - 100000;
-        dump($uid);
         $result = UsersModel::destroy($uid);
-        return $result;
+        if ($result) {
+            return ['error'=>0,'msg'=>'删除成功'];
+        } else {
+            return ['error'=>1,'msg'=>'删除失败'];
+        }
+    }
+    public function unlock(UsersModel $usersModel)
+    {
+        $uid = $_POST['uid'] - 100000;
+        $result = $usersModel->withTrashed()->where(['uid' => $uid])->update(['delete_time'=>null]);
+        if ($result) {
+            return ['error'=>0,'msg'=>'恢复成功'];
+        } else {
+            return ['error'=>1,'msg'=>'恢复失败'];
+        }
     }
 }
