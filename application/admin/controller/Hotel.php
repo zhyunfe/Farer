@@ -33,18 +33,23 @@ class Hotel extends Auth {
 
 
             // +----------------------------------------------------------------------
-            // | 未完成： 通过city（省份）county（城市）确认酒店的pid
+            // | 未完成： 通过province（省份）city（城市）确认酒店的pid
             // +----------------------------------------------------------------------
 
 
-            $location = $obj['city'].$obj['county'].$obj['location'];
-            $service = rtrim($obj['service'],',');
-            $result = $hotel->save(['pid'=>1,'name'=>$obj['name'],
-                'header_image'=>$header_image,'location'=>$location,
-                'style'=>$obj['type'],'introduce'=>$obj['desc'],
-                'telephone'=>$obj['phone'],'gl'=>$obj['gl'],
-                'service'=>$service
-               ]);
+            $location = $obj['province'].$obj['city'].$obj['county'].$obj['location'];
+            $pid      = $obj['province'].$obj['city'];
+            $service  = rtrim($obj['service'],',');
+            $result   = $hotel->save(['pid'        =>$pid,
+                                      'name'        =>$obj['name'],
+                                      'header_image'=>$header_image,
+                                      'location'    =>$location,
+                                      'style'       =>$obj['type'],
+                                      'introduce'   =>$obj['desc'],
+                                      'telephone'   =>$obj['phone'],
+                                      'gl'          =>$obj['gl'],
+                                      'service'     =>$service
+            ]);
             if ($result) {
                 //插入成功返回错误号和错误信息
                 return json_encode(['error'=>0,'msg'=>'添加成功']);
@@ -55,5 +60,12 @@ class Hotel extends Auth {
             //文件上传失败的话返回错误号和错误信息
             return json_encode(['error'=>2,'msg'=>$file->getError()]);
         }
+    }
+    public function find(HotelModel $hotel)
+    {
+        $pid    = input('post.pid');
+        $style  = input('post.type');
+        $result = $hotel->field(['id','name'])->where(['pid'=>$pid,'style'=>$style])->select();
+        return $result;
     }
 }

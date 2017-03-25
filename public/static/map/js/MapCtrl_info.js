@@ -1,10 +1,9 @@
 // 百度地图API功能
 $('#addHome').on('click',function (){
+	$('#addHome').addClass('active');
 	refresh();
 });
-
 function refresh() {
-	$(this).addClass('active');
 
 	$('#content').html('');
 	$('<div>').appendTo($('#content')).attr('id','baiduMap').attr('class','am-g');
@@ -222,6 +221,7 @@ function refresh() {
 					var gl = $('.simditor-body').html();
 					var form = new FormData();
 					form.append('desc',description);
+					form.append('province',province);
 					form.append('city',city);
 					form.append('county',county);
 					form.append('location',location);
@@ -300,7 +300,7 @@ function refresh() {
 		case 1:
 		var map = new BMap.Map("map");
 			if(typeof(window.parent.myDR) != "object"){
-			
+
 			var poi = new BMap.Point(jingDu,weiDu);//默认起始坐标
 		}else{
 			var marker = new BMap.Marker(new BMap.Point(window.parent.myX, window.parent.myY));
@@ -309,19 +309,19 @@ function refresh() {
 			document.getElementById("span_address").innerText = window.parent.myAddress;
 			var xiangxi = "<input  type='hidden' name='opraddress' value="+window.parent.myAddress+">";
 			parent.document.getElementById("opraddress_div").innerHTML=xiangxi;
-			
+
 			//触发消失
 			document.getElementById("suggestId").onfocus=function(){
 					document.getElementById("span_address").innerText = '';
 				};
-			
+
 			var poi = new BMap.Point(window.parent.myDR[0]['lng'],window.parent.myDR[0]['lat']);
-			
+
 			//赋值坐标x默认值
 			document.getElementById("jing").value = window.parent.myX;
 			var jing = "<input id='lng_div'  type='hidden' name='geographiclongitude' value="+window.parent.myX+">";
 			parent.document.getElementById("lng_div").innerHTML=jing;
-			
+
 			//赋值坐标y默认值
 			document.getElementById("wei").value = window.parent.myY;
 			var wei = "<input id='lat_div'  type='hidden' name='geographiclatitude' value="+window.parent.myY+">";
@@ -332,12 +332,12 @@ function refresh() {
 		var centerP = poi;
 		map.centerAndZoom(centerP, 13);
 		$('#s_province').change(function() {
-	        var value = $(this).children('option:selected').val(); //这就是selected的值 
+	        var value = $(this).children('option:selected').val(); //这就是selected的值
 	        changeTemp(value);	//省改变地方地图联动
 	        map.centerAndZoom(centerP, 11);//重新定位地图
 	    });
 		$('#s_city').change(function() {
-	        var value = $(this).children('option:selected').val(); //这就是selected的值 
+	        var value = $(this).children('option:selected').val(); //这就是selected的值
 	        changeTemp(value);	//市改变地方地图联动
 	        map.centerAndZoom(centerP, 13);//重新定位地图
 	    });
@@ -352,25 +352,25 @@ function refresh() {
 			//初始点详细位置请求
 			type:"GET",
 			url:'http://api.map.baidu.com/geocoder/v2/?ak=149b2f3647140074f183d3e30d3b0dd8&callback=renderReverse&location='+weiDu+','+jingDu+'&output=json&pois=0',
-			dataType: "jsonp",  
-			success:function (json) {                        
+			dataType: "jsonp",
+			success:function (json) {
                         $('#sug_label').val(json.result.formatted_address);
                         //具体地址给sug_label
                     }
 		});
 	    var local = new BMap.LocalSearch(map, {    //本地搜索
-	     renderOptions:{map: map}      
-	    });    
-	    // local.search(KeyWord);    
+	     renderOptions:{map: map}
+	    });
+	    // local.search(KeyWord);
 		var local_in = new BMap.LocalSearch(SearchRange, {    //指定地区搜索
-		 renderOptions: {    
-		   map: map,    
-		   autoViewport: true,    
-		   selectFirstResult: false    
-		 },    
-		  pageCapacity: 20    
-		});    
-		// local_in.search(KeyWord);  
+		 renderOptions: {
+		   map: map,
+		   autoViewport: true,
+		   selectFirstResult: false
+		 },
+		  pageCapacity: 20
+		});
+		// local_in.search(KeyWord);
 		if(SearchRange=="1"){
 			//为1时本IP地区搜索
 			local.search(KeyWord);
@@ -380,23 +380,23 @@ function refresh() {
 		}
 
 		function onlyMarker(){//只一个标注
-			cleanMarker(); 
+			cleanMarker();
 		}
 
 		function onlyPolygon(){//只一个多边形 矩形
 			cleanPolygon();
 		}
-	    var overlays = [];		
+	    var overlays = [];
 		// 创建地址解析器实例
-		var myGeo = new BMap.Geocoder();		
+		var myGeo = new BMap.Geocoder();
 		var overlaycomplete = function(e){
-			
+
 			if(e.overlay == '[object Marker]'){
 				//地图上放置点的时候,清除前面所有点
 				if(isOnly){
 					onlyMarker();
-					} 
-				////点(在地图上画点的时候,把坐标,地址,显示在input中)	
+					}
+				////点(在地图上画点的时候,把坐标,地址,显示在input中)
 				var pt = e.overlay.point;
 				myGeo.getLocation(pt, function(rs){
 					var addComp = rs.addressComponents;//将点的市、区/县、街给addComp
@@ -410,10 +410,10 @@ function refresh() {
 					}else {
 						$("#s_province option:first").text(s_province); //其他省份
 					}
-					
+
 					$("#s_city option:selected").text(s_city); //市级单位赋值
 					$("#s_county option:selected").text(s_district);//区县单位赋值
-					if(addComp.province == addComp.city){	
+					if(addComp.province == addComp.city){
 						var add_p_c =  addComp.city;
 					}else{
 						var add_p_c =  addComp.province+addComp.city;
@@ -422,27 +422,27 @@ function refresh() {
 					//清除地址input
 					document.getElementById("span_address").innerText = '';
 					//赋值
-					document.getElementById("suggestId").value = dizhi;					
+					document.getElementById("suggestId").value = dizhi;
 					var xiangxi = "<input  type='hidden' name='opraddress' value="+dizhi+">";
-				});   
-					
+				});
+
 					document.getElementById("jing").value = e.overlay.point.lng;
 					document.getElementById("wei").value = e.overlay.point.lat;
-							
+
 			}else if(e.overlay == '[object Polygon]'){
 				if(isOnly){
 					onlyPolygon();
 				}
-				//多边形,矩形 
+				//多边形,矩形
 				var arr = e.overlay.getPath();
 				html = '';
 				for (n in arr){
 					html += "<input  type='hidden' name='xy["+n+"][lng]' value="+arr[n]['lng']+">"+"<input type='hidden' name='xy["+n+"][lat]' value="+arr[n]['lat']+">";
-				}			
+				}
 				//经纬度写入 表单 隐藏域
 				parent.document.getElementById("xy").innerHTML=html;
 			}else {
-				
+
 			}
 
 	    };
@@ -457,7 +457,7 @@ function refresh() {
 	    }else{
 	    	//否则隐藏BAR
 	    	drawingBarTF = true;
-	    	for(var i in arr_l){	
+	    	for(var i in arr_l){
 	    		//循环判断
 	    		if(arr_l[i]=='B'){arr_l[i]=BMAP_DRAWING_MARKER;}else if(arr_l[i]=='C'){arr_l[i]=BMAP_DRAWING_POLYGON;}else if(arr_l[i]='D'){arr_l[i]=BMAP_DRAWING_RECTANGLE;}else{alert("error!");};
 	    	}
@@ -492,11 +492,11 @@ function refresh() {
 	        polylineOptions: styleOptions, //线的样式
 	        polygonOptions: styleOptions, //多边形的样式
 	        rectangleOptions: styleOptions //矩形的样式
-	    });  
+	    });
 		 //添加鼠标绘制工具监听事件，用于获取绘制结果
 	    drawingManager.addEventListener('overlaycomplete', overlaycomplete);
 	    //清除所有遮盖物
-	    
+
 		$("#cleanAll").click(function(){
 			map.clearOverlays();
 			for(var i = 0; i < overlays.length; i++){
@@ -515,7 +515,7 @@ function refresh() {
 				{
 				"input" : "suggestId",
 				"location" : map
-				
+
 			});
 
 			ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
@@ -524,13 +524,13 @@ function refresh() {
 				var value = "";
 				if (e.fromitem.index > -1) {
 					value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-				}    
+				}
 				str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
 				value = "";
 				if (e.toitem.index > -1) {
 					_value = e.toitem.value;
 					value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-				}    
+				}
 				str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
 				G("searchResultPanel").innerHTML = str;
 			});
@@ -545,8 +545,8 @@ function refresh() {
 				cleanMarker();
 			});
 		function setPlace(){
-			//map.clearOverlays();    //清除地图上所有覆盖物 
-			function myFun(){ 
+			//map.clearOverlays();    //清除地图上所有覆盖物
+			function myFun(){
 				var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
 				map.centerAndZoom(pp, 18);
 				map.addOverlay(new BMap.Marker(pp));    //添加标注
@@ -559,30 +559,30 @@ function refresh() {
 		function search(){
 		//地址
 		var dizhi = document.getElementById("suggestId").value;
-		
+
 		myGeo.getPoint(dizhi, function(point){
-			if (point) {	
+			if (point) {
 				document.getElementById("jing").value = point.lng;
 				document.getElementById("wei").value = point.lat;
-				
+
 				var jing = "<input  type='hidden' name='geographiclongitude' value="+point.lng+">";
 				var wei = "<input  type='hidden' name='geographiclatitude' value="+point.lat+">";
 				var xiangxi = "<input  type='hidden' name='opraddress' value="+dizhi+">";
-				
+
 				parent.document.getElementById("lng_div").innerHTML=jing;
 				parent.document.getElementById("lat_div").innerHTML=wei;
 				parent.document.getElementById("opraddress_div").innerHTML=xiangxi;
-				
+
 			}
 		}, "北京市");
 	}
-		
+
 		//清除以前的所有点
 		function cleanMarker(){
 			//所有覆盖物
 			var allOverlay = map.getOverlays();
 			//所有覆盖物的个数
-			var arrMarker = new Array();			
+			var arrMarker = new Array();
 			var len = allOverlay.length-1;
 			var lastMarker = new Array();
 			//获取最后一个点
@@ -590,8 +590,8 @@ function refresh() {
 				if(allOverlay[i] == '[object Marker]'){
 					lastMarker[i] = allOverlay[i];
 
-				}			
-			}	
+				}
+			}
 			//获取最后一个多边形
 			for (var i = len; i >= 0; i--){
 				//alert(i+':'+allOverlay[i])
@@ -599,13 +599,13 @@ function refresh() {
 					var lastPolygon = allOverlay[i];
 					break;
 				}
-				
+
 			}
 			//清除所有
 			map.clearOverlays();
 			//添加多边形
 			map.addOverlay(lastPolygon);
-			
+
 			//添加点
 			var Marker_num = new Array();
 			//var num_a = 0;
@@ -615,15 +615,15 @@ function refresh() {
 			//最大值
 			var max_num = Math.max.apply(null, Marker_num);
 			//最小值
-			map.addOverlay(lastMarker[max_num]);	
+			map.addOverlay(lastMarker[max_num]);
 			//选中"拖动地图"
 			drawingManager.close();
 		}
-		
+
 		//清除以前的所有点
-		function cleanPolygon(){	
+		function cleanPolygon(){
 			//所有覆盖物
-			var allOverlay = map.getOverlays();	
+			var allOverlay = map.getOverlays();
 			var len = allOverlay.length-1;
 			//所有多边形
 			var lastPolygon = new Array();
@@ -632,28 +632,28 @@ function refresh() {
 			//分割数组
 			for (var i in allOverlay){
 				if(allOverlay[i] == '[object Marker]'){
-					lastMarker[i] = allOverlay[i];	
+					lastMarker[i] = allOverlay[i];
 				}
 				if(allOverlay[i] == '[object Polygon]'){
-					lastPolygon[i] = allOverlay[i];	
+					lastPolygon[i] = allOverlay[i];
 				}
-				
+
 			}
 			//清除所有
 			map.clearOverlays();
 			//添加点
-			var Marker_num = new Array();	
+			var Marker_num = new Array();
 			//添加多边形
 			var Polygon_num = new Array();
 			//遍历点
 			for(var i in lastMarker){
 				Marker_num.push(i);
 			}
-			
+
 			//遍历多边形
 			for(var i in lastPolygon){
 				Polygon_num.push(i);
-			}	
+			}
 			//最小值
 			var Marker_min_num = Math.min.apply(null, Marker_num);
 			//最大值

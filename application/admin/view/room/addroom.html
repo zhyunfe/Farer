@@ -1,4 +1,4 @@
-<div id="info">
+<div id="info" class="am-u-md-6">
     <form class="am-form">
         <fieldset>
         <div class="am-form-group">
@@ -7,12 +7,11 @@
             <select id="s_province" name="s_province" style="display: inline-block"></select>
             <select id="s_city" name="s_city" style="display: inline-block"></select>
             <select id="s_county" name="s_county" style="display: inline-block"></select>
-            <script class="resources library" src="http://www.farer.com/static/map/js/area.js" type="text/javascript"></script>
-            <script type="text/javascript">_init_area();</script>
         </div>
         <div class="am-form-group">
             <span class="hotellist">酒店列表：</span>
             <select name="type" id="hoteltype" style="display: inline-block">
+                <option value="-1">酒店类型</option>
                 <option value="0">经济</option>
                 <option value="1">豪华</option>
                 <option value="2">主题</option>
@@ -21,4 +20,44 @@
         </div>
         </fieldset>
     </form>
+    <script class="resources library" src="http://www.farer.com/static/map/js/area.js" type="text/javascript"></script>
+    <script type="text/javascript">_init_area();</script>
+</div>
+
+<div id="hotel" class="am-u-md-6">
+    <form class="am-form">
+        <fieldset>
+            <div class="am-form-group">
+                <label for="hotel_name">所属酒店</label>
+                <input type="text"  id="hotel_name" placeholder="酒店名称">
+                </div>
+            <div class="am-form-group">
+                <label for="room_type">房间类型</label>
+                <select id="room_type">
+                    <option value="2">标准</option>
+                    <option value="0">大床</option>
+                    <option value="1">家庭</option>
+                    </select>
+                <span class="am-form-caret"></span>
+            </div>
+            <div class="am-form-group">
+                <label for="permoney">单日价格</label>
+                <input type="number" id="permoney" required value="0"/>
+            </div>
+            <div class="am-form-group">
+                <label for="number">房间数量</label>
+                <input type="number" id="number" required value="0"/>
+            </div>
+            <div class="am-form-group">
+                <label>是否可以取消</label>
+                <input type="radio" value="1" name="is_cancle" checked> 可以
+                <input type="radio" value="1" name="is_cancle"> 不可以
+            </div>
+            <div class="am-form-group">
+                <label for="doc-ta-1">房间描述</label>
+                <textarea class="desciption" rows="5" id="doc-ta-1"></textarea>
+            </div>
+        </fieldset>
+    </form>
+    <p><a class="am-btn am-btn-default" id="hotel_add_next">下一步</a></p>
 </div>

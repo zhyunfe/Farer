@@ -21,7 +21,7 @@
     <!--加载地图-->
     <link rel="stylesheet" href="__STATIC_URL__/map/css/MapCtrl.css" />
     <link rel="stylesheet" href="__STATIC_URL__/js/addRoom.js">
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tzAcIFZ5xCoRwm63NcBGfoVB"></script>
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tzAcIFZ5xCoRwm63NcBGfoVB"></script>-->
     <!--加载鼠标绘制工具-->
     <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
     <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
@@ -388,8 +388,7 @@
                     }).always(function () {
                             //添加攻略处理方法
                             addCaseClick();
-                            //添加房间的方法
-
+                            //添加房间的方方法
                             addRoom();
                             //添加商品的方法
                     });
@@ -397,14 +396,31 @@
             });
             function addRoom()
             {
-                var province = $('#s_province').children('option:selected').val();
-                var city = $('#s_city').children('option:selected').val();
-                var county = $('#s_county').children('option:selected').val();
+                $('#hoteltype').change(function () {
+                    var province = $('#s_province').val();
+                    var city     = $('#s_city').val();
+                    var county   = $('#s_county').val();
+                    var location = province+city+county;
+                    var type     = $('#hoteltype').val();
+                    console.log(type);
+                    $.ajax({
+                        method:'post',
+                        url:'{:url("admin/hotel/find")}',
+                        data:{type:type,pid:location},
+                        success:function (data) {
+                            if (data.length == 0) {
+                                $('<option>').appendTo($('#hotellist')).addClass('selected').html('没有数据');
+                            } else {
+                                console.log('有书局');
+                            }
+                        },
+                        fail:function (data) {
 
-                var location = province+city+county;
-                $('#hoteltype').click(function () {
-                    alert(location);
-                });
+                        },
+                        async:false,
+                        dataType:'json'
+                    });
+                })
             }
             /**
              * 显示用户详情页
@@ -629,6 +645,7 @@
             }
         });
     </script>
+    <script type="text/javascript" src="__STATIC_URL__/addRoom/addRoom.js"></script>
     <script type="text/javascript" src="__STATIC_URL__/map/js/MapCtrl_info.js"></script>
     <script type="text/javascript" src="__STATIC_URL__/hAdmin/js/plugins/simditor/module.js"></script>
     <script type="text/javascript" src="__STATIC_URL__/hAdmin/js/plugins/simditor/uploader.js"></script>

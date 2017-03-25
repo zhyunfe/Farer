@@ -60,7 +60,7 @@ class Index extends Auth
                     return '添加游记';
                     break;
                 case 'addRoom':
-                    $add = file_get_contents('../application/admin/view/room/addroom.html');
+                    $add = file_get_contents('../application/admin/view/room/addRoom.html');
                     return $add;
                     break;
             }
