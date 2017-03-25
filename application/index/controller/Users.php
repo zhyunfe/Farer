@@ -10,13 +10,10 @@ class Users extends Auth
      * 首页
      *
      */
-//    private $is_check_login = [];
+//需要session验证
+    protected $is_check_login = ['wirteNote'];
 
 
-    public function test()
-    {
-        echo 123;
-    }
     public function zhifu()
     {
         $this->assign('title','zhifu');
@@ -24,16 +21,10 @@ class Users extends Auth
     }
 
 
-//    需要session验证
-//    protected $is_check_login = ['*'];
 
 
 
-    public function center()
-    {
 
-       return $this->fetch();
-    }
 
     public function orderList()
     {
@@ -45,9 +36,37 @@ class Users extends Auth
     {
         return $this->fetch();
     }
-    public function text()
+
+
+    // +----------------------------------------------------------------------
+    // | 用户的展示界面
+    // +----------------------------------------------------------------------
+    public function center()
     {
-        echo 666;
+        if($this->checkLogin())
+        {
+            $this->assign('iflo',1);
+        }else{
+            $this->assign('iflo',0);
+        }
+        return $this->fetch();
     }
+
+    // +----------------------------------------------------------------------
+    // | 用户写游记
+    // +----------------------------------------------------------------------
+    public  function writeNote()
+    {
+        return $this->fetch();
+    }
+
+    // +----------------------------------------------------------------------
+    // | 用户写游记
+    // +----------------------------------------------------------------------
+    public  function setUp()
+    {
+        return $this->fetch();
+    }
+
 
 }

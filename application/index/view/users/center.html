@@ -17,18 +17,46 @@
 <body>
 
 <!----------------用户头部------------------->
+{if $iflo==0}
+<style>
+    #user_center .user_header .set1 {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        width: 30px;
+        z-index: 1000;
+    }
+    #user_center .user_header .set2{
+        position: absolute;
+        right: 50px;
+        top: 15px;
+        width: 30px;
+        z-index: 1000;
+    }
+</style>
+{/if}
 <div id="user_center">
     <div class="user_header">
-        <a href="set_up.html"><img class="set" src="__STATIC_URL__/index/images/set_up.png"></a>
+        {if $iflo==0}
+        <a href="{:url('index/auth/login')}"><img class="set1" src="__STATIC_URL__/index/images/chz_login.png"></a>
+        <a href="{:url('index/auth/register')}"><img class="set2" src="__STATIC_URL__/index/images/chz_reg.png"></a>
+        {else}
+        <a href="{:url('index/users/setup')}"><img class="set" src="__STATIC_URL__/index/images/set_up.png"></a>
+        {/if}
         <div class="pic">
-            <a title="" href="user_data.html">
+            <a title="" href="javascript:;">
                 <img src="__STATIC_URL__/index/images/head.jpg"/>
             </a>
         </div>
         <div class="name">
-            <label>*COLOR*</label>
+            {if $iflo==0}
+            <label>未登录</label>
+            {else}
+            <label>用户名</label>
             <p>人生旅程，不同的是沿途风景以及看风景的心情</p>
+            {/if}
         </div>
+        {if $iflo==1}
         <a class="sign" data-am-modal="{target: '#my-alert'}">每日签到</a>
         <!-------------------签到弹出层------------------->
         <div id="sign_layer">
@@ -49,6 +77,9 @@
                 </div>
             </div>
         </div>
+        {/if}
+
+
         <div class="clear"></div>
     </div>
     <!----------------用户导航------------------->
@@ -56,7 +87,7 @@
         <div class="order_nav">
             <ul class="box_nav am-avg-sm-4">
                 <li>
-                    <a title="" href="release.html">
+                    <a title="" href="{:url('index/users/writenote')}">
                         <img src="__STATIC_URL__/index/images/user_center_icon1.png"/>
                         <p>发布游记</p>
                     </a>

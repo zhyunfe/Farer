@@ -23,8 +23,5 @@ class Notes extends Auth
     {
         return $this->fetch();
     }
-    public  function writeNote()
-    {
-        return $this->fetch();
-    }
+
 }

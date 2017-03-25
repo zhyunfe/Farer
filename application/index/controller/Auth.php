@@ -16,6 +16,7 @@ use app\index\model\Users;
 //use think\session;
 class Auth extends Controller
 {
+
     // +----------------------------------------------------------------------
     // | 判断该类名是否需要用户登录
     // +----------------------------------------------------------------------
@@ -45,24 +46,39 @@ class Auth extends Controller
     // +----------------------------------------------------------------------
     // | 用户登录的逻辑处理
     // +----------------------------------------------------------------------
+
+
     public function login()
     {
+
+
         $this->assign('title', '登陆');
+        Session::set('url',$_SERVER['HTTP_REFERER']);
+//        dump(Session::get('url'));
+//        die;
         return $this->fetch();
     }
 
     public function doLogin()
     {
+
+        $str = Session::get('url');
        $info =  Users::where(['email' => input('post.email'),'password' => md5(input('post.password'))])->find();
        if(!empty($info))
        {
+//           dump(Session::get('url'));
+//           die;
+
            $this->assign('title','登录成功');
-           $this->assign('url',$_SERVER['HTTP_REFERER']);
+//           dump($str);
+//           die;
+           Session::set('user',$info->toArray());
+           $this->assign('aurl',$str);
 
            $this->success();
        }else{
            $this->assign('title','登录失败');
-           $this->assign('url',$_SERVER['HTTP_REFERER']);
+           $this->assign('aurl',$str);
 
            $this->error();
        }
@@ -179,7 +195,10 @@ class Auth extends Controller
     {
         session(null);
         $this->assign('title','退出成功');
-        $this->assign('url',$_SERVER['HTTP_REFERER']);
+        $this->assign('aurl','http://www.farer.com');
         $this->success();
     }
+
+
+
 }

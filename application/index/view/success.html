@@ -118,7 +118,7 @@
 			<p>{$title}</p>
 
 		</div>
-		<a id="js-alert-btn" class="alert-btn" href={$url}>立即跳转</a>
+		<a id="js-alert-btn" class="alert-btn" href="{$aurl}">立即跳转</a>
 	</div>
 	<div class="alert-footer clearfix">
 		<svg width="46px" height="42px" class="alert-footer-icon">
@@ -130,7 +130,7 @@
 		<div class="alert-footer-text"><p>secure</p>^_^</div>
 	</div>
 </div>
-<div id="chz_url" style="opacity: 0">{$url}</div>
+
 
 <script type="text/javascript">
 function alertSet(e) {
@@ -141,7 +141,8 @@ function alertSet(e) {
     document.getElementById("js-sec-text").innerHTML = t,
     setInterval(function() {
         if (0 == t){
-			location.href=document.getElementById('chz_url').innerText;
+//            alert(document.getElementById('chz_url').innerText);
+			location.href=document.getElementById('js-alert-btn').getAttribute('href');
 		}else {
             t -= 1,
             document.getElementById("js-sec-text").innerHTML = t;
