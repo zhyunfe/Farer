@@ -32,10 +32,10 @@ class Farercase extends Auth
             if ($result) {
                 return json_encode(['error'=>0,'msg'=>'添加成功']);
             } else {
-                return json_encode(['error'=>1,'msg'=>'添加失败']);
+                return json_encode(['error'=>30001,'msg'=>'添加失败']);
             }
         }else{
-            return json_encode(['error'=>2,'msg'=>$file->getError()]);
+            return json_encode(['error'=>30002,'msg'=>$file->getError()]);
         }
     }
 }
