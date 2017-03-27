@@ -56,8 +56,9 @@ class Index extends Auth
                     $add = file_get_contents('../application/admin/view/index/addCase.html');
                     return $add;
                     break;
-                case 'addNote':
-                    return '添加游记';
+                case 'addPlace':
+                    $add = file_get_contents('../application/admin/view/place/addPlace.html');
+                    return $add;
                     break;
                 case 'addRoom':
                     $add = file_get_contents('../application/admin/view/room/addRoom.html');

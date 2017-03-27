@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../../static/before/successload/js/Popt.js"></script>
+    <script src="../../static/before/successload/js/cityJson.js"></script>
+    <script src="../../static/before/successload/js/citySet.js"></script>
+    <style type="text/css">
+        ._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position: relative;background-color: white }
+        ._citys span { color: #56b4f8; height: 15px; width: 15px; line-height: 15px; text-align: center; border-radius: 3px; position: absolute; right: 10px; top: 10px; border: 1px solid #56b4f8; cursor: pointer; }
+        ._citys0 { width: 100%; height: 34px; display: inline-block; border-bottom: 2px solid #56b4f8; padding: 0; margin: 0; }
+        ._citys0 li { display: inline-block; line-height: 34px; font-size: 15px; color: #888; width: 80px; text-align: center; cursor: pointer; }
+        .citySel { background-color: #56b4f8; color: #fff !important; }
+        ._citys1 { width: 100%; display: inline-block; padding: 10px 0; }
+        ._citys1 a { width: 83px; height: 35px; display: inline-block; background-color: #f5f5f5; color: #666; margin-left: 6px; margin-top: 3px; line-height: 35px; text-align: center; cursor: pointer; font-size: 13px; overflow: hidden; }
+        ._citys1 a:hover { color: #fff; background-color: #56b4f8; }
+        .AreaS { background-color: #56b4f8 !important; color: #fff !important; }
+    </style>
+</head>
+<div class="tpl-portlet-components">
+    <div class="tpl-block">
+        <div class="am-g">
+            <div class="tpl-form-body tpl-form-line">
+                <form class="am-form tpl-form-line-form" id="caseForm">
+                    <div class="am-form-group">
+                        <label for="case_title" class="am-u-sm-3 am-form-label">景区名称 <span class="tpl-form-line-small-title">Title</span></label>
+                        <div class="am-u-sm-9">
+                            <input type="text" class="tpl-form-input" id="place_title" name="title1" placeholder="请输入景区名称">
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="location" class="am-u-sm-3 am-form-label">景区地址 <span class="tpl-form-line-small-title">Type</span></label>
+                        <div class="am-u-sm-9">
+                            <div class="place">
+                                <input type="text" name="area" id="location" placeholder="地区">
+                            </div>
+                            <input type="text" name="tian" id="address" placeholder="详细地址">
+                            <input type="text" name="price" id="price" placeholder="门票价格">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="location" class="am-u-sm-3 am-form-label">开放时间 <span class="tpl-form-line-small-title">OpenTime</span></label>
+                        <div class="am-alert am-alert-danger" id="alert" style="display: none">
+                            <p>开始日期应小于结束日期！</p>
+                        </div>
+                        <div class="am-g">
+                            <div class="am-u-sm-3">
+                                <button type="button" class="am-btn am-btn-default am-margin-right" id="my-start">开始日期</button><span id="my-startDate"></span>
+                            </div>
+                            <div class="am-u-sm-3">
+                                <button type="button" class="am-btn am-btn-default am-margin-right" id="my-end">结束日期</button><span id="my-endDate"></span>
+                            </div>
+                            <div class="am-u-sm-3">&nbsp;</div>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="placeImage" class="am-u-sm-3 am-form-label">景区图片 <span class="tpl-form-line-small-title">Images</span></label>
+                        <div class="am-u-sm-9">
+                            <div class="am-form-group am-form-file">
+                                <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                                    <i class="am-icon-cloud-upload"></i> 添加封面图片</button>
+                                <input id="placeImage" type="file">
+                                <div id="file-list"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="description" class="am-u-sm-3 am-form-label">景区描述</label>
+                        <div class="am-u-sm-9">
+                            <textarea id="description"  cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-9 am-u-sm-push-3">
+                            <a class="am-btn am-btn-primary tpl-btn-bg-color-success" id="place_up">提交</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">添加成功</div>
+        <div class="am-modal-bd">
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<script>
+    $("#location").click(function (e) {
+        SelCity(this,e);
+    });
+</script>
+</body>
+
+</html>

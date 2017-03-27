@@ -16,7 +16,7 @@ use app\admin\model\Users;
 class Auth extends Controller
 {
     //存储需要验证登录的模块
-    protected $is_check_login = ['*'];
+    protected $is_check_login = [];
 
     /**
      * 在初始化类的时候验证一下是否为要登录的界面

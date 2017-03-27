@@ -257,7 +257,10 @@
                                 <i class="am-icon-angle-right"></i>
                                 <span>添加攻略</span>
                             </a>
-
+                            <a class="add" id="addPlace">
+                                <i class="am-icon-angle-right"></i>
+                                <span>添加景区</span>
+                            </a>
                             <a class="add" id="addGoods">
                                 <i class="am-icon-angle-right"></i>
                                 <span>添加套餐</span>
@@ -322,7 +325,6 @@
                     $('.select').removeClass('active');
                     $(this).addClass('active');
                     var num = $(this).attr('num');
-
                     var type = ['index', 'data','manage','form'];
                     $.ajax({
                         method: 'post',
@@ -377,7 +379,7 @@
                     $('#page').html('');
                     $(this).addClass('active').siblings().removeClass('active');
                     var add = $(this).attr('add');
-                    var type = ['addHotel','addRoom','addCase','addNote'];
+                    var type = ['addHotel','addRoom','addCase','addPlace'];
 
                     $.ajax({
                         method: 'post',
@@ -394,10 +396,94 @@
                             addCaseClick();
                             //添加房间的方方法
                             addRoom();
+                            //添加景区的方法
+                            addPlace();
                             //添加商品的方法
                     });
                 });
             });
+            function addPlace()
+            {
+                getTime();
+                //当上传了文件之后显示图片名称
+                $('#placeImage').on('change', function() {
+                    var fileNames = '';
+                    $.each(this.files, function() {
+                        fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                    });
+                    $('#file-list').html(fileNames);
+                });
+                $('#place_up').on('click',function () {
+                    //判断是否已经上传了图片
+                    if($('#file-list').html() == '') {
+                        $('.am-modal-hd').html('小主是不是忘了上传图片啊！');
+                        $('#my-alert').modal();
+                        return;
+                    }
+                    var name = $('#place_title').val();
+                    var location = $('#location').val();
+                    var address = $('#address').val();
+                    var price  = $('#price').val();
+                    var start = $('#my-startDate').text();
+                    var end  = $('#my-endDate').text();
+                    var open_time = start+','+end;
+                    var placeImage = document.getElementById('placeImage').files[0];
+                    var description = $('#description').val();
+                    var form = new FormData();
+                    form.append('title',name);
+                    form.append('pid',location);
+                    form.append('description',description);
+                    form.append('image',placeImage);
+                    form.append('price',price);
+                    form.append('addr',address);
+                    form.append('open_time',open_time);
+                    $.ajax({
+                        method:'post',
+                        data:form,
+                        url:'../place/addPlace',
+                        processData: false,
+                        contentType: false,
+                        success:function (data) {
+                            var obj= $('#addPlace');
+                            addCaseData(data,obj);
+                        }
+
+                    })
+                });
+
+            }
+            function getTime()
+            {
+                var date = new Date();
+                var startDate = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate();
+                var endDate = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate();
+                $('#my-startDate').text(startDate);
+                $('#my-endDate').text(endDate);
+                var $alert = $('#alert');
+                $('#my-start').datepicker().
+                on('changeDate.datepicker.amui', function(event) {
+                    if (event.date.valueOf() > endDate.valueOf()) {
+                        $alert.find('p').text('开始日期应小于结束日期！').end().show();
+                    } else {
+                        $alert.hide();
+                        startDate = new Date(event.date);
+                        $('#my-startDate').text($('#my-start').data('date'));
+                    }
+                    $(this).datepicker('close');
+                });
+
+                $('#my-end').datepicker().
+                on('changeDate.datepicker.amui', function(event) {
+                    if (event.date.valueOf() < startDate.valueOf()) {
+                        $alert.find('p').text('结束日期应大于开始日期！').end().show();
+                    } else {
+                        $alert.hide();
+                        endDate = new Date(event.date);
+                        $('#my-endDate').text($('#my-end').data('date'));
+                    }
+                    $(this).datepicker('close');
+                });
+            }
             function addRoom()
             {
                 var parentid = 0;
@@ -535,6 +621,14 @@
                             success:function (data) {
                                 $('#content').html(data);
                             }
+                        }).always(function () {
+                            $('#userUp').on('click',function () {
+                               var form = new FormData();
+                                form.append('username',$('#nickname').val());
+                                form.append('realname',$('#user-name').val());
+                                form.append('email',$('#user-email').val());
+                                console.log(form);
+                            })
                         })
                     });
                 });
@@ -694,7 +788,8 @@
                         processData: false,
                         contentType: false,
                         success:function (data) {
-                            addCaseData(data);
+                            var obj = $('#addCase');
+                            addCaseData(data,obj);
                         },
                         //没有连接成功，弹出模态框和错误信息
                         fail:function (data) {
@@ -710,7 +805,7 @@
              * 通过模态框显示提示信息
              * @param data
              */
-            function addCaseData(data)
+            function addCaseData(data,obj)
             {
                 data = JSON.parse(data);
                 if(!data.error){
@@ -725,7 +820,7 @@
                             $('body').removeClass('am-dimmer-active');
                             $('.am-dimmer').removeClass('am-active').css('display','none');
                             $('.am-modal-hd').html(data.msg);
-                            $('#addCase').trigger('click');
+                           obj.trigger('click');
                         },
                         onCancel: function() {
                         }
