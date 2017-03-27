@@ -1,24 +1,8 @@
-{__NOLAYOUT__}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>购物车</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta content="telephone=no" name="format-detection">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <!--库-->
-    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/amazeui.css">
-    <script type="text/javascript" src="__STATIC_URL__/index/js/jquery.min.js"></script>
-    <script type="text/javascript" src="__STATIC_URL__/index/js/jquery.Spinner.js"></script>
-    <script type="text/javascript" src="__STATIC_URL__/index/js/amazeui.js"></script>
-    <!--核心样式-->
-    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/style.css">
+
 <body>
 <!-----------公共版头----------->
 <div id="header">
-    <a class="return" href="user_center.html"><i class="am-icon-angle-left"></i></a>
+
     <span>购物车</span>
 </div>
 <!----------------我的订单------------------>
@@ -30,7 +14,7 @@
                     <input type="checkbox" value="" data-am-ucheck>
                 </label>
                 <a class="pic" href="project_basic.html">
-                    <img class="goodimg" src="__STATIC_URL__/index/images/my_order01.jpg"/>
+                    <img class="goodimg" src="__STATIC_URL__/moban/images/my_order01.jpg"/>
                 </a>
                 <div class="project_cont">
                     <p>法国正品男士香水清新持久淡香诱惑古龙水香奈</p>
@@ -49,7 +33,7 @@
                     <input type="checkbox" value="" data-am-ucheck>
                 </label>
                 <a class="pic" href="project_basic.html">
-                    <img class="goodimg" src="__STATIC_URL__/index/images/my_order01.jpg"/>
+                    <img class="goodimg" src="__STATIC_URL__/moban/images/my_order01.jpg"/>
                 </a>
                 <div class="project_cont">
                     <p>法国正品男士香水清新持久淡香诱惑古龙水香奈</p>
@@ -68,7 +52,7 @@
                     <input type="checkbox" value="" data-am-ucheck>
                 </label>
                 <a class="pic" href="project_basic.html">
-                    <img class="goodimg" src="__STATIC_URL__/index/images/my_order01.jpg"/>
+                    <img class="goodimg" src="__STATIC_URL__/moban/images/my_order01.jpg"/>
                 </a>
                 <div class="project_cont">
                     <p>法国正品男士香水清新持久淡香诱惑古龙水香奈</p>
@@ -101,49 +85,11 @@
             <li class="no_freight">不含运费</li>
         </ul>
     </div>
-    <div class="settlement"><a href="sure_order.html">提交订单</a></div>
+    <div class="settlement"><a href="{:url('index/users/sureorder')}">提交订单</a></div>
 </div>
 </body>
 <!--footer-->
-<div id="footer">
-    <div class="first">
-        <ul class="am-avg-sm-2">
-            <li>
-                <a title=""  href="index.html">
-                    <img src="__STATIC_URL__/index/images/icon-footer1-a.png"/>
-                    <p>首页</p>
-                </a>
-            </li>
-            <li>
-                <a title="" href="trip_list.html">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer2-a.png"/>
-                    <p>孟津旅游</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="beautiful">
-        <a title=""  href="beautiful_list.html">
-            <img alt="" src="__STATIC_URL__/index/images/icon-footer3-a.png"/>
-        </a>
-    </div>
-    <div class="last">
-        <ul class="am-avg-sm-2">
-            <li class="active">
-                <a title="" href="specialty_mall.html">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer04-a.png"/>
-                    <p>特产商城</p>
-                </a>
-            </li>
-            <li>
-                <a title="" href="user_center.html">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer5-a.png"/>
-                    <p>我的</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+{include file="public/foot" /}
 
 </body>
-</html>
+

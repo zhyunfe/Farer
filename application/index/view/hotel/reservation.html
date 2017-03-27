@@ -1,0 +1,83 @@
+
+<body>
+<!-----------公共版头----------->
+<div id="header">
+    <span>酒店预订</span>
+
+</div>
+
+
+
+<div style="width:100%;height: 70px"></div>
+
+<!-----------当前位置----------->
+
+<h1 style="margin-left: 20px;">所在地<h1>
+
+
+
+    <span style="margin-left: 20px">北京<span>
+        <br><br>
+
+<!-----------目的地----------->
+
+
+
+
+
+
+
+
+<!-----------订阅日期----------->
+        <h1>设置时间<h1>
+<div class="am-alert am-alert-danger" id="my-alert" style="display: none">
+    <p>开始日期应小于结束日期！</p>
+</div>
+<div class="am-g">
+    <div class="am-u-sm-6">
+        <button type="button" class="am-btn am-btn-default am-margin-right" id="my-start">开始日期</button><span id="my-startDate"><br>2017-3-26</span>
+    </div>
+    <div class="am-u-sm-6" >
+        <button type="button" class="am-btn am-btn-default am-margin-right" id="my-end">结束日期</button><span id="my-endDate"><br>2017-3-26</span>
+    </div>
+</div>
+<script>
+        var startDate = new Date(2014, 11, 20);
+        var endDate = new Date(2014, 11, 25);
+        var $alert = $('#my-alert');
+        $('#my-start').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (event.date.valueOf() > endDate.valueOf()) {
+                $alert.find('p').text('开始日期应小于结束日期！').end().show();
+            } else {
+                $alert.hide();
+                startDate = new Date(event.date);
+                $('#my-startDate').text($('#my-start').data('date'));
+            }
+            $(this).datepicker('close');
+        });
+
+        $('#my-end').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (event.date.valueOf() < startDate.valueOf()) {
+                $alert.find('p').text('结束日期应大于开始日期！').end().show();
+            } else {
+                $alert.hide();
+                endDate = new Date(event.date);
+                $('#my-endDate').text($('#my-end').data('date'));
+            }
+            $(this).datepicker('close');
+        });
+
+</script>
+
+
+
+            <!-----------提交按钮----------->
+            <button style="position: relative;right: -300px;">提交</button>
+
+
+
+
+
+</body>

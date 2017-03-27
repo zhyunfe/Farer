@@ -14,12 +14,20 @@ class Notes extends Auth
 //    protected $is_check_login = ['writeNote'];
 
 
-    public function noList()
+
+
+
+    // +----------------------------------------------------------------------
+    // | 游记列表
+    // +----------------------------------------------------------------------
+    public function show()
     {
         return $this->fetch();
     }
-
-    public function noDetail()
+    // +----------------------------------------------------------------------
+    // | 游记详情
+    // +----------------------------------------------------------------------
+    public function details()
     {
         return $this->fetch();
     }

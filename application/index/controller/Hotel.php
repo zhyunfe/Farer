@@ -13,17 +13,17 @@ class Hotel extends Controller
     {
         return $this->fetch();
     }
-
-
-
-    public function holist()
+    // +----------------------------------------------------------------------
+    // | 订酒店的页面
+    // +----------------------------------------------------------------------
+    public function reservation()
     {
         return $this->fetch();
     }
 
 
-    public function hodetail()
-    {
-        return $this->fetch();
-    }
+
+
+
+
 }

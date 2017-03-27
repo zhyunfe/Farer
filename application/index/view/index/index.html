@@ -1,15 +1,36 @@
 
+
+<body>
 <div id="index">
   <!-----------首页头部----------->
-  {include file="public/top" /}
+  <div class="index_head">
+    <div class="logo">
+      <a href="{:url('index/index/index')}"><img src="__STATIC_URL__/moban/images/logo.png"></a>
+    </div>
+    <!----------------搜索------------------>
+    <div class="search">
+      <select>
+        <option value="option1">特产</option>
+        <option value="option2">景点</option>
+      </select>
+      <i class="am-icon-caret-down"></i>
+      <input class="text" type="search" placeholder="要买什么？" />
+      <input class="submit " type="submit" value=" " />
+      <i class="am-icon-search"></i>
+      <div class="clear"></div>
+    </div>
+    <a class="phone">
+      <img src="__STATIC_URL__/moban/images/phone.png">
+    </a>
+  </div>
   <!-----------轮播banner----------->
   <div id="index_banner">
     <div class="am-slider am-slider-default">
       <ul class="am-slides">
-        <li><a title="" href="activity_detail.html"><img src="__STATIC_URL__/index/images/banner2.jpg"/></a></li>
-        <li><a title="" href="activity_detail.html"><img src="__STATIC_URL__/index/images/banner4.jpg"/></a></li>
-        <li><a title="" href="activity_detail.html"><img src="__STATIC_URL__/index/images/banner3.jpg"/></a></li>
-        <li><a title="" href="activity_detail.html"><img src="__STATIC_URL__/index/images/banner.jpg"/></a></li>
+        <li><a title="" href="{:url('index/place/details')}"><img src="__STATIC_URL__/moban/images/banner2.jpg"/></a></li>
+        <li><a title="" href="{:url('index/place/details')}"><img src="__STATIC_URL__/moban/images/banner4.jpg"/></a></li>
+        <li><a title="" href="{:url('index/place/details')}"><img src="__STATIC_URL__/moban/images/banner3.jpg"/></a></li>
+        <li><a title="" href="{:url('index/place/details')}"><img src="__STATIC_URL__/moban/images/banner.jpg"/></a></li>
       </ul>
     </div>
   </div>
@@ -17,30 +38,27 @@
   <div class="order_nav">
     <ul class="box_nav am-avg-sm-4">
       <li>
-        <a title="" href="{:url('index/farercase/triplist')}">
-          <img src="__STATIC_URL__/index/images/index_icon01.png"/>
-          <p>攻略</p>
+        <a title="" href="{:url('index/purchase/show')}">
+          <img src="__STATIC_URL__/moban/images/index_icon01.png"/>
+          <p>景区套餐</p>
         </a>
       </li>
       <li>
-
-
-        <a title="" href="{:url('index/hotel/choose')}">
-
-          <img src="__STATIC_URL__/index/images/index_icon02.png"/>
-          <p>酒店</p>
+        <a title="" href="{:url('index/hotel/reservation')}">
+          <img src="__STATIC_URL__/moban/images/index_icon02.png"/>
+          <p>酒店查询</p>
         </a>
       </li>
       <li>
-        <a title="" href="{:url('index/notes/nolist')}">
-          <img src="__STATIC_URL__/index/images/index_icon03.png"/>
-          <p>游记</p>
+        <a title="" href="{:url('index/notes/show')}">
+          <img src="__STATIC_URL__/moban/images/index_icon03.png"/>
+          <p>个人游记</p>
         </a>
       </li>
       <li>
-        <a title="" href="{:url('index/farercase/alllist')}">
-          <img src="__STATIC_URL__/index/images/index_icon04.png"/>
-          <p>套餐</p>
+        <a title="" href="{:url('index/farercase/show')}">
+          <img src="__STATIC_URL__/moban/images/index_icon04.png"/>
+          <p>攻略天地</p>
         </a>
       </li>
       <div class="clear"></div>
@@ -52,44 +70,192 @@
   <div id="trip_list" style="width:100%;overflow:hidden;">
     <div class="am-tabs" data-am-tabs>
       <div id="item_name">
-        <img src="__STATIC_URL__/index/images/index_icon05.png">
-        <span>热门攻略</span>
+        <img src="__STATIC_URL__/moban/images/index_icon05.png">
+        <span>景区套餐</span>
       </div>
-      <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
-        {foreach $content as $value}
-        <li>
-          <div class="am-gallery-item">
-            <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
-              <img src="__STATIC_URL__/index/gonglue/{$value['header_image']}"  alt="{$value['title']}"/>
-              <h3 class="am-gallery-title">{$value['title']}</h3>
-              <div class="am-gallery-desc am-gallery-title">{$value['title']}</div>
-              <div class="am-gallery-desc">浏览次数<span>&nbsp;&nbsp;&nbsp;23</span></div>
-            </a>
-          </div>
-        </li>
-        {/foreach}
+      <ul class="am-tabs-nav am-nav am-nav-tabs am-avg-sm-2">
+        <li class="am-active"><a href="#tab1">套餐</a></li>
+        <li><a href="#tab2">景区</a></li>
       </ul>
-      <div id="more">
-        <a title=""  href="specialty_mall.html">
-          <span>更多特产 </span>
-          <i class="am-icon-angle-right" ></i>
-        </a>
+
+      <div class="am-tabs-bd">
+        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+          <ul>
+            <li class="view">
+              <div class="pic">
+                <img src="__STATIC_URL__/moban/images/trip_list_02.jpg">
+                <div class="cont">
+                  <a title="" class="button" href="{:url('index/purchase/details')}">查看详情</a>
+                  <div class="num">
+                    <p><span>20/30</span>人报名</p>
+                    <p>出发时间<span>2017/10/02</span></p>
+                  </div>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <div class="con">
+                <span>黄河小浪底</span>
+                <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
+              </div>
+            </li>
+            <li class="view">
+              <div class="pic">
+                <img src="__STATIC_URL__/moban/images/trip_list_02.jpg">
+                <div class="cont">
+                  <a title="" class="button" href="activity_detail.html">查看详情</a>
+                  <div class="num">
+                    <p><span>20/30</span>人报名</p>
+                    <p>出发时间<span>2017/10/02</span></p>
+                  </div>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <div class="con">
+                <span>黄河小浪底</span>
+                <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="am-tab-panel am-fade" id="tab2">
+          <ul>
+            <li class="view">
+              <div class="pic">
+                <img src="__STATIC_URL__/moban/images/trip_list_01.jpg">
+                <div class="cont">
+                  <a title="" class="button" href="{:url('index/place/details')}">查看购票</a>
+                </div>
+              </div>
+              <div class="con">
+                <span>黄河小浪底</span>
+                <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
+              </div>
+            </li>
+            <li class="view">
+              <div class="pic">
+                <img src="__STATIC_URL__/moban/images/trip_list_02.jpg">
+                <div class="cont">
+                  <a title="" class="button" href="view_detail.html">查看购票</a>
+                </div>
+              </div>
+              <div class="con">
+                <span>黄河小浪底</span>
+                <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
 
-<script>
-    $(function () {
-        $('.am-slider').flexslider({
-            controlNav: true,               // Boolean: 是否创建控制点
-            directionNav: true,             // Boolean: 是否创建上/下一个按钮（previous/next）
-            touch: true,                    // Boolean: 允许触摸屏触摸滑动滑块
-        });
-    });
-</script>
-<!--footer-->
+  <!-----------美丽乡村----------->
+  <div id="beautiful_country">
+    <div id="item_name">
+      <img src="__STATIC_URL__/moban/images/index_icon07.png">
+      <span>热门游记</span>
+    </div>
+    <ul class="am-avg-sm-2">
+      <li class="beautiful_list">
+        <a  title="" href="{:url('index/notes/details')}">
+          <div class="pic">
+            <img src="__STATIC_URL__/moban/images/beautiful_01.jpg"/>
+          </div>
+          <div class="name">
+            <img alt="" class="head" src="__STATIC_URL__/moban/images/head.jpg">
+            <span>181***5241</span>
+            <div class="num">
+              <i class="am-icon-eye"></i>
+              <span>2</span>
+              <i class="am-icon-comments"></i>
+              <span>0</span>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <label>偶遇洛阳</label>
+          <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
+        </a>
+      </li>
+      <li class="beautiful_list">
+        <a  title="" href="beautiful_detail.html">
+          <div class="pic">
+            <img src="__STATIC_URL__/moban/images/beautiful_02.jpg"/>
+          </div>
+          <div class="name">
+            <img alt="" class="head" src="__STATIC_URL__/moban/images/head.jpg">
+            <span>181***5241</span>
+            <div class="num">
+              <i class="am-icon-eye"></i>
+              <span>2</span>
+              <i class="am-icon-comments"></i>
+              <span>0</span>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <label>偶遇洛阳</label>
+          <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
+        </a>
+      </li>
+    </ul>
+    <div id="more">
+      <a title=""  href="trip_list.html">
+        <span>更多景点</span>
+        <i class="am-icon-angle-right" ></i>
+      </a>
+    </div>
+  </div>
+  <!-----------新闻资讯----------->
+  <div id="news_list">
+    <div id="item_name">
+      <img src="__STATIC_URL__/moban/images/index_icon08.png">
+      <span>攻略天地</span>
+    </div>
+    <ul>
+      <li>
+        <a title="" class="news" href="news_detail.html">
+          <div class="pic">
+            <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+          </div>
+          <div class="project_cont">
+            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
+          </div>
+          <div class="price">
+            <p>2015/04/16</p>
+            <span>12</span>
+            <i class="am-icon-eye"></i>
+            <div class="clear"></div>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a title="" class="news" href="news_detail.html">
+          <div class="pic">
+            <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+          </div>
+          <div class="project_cont">
+            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
+          </div>
+          <div class="price">
+            <p>2015/04/16</p>
+            <span>12</span>
+            <i class="am-icon-eye"></i>
+            <div class="clear"></div>
+          </div>
+        </a>
+      </li>
+    </ul>
+    <div id="more">
+      <a title=""  href="news_list.html">
+        <span>更多资讯</span>
+        <i class="am-icon-angle-right" ></i>
+      </a>
+    </div>
+  </div>
+</div>
 
-  {include file="public/foot" /}
+<!--footer-->
+{include file="public/foot" /}
+
+</body>
 

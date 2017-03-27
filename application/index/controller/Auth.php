@@ -64,9 +64,20 @@ class Auth extends Controller
 
     public function doLogin()
     {
-
         $str = Session::get('url');
+        dump(input('post .'));
+        die;
+        if(input('post.rememberpwd') == 'on')
+        {
+            dump(1);
+            die;
+        }else{
+            dump(2);
+            die;
+        }
        $info =  Users::where(['email' => input('post.email'),'password' => md5(input('post.password'))])->find();
+       Session::set('today',time());
+
        if(!empty($info))
        {
 //           dump(Session::get('url'));
@@ -160,10 +171,12 @@ class Auth extends Controller
             return json(['status' => 0,'msg'=>$validate->getError()]);
         }else{
             $data['password'] = md5($data['password']);
+            $data['logtime'] = time();
             $userb = new Users($data);
             $userb->allowField(true)->save();
             $userc = Users::find($user->getLastInsID());
             Session::set('user',$userc->toArray());
+            Session::set('today',time());
             return json(['status' => 1]);
         }
     }

@@ -12,8 +12,21 @@ use think\Model\Purchzse as PurModel;
 class Purchase extends Controller
 {
 
-    public function purList()
+    // +----------------------------------------------------------------------
+    // | 套餐列表
+    // +----------------------------------------------------------------------
 
+
+    public function show()
+    {
+        return $this->fetch();
+    }
+
+    // +----------------------------------------------------------------------
+    // | 套餐详情
+    // +----------------------------------------------------------------------
+
+    public function details()
     {
         return $this->fetch();
     }
@@ -21,38 +34,5 @@ class Purchase extends Controller
 
 
 
-    public function purZhifu()
-
-    {
-        return $this->fetch();
-    }
-
-
-
-    public function purrealZhifu()
-
-    {
-        return $this->fetch();
-    }
-
-
-
-    public function purMoney()
-
-    {
-        return $this->fetch();
-    }
-
-
-    public function zhiFu()
-    {
-        return $this->fetch();
-    }
-
-
-    public function allList()
-    {
-        return $this->fetch();
-    }
 
 }

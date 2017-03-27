@@ -16,23 +16,15 @@ class Index extends Auth
     // +----------------------------------------------------------------------
     public function index(Farercase $farercase)
     {
-//        dump(Session::get('user'));
-//        die;
-        $far = Farercase::all();
 
-        $arr = [];
-        foreach ($far as $value)
-        {
-            $arr[] = $value->toArray();
-        }
-
-
-
-
-        $this->assign('title','首页');
-        $this->assign('content',$arr);
         return $this->fetch();
     }
+
+
+
+
+
+
 
     public function successLoad()
     {

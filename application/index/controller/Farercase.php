@@ -11,56 +11,33 @@ use app\index\model\Farerdiqu;
 use think\Controller;
 class Farercase extends Controller
 {
-    public function tripList()
+    // +----------------------------------------------------------------------
+    // | 攻略列表
+    // +----------------------------------------------------------------------
+    public function show()
     {
 
-
-
-
-
-        $this->assign('title','攻略列表');
-        return $this->fetch();
-    }
-
-    // +----------------------------------------------------------------------
-    // | 攻略相关的景区列表
-    // +----------------------------------------------------------------------
-    public function regionsList()
-    {
-        $bgfc = [];
-        $smfc = [];
-        foreach (Farerdiqu::where(['ifcity' => 0])->select() as $value)
-        {
-            $bgfc[] = $value->toArray();
-        }
-        foreach (Farerdiqu::where('ifcity != 0')->select() as $value)
-        {
-            $smfc[] = $value->toArray();
-        }
-//        dump($smfc);
-//        die;
-        $this->assign('biglist',$bgfc);
-        $this->assign('smllist',$smfc);
         return $this->fetch();
     }
 
 
     // +----------------------------------------------------------------------
-    // |景区详情攻略
+    // | 攻略详情
     // +----------------------------------------------------------------------
-    public function regionDetail()
+    public function details()
     {
+
         return $this->fetch();
     }
 
 
-    // +----------------------------------------------------------------------
-    // |所有攻略列表
-    // +----------------------------------------------------------------------
-    public function allList()
-    {
-        return $this->fetch();
-    }
+
+
+
+
+
+
+
 
 
 }

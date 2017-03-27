@@ -1,19 +1,5 @@
-{__NOLAYOUT__}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>个人中心</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta content="telephone=no" name="format-detection">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <!--库-->
-    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/amazeui.css">
-    <script type="text/javascript" src="__STATIC_URL__/index/js/jquery.min.js"></script>
-    <script type="text/javascript" src="__STATIC_URL__/index/js/amazeui.js"></script>
-    <!--核心样式-->
-    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/style.css">
+
+
 <body>
 
 <!----------------用户头部------------------->
@@ -38,45 +24,67 @@
 <div id="user_center">
     <div class="user_header">
         {if $iflo==0}
-        <a href="{:url('index/auth/login')}"><img class="set1" src="__STATIC_URL__/index/images/chz_login.png"></a>
-        <a href="{:url('index/auth/register')}"><img class="set2" src="__STATIC_URL__/index/images/chz_reg.png"></a>
+        <a href="{:url('index/auth/login')}"><img class="set1" src="__STATIC_URL__/moban/images/chz_login.png"></a>
+        <a href="{:url('index/auth/register')}"><img class="set2" src="__STATIC_URL__/moban/images/chz_reg.png"></a>
         {else}
-        <a href="{:url('index/users/setup')}"><img class="set" src="__STATIC_URL__/index/images/set_up.png"></a>
+        <a href="{:url('index/users/setup')}"><img class="set" src="__STATIC_URL__/moban/images/set_up.png"></a>
         {/if}
+
         <div class="pic">
-            <a title="" href="javascript:;">
-                <img src="__STATIC_URL__/index/images/head.jpg"/>
+            {if $iflo==0}
+                 <a title="" href="javascript:;">
+
+                <img src="__STATIC_URL__/moban/images/bannar.jpg"/>
+                {else}
+                     <a title="" href="{:url('index/users/details')}">
+                <img src={$iflo["photo"]}>
+                {/if}
             </a>
         </div>
         <div class="name">
-            {if $iflo==0}
+            {if $iflo == 0}
             <label>未登录</label>
             {else}
-            <label>用户名</label>
-            <p>人生旅程，不同的是沿途风景以及看风景的心情</p>
+
+
+
+            <label>{$iflo['uid']}</label>
+
+
+
+            <p>{$iflo['tag']}</p>
             {/if}
         </div>
-        {if $iflo==1}
-        <a class="sign" data-am-modal="{target: '#my-alert'}">每日签到</a>
-        <!-------------------签到弹出层------------------->
-        <div id="sign_layer">
-            <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
-                <div class="am-modal-dialog">
-                    <div class="win-m">
-                        <img src="__STATIC_URL__/index/images/sign-m.png"/>
-                        <div class="tex">
-                            <p class="p1">签到成功</p>
-                            <p class="p1">获得<span class="already-sign">20</span>积分</p>
-                            <p class="p2">每天签到都可以获得积分哦</p>
-                        </div>
-                        <div class="am-modal-footer">
-                            <span class="am-modal-btn">知道了</span>
-                        </div>
-                    </div>
+        {if $iflo}
 
-                </div>
-            </div>
-        </div>
+
+
+
+
+        <a class="sign" data-am-modal="{target: '#my-alert'}" id="chz_qd">每日签到</a>
+        <script>
+            qd_flag = 1;
+            $('#chz_qd').on('click',function(){
+                if(qd_flag == 1){
+                    $.post('doqd',{},function (data) {
+                        if(data.status == 1)
+                        {
+                            qd_flag = 0;
+                        }
+
+                        alert('签到成功');
+                    },'JSON');
+
+                }
+
+
+            })
+
+
+
+
+        </script>
+
         {/if}
 
 
@@ -88,25 +96,25 @@
             <ul class="box_nav am-avg-sm-4">
                 <li>
                     <a title="" href="{:url('index/users/writenote')}">
-                        <img src="__STATIC_URL__/index/images/user_center_icon1.png"/>
+                        <img src="__STATIC_URL__/moban/images/user_center_icon1.png"/>
                         <p>发布游记</p>
                     </a>
                 </li>
                 <li>
                     <a title="" href="{:url('index/users/collect')}">
-                        <img src="__STATIC_URL__/index/images/user_center_icon2.png"/>
+                        <img src="__STATIC_URL__/moban/images/user_center_icon2.png"/>
                         <p>我的收藏</p>
                     </a>
                 </li>
                 <li>
                     <a title="" href="{:url('index/users/prolist')}">
-                        <img src="__STATIC_URL__/index/images/user_center_icon3.png"/>
+                        <img src="__STATIC_URL__/moban/images/user_center_icon3.png"/>
                         <p>商品订单</p>
                     </a>
                 </li>
                 <li>
                     <a title="" href="{:url('index/users/triplist')}">
-                        <img src="__STATIC_URL__/index/images/user_center_icon4.png"/>
+                        <img src="__STATIC_URL__/moban/images/user_center_icon4.png"/>
                         <p>旅游订单</p>
                     </a>
                 </li>
@@ -117,12 +125,12 @@
         <div class="data_nav">
             <ul class="am-avg-sm-2">
                 <li>
-                    <img src="__STATIC_URL__/index/images/user_center_icon5.png" />
+                    <img src="__STATIC_URL__/moban/images/user_center_icon5.png" />
                     <p>积分<span>580</span></p>
                 </li>
                 <li>
                     <a href="{:url('index/users/shopcar')}">
-                        <img src="__STATIC_URL__/index/images/icon-shop_car2.png" />
+                        <img src="__STATIC_URL__/moban/images/icon-shop_car2.png" />
                         <p>购物车<label>9</label></p>
                     </a>
                 </li>
@@ -132,13 +140,13 @@
 
             <li>
                 <a title="" href="{:url('index/users/notelist')}">
-                    <img src="__STATIC_URL__/index/images/user_center_icon6.png">我的游记
+                    <img src="__STATIC_URL__/moban/images/user_center_icon6.png">我的游记
                     <i class="am-icon-angle-right"></i>
                 </a>
             </li>
             <li>
                 <a title="" href="{:url('index/users/tripcomment')}">
-                    <img src="__STATIC_URL__/index/images/user_center_icon7.png">我的评论
+                    <img src="__STATIC_URL__/moban/images/user_center_icon7.png">我的评论
                     <i class="am-icon-angle-right"></i>
                 </a>
             </li>
@@ -146,48 +154,5 @@
     </div>
 </div>
 <!--footer-->
-
-
-
-<div id="footer">
-    <div class="first">
-        <ul class="am-avg-sm-2">
-            <li>
-                <a title=""  href="{:url('index/index/index')}">
-                    <img src="__STATIC_URL__/index/images/icon-footer1-a.png"/>
-                    <p>首页</p>
-                </a>
-            </li>
-
-            <li>
-                <a title="" href="{:url('index/farercase/triplist')}">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer2-a.png"/>
-                    <p>攻略</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="beautiful">
-        <a title=""  href="javascript:;">
-            <img alt="" src="__STATIC_URL__/index/images/icon-footer3-a.png"/>
-        </a>
-    </div>
-    <div class="last">
-        <ul class="am-avg-sm-2">
-            <li >
-                <a title="" href="{:url('index/notes/nolist')}">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer4-a.png"/>
-                    <p>游记</p>
-                </a>
-            </li>
-            <li  class="active">
-                <a title="" href="{:url('index/users/center')}">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer05-a.png"/>
-                    <p>我的</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+{include file="public/foot" /}
 </body>
-</html>
