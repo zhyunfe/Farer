@@ -1,0 +1,49 @@
+<legend>添加房间照片</legend>
+<div class="htmleaf-container" class="am-u-md-9 am-u-lg-8">
+    <div class="container kv-main am-u-md-12 am-u-lg-12">
+        <form enctype="multipart/form-data">
+            <div class="form-group">
+                <input id="file-1" type="file" multiple class="file" name="pic" data-overwrite-initial="false" data-min-file-count="2">
+            </div>
+            <hr>
+        </form>
+    </div>
+</div>
+<!--<p>&nbsp;</p>-->
+<!--<p class="am-g">-->
+    <!--<a class="am-u-md-5">&nbsp;</a>-->
+    <!--<a class="am-btn am-btn-warning am-u-md-1" id="perfect">错误清除</a>-->
+    <!--<a class="am-u-md-5">&nbsp;</a>-->
+<!--</p>-->
+<script>
+
+    $("#file-1").fileinput({
+        uploadUrl: "../room/doAddPic/id/"+idnum, // you must set a valid URL here else you will get an error
+        allowedFileExtensions : ['jpg', 'png','gif'],
+        overwriteInitial: false,
+        maxFileSize: 1000,
+        maxFilesNum: 10,
+        //allowedFileTypes: ['image', 'video', 'flash'],
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+
+    $(".btn-warning").on('click', function() {
+        if ($('#file-4').attr('disabled')) {
+            $('#file-4').fileinput('enable');
+        } else {
+            $('#file-4').fileinput('disable');
+        }
+    });
+    $(".btn-info").on('click', function() {
+        $('#file-4').fileinput('refresh', {previewClass:'bg-info'});
+    });
+//    $(document).ready(function() {
+//        $("#test-upload").fileinput({
+//            'showPreview' : false,
+//            'allowedFileExtensions' : ['jpg', 'png','gif'],
+//            'elErrorContainer': '#errorBlock'
+//        });
+//    });
+</script>
