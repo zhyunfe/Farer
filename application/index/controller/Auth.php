@@ -12,7 +12,7 @@ use think\Request;
 use think\Session;
 use think\Validate;
 use app\index\model\Users;
-
+use think\Cookie;
 
 class Auth extends Controller
 {
@@ -25,11 +25,14 @@ class Auth extends Controller
     public function __construct()
     {
         parent::__construct();
+
         if(!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*'))
         {
 
-            $this->assign('aurl',"javascript:location=history.go(-1);");
-            $this->error();
+                $this->assign('aurl',"javascript:location=history.go(-1);");
+                $this->error();
+
+
         }
     }
 
@@ -55,6 +58,16 @@ class Auth extends Controller
     {
 
 
+      if(!empty(Cookie::get('email'))) {
+
+          $this->assign('ifa',0);
+          $this->assign('user',Cookie::get('email'));
+          $this->assign('pwd',Cookie::get('password'));
+      }else{
+          $this->assign('ifa',1);
+      }
+        //判断是否有cookie
+
         $this->assign('title', '登陆');
         Session::set('url',$_SERVER['HTTP_REFERER']);
 //        dump(Session::get('url'));
@@ -65,37 +78,39 @@ class Auth extends Controller
     public function doLogin()
     {
         $str = Session::get('url');
-        dump(input('post .'));
-        die;
-        if(input('post.rememberpwd') == 'on')
+        if(input('post.remeberpwd') == 'on')
         {
-            dump(1);
-            die;
+            Cookie::set('email',input('post.email'),3600);
+            Cookie::set('password',input('post.password'),3600);
         }else{
-            dump(2);
-            die;
-        }
-       $info =  Users::where(['email' => input('post.email'),'password' => md5(input('post.password'))])->find();
-       Session::set('today',time());
 
-       if(!empty($info))
-       {
+            cookie('email',null);
+
+        }
+
+            $info =  Users::where(['email' => input('post.email'),'password' => md5(input('post.password'))])->find();
+            Session::set('today',time());
+
+            if(!empty($info))
+            {
 //           dump(Session::get('url'));
 //           die;
 
-           $this->assign('title','登录成功');
+                $this->assign('title','登录成功');
 //           dump($str);
 //           die;
-           Session::set('user',$info->toArray());
-           $this->assign('aurl',$str);
+                Session::set('user',$info->toArray());
+                $this->assign('aurl',$str);
 
-           $this->success();
-       }else{
-           $this->assign('title','登录失败');
-           $this->assign('aurl',$str);
+                $this->success();
+            }else{
+                $this->assign('title','登录失败');
+                $this->assign('aurl',$str);
 
-           $this->error();
-       }
+                $this->error();
+            }
+
+
     }
 
     public function doLogEmail(Users $user)
@@ -171,7 +186,7 @@ class Auth extends Controller
             return json(['status' => 0,'msg'=>$validate->getError()]);
         }else{
             $data['password'] = md5($data['password']);
-            $data['logtime'] = time();
+
             $userb = new Users($data);
             $userb->allowField(true)->save();
             $userc = Users::find($user->getLastInsID());

@@ -32,14 +32,25 @@
         </style>
     <form method="post" class="am-form" action="{:url('index/auth/doLogin')}">
       <label for="email">邮箱:</label>
-      <input type="email" name="email" id="email" value="">
+      {if $ifa == 0}
+      <input type="email" name="email" id="email" value="{$user}">
         <span id="chz_yh">请输入邮箱</span>
       <br>
 
       <label for="password">密码:</label>
-      <input type="password" name="password" id="password" value="">
+      <input type="password" name="password" id="password" value="{$pwd}">
         <span id="chz_pw">请输入密码</span>
       <br>
+      {else}
+      <input type="email" name="email" id="email" value="">
+      <span id="chz_yh">请输入邮箱</span>
+      <br>
+
+      <label for="password">密码:</label>
+      <input type="password" name="password" id="password" value="">
+      <span id="chz_pw">请输入密码</span>
+      <br>
+      {/if}
       <label for="remember-me">
         <input id="remember-me" type="checkbox" name="remeberpwd">
         记住密码

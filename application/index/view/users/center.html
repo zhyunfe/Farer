@@ -63,19 +63,16 @@
 
         <a class="sign" data-am-modal="{target: '#my-alert'}" id="chz_qd">每日签到</a>
         <script>
-            qd_flag = 1;
-            $('#chz_qd').on('click',function(){
-                if(qd_flag == 1){
-                    $.post('doqd',{},function (data) {
-                        if(data.status == 1)
-                        {
-                            qd_flag = 0;
-                        }
 
-                        alert('签到成功');
+            $('#chz_qd').on('click',function(){
+
+                    $.post('doqd',{},function (data) {
+
+
+                        alert(data.msg);
                     },'JSON');
 
-                }
+
 
 
             })

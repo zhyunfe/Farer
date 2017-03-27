@@ -1,5 +1,6 @@
 <?php
 namespace app\index\controller;
+use think\Db;
 use think\Session;
 use think\Request;
 use think\Controller;
@@ -215,15 +216,26 @@ class Users extends Auth
     // +----------------------------------------------------------------------
     public function doqd(UsersModel $user)
     {
-        if(time() - Session::get('today') < 86400)
+//        return json(['status' => 1,'msg'=>'邮箱重复了']);
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
+
+        if(($user->logtime) == null)
         {
-            return json(['status'=>1]);
-        }else{
-            $score = Session::get('user')['score']+20;
-            $user->data(['score'=>$score]);
+            $user->logtime = time();
             $user->save();
-            return json(['status'=>2]);
+            return json(['msg'=>'签到成功']);
+        }else{
+            $logtime = date('y-m-d',$info['logtime']);
+            if(!strcmp($logtime, date('y-m-d',time())))
+            {
+                return json(['msg'=>'签到成功']);
+            }else{
+                return json(['msg'=>'滚']);
+            }
         }
+
 
 
 
