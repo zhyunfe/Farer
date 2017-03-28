@@ -22,12 +22,12 @@ class Auth extends Controller
      * 在初始化类的时候验证一下是否为要登录的界面
      * 如果没有登录，跳转到登录界面
      */
-    public function _initialize()
-    {
-        if (!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*')) {
-            $this->error('您还没有登录', url('admin/auth/login'));
-        }
-    }
+//    public function _initialize()
+//    {
+//        if (!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*')) {
+//            $this->error('您还没有登录', url('admin/auth/login'));
+//        }
+//    }
 
     /**
      * 判断是否登录
@@ -58,6 +58,7 @@ class Auth extends Controller
      */
     public function doLogin(Users $users)
     {
+        //检查email是否存在
         if ($_POST['type'] == 'email') {
             $email  = $_POST['email'];
             $result = $users->where('email', $email)->select();
@@ -79,7 +80,6 @@ class Auth extends Controller
             } else {
                 return false;
             }
-
         }
     }
 

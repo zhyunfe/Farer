@@ -64,6 +64,10 @@ class Index extends Auth
                     $add = file_get_contents('../application/admin/view/room/addRoom.html');
                     return $add;
                     break;
+                case 'addPurchase':
+                    $add = file_get_contents('../application/admin/view/purchase/addPurchase.html');
+                    return $add;
+                    break;
             }
         } else {
             $this->assign('title','首页 - Farer后台管理系统');

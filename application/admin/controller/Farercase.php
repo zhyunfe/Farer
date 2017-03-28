@@ -17,11 +17,18 @@ class Farercase extends Auth
 {
     protected $is_check_login = ['*'];
 
+    /**
+     * 新增攻略
+     * @param FCase $case
+     * @return string   返回错误信息
+     */
     public function addCase(FCase $case)
     {
+        //获取上传的封面图片，并将它移到/uploads/farercase中
         $header_image = null;
         $file = request()->file('file');
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads/farercase');
+
         if($info){
             $header_image = $info->getSaveName();
             $obj = input('post.');

@@ -20,10 +20,11 @@
 <div class="tpl-portlet-components">
     <div class="tpl-block">
         <div class="am-g">
+            <legend>添加景区</legend>
             <div class="tpl-form-body tpl-form-line">
                 <form class="am-form tpl-form-line-form" id="caseForm">
                     <div class="am-form-group">
-                        <label for="case_title" class="am-u-sm-3 am-form-label">景区名称 <span class="tpl-form-line-small-title">Title</span></label>
+                        <label for="place_title" class="am-u-sm-3 am-form-label">景区名称 <span class="tpl-form-line-small-title">Title</span></label>
                         <div class="am-u-sm-9">
                             <input type="text" class="tpl-form-input" id="place_title" name="title1" placeholder="请输入景区名称">
                         </div>
@@ -33,7 +34,7 @@
                         <label for="location" class="am-u-sm-3 am-form-label">景区地址 <span class="tpl-form-line-small-title">Type</span></label>
                         <div class="am-u-sm-9">
                             <div class="place">
-                                <input type="text" name="area" id="location" placeholder="地区">
+                                <input type="text" name="area" id="location" placeholder="点我选择地区" readonly>
                             </div>
                             <input type="text" name="tian" id="address" placeholder="详细地址">
                             <input type="text" name="price" id="price" placeholder="门票价格">

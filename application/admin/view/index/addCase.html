@@ -2,6 +2,12 @@
 <html>
 
 <head>
+
+    <!--<link href="./../static/hAdmin/css/font-awesome.css?v=4.4.0" rel="stylesheet">-->
+    <!--<link href="../../static/hAdmin/css/animate.css" rel="stylesheet">-->
+    <!--<link href="../../static/hAdmin/css/plugins/summernote/summernote.css" rel="stylesheet">-->
+    <!--<link href="../../static/hAdmin/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">-->
+    <!--<link href="../../static/hAdmin/css/style.css?v=4.1.0" rel="stylesheet">-->
     <script src="../../static/before/successload/js/Popt.js"></script>
     <script src="../../static/before/successload/js/cityJson.js"></script>
     <script src="../../static/before/successload/js/citySet.js"></script>
@@ -20,6 +26,7 @@
 <div class="tpl-portlet-components">
                 <div class="tpl-block">
                     <div class="am-g">
+                        <legend>添加攻略</legend>
                         <div class="tpl-form-body tpl-form-line">
                             <form class="am-form tpl-form-line-form" id="caseForm">
                                 <div class="am-form-group">
@@ -51,10 +58,10 @@
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">描述 <span class="tpl-form-line-small-title">Type</span></label>
+                                    <label for="location" class="am-u-sm-3 am-form-label">描述 <span class="tpl-form-line-small-title">Type</span></label>
                                     <div class="am-u-sm-9">
                                         <div class="place">
-                                            <input type="text" name="area" id="location" placeholder="地区">
+                                            <input type="text" name="area" id="location" placeholder="点击我选择地区" readonly>
                                         </div>
                                         <input type="text" name="tian" id="num" placeholder="出行天数">
                                         <input type="text" name="price" id="price" placeholder="门票价格">
@@ -62,14 +69,14 @@
                                 </div>
 
                                 <div class="am-form-group">
-                                    <label for="user-intro" class="am-u-sm-3 am-form-label">游玩攻略</label>
+                                    <label for="ywcase" class="am-u-sm-3 am-form-label">游玩攻略</label>
                                     <div class="am-u-sm-9">
                                         <textarea id="ywcase"  cols="30" rows="10"></textarea>
                                     </div>
                                 </div>
                                     <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
                                     <div class="am-form-group">
-                                    <label for="user-intro" class="am-u-sm-3 am-form-label">交通攻略</label>
+                                    <label for="jtcase" class="am-u-sm-3 am-form-label">交通攻略</label>
                                     <div class="am-u-sm-9">
                                         <textarea id="jtcase"  cols="30" rows="10"></textarea>
                                     </div>
@@ -78,7 +85,7 @@
                                     <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
 
                                     <div class="am-form-group">
-                                    <label for="user-intro" class="am-u-sm-3 am-form-label">住宿攻略</label>
+                                    <label for="zscase" class="am-u-sm-3 am-form-label">住宿攻略</label>
                                     <div class="am-u-sm-9">
                                         <textarea id="zscase"  cols="30" rows="10"></textarea>
                                     </div>
@@ -104,11 +111,22 @@
                     </div>
                 </div>
             </div>
+<!--<script src="../../static/hAdmin/js/bootstrap.min.js?v=3.3.6"></script>-->
+
+<!--&lt;!&ndash;&lt;!&ndash; 自定义js &ndash;&gt;&ndash;&gt;-->
+<!--<script src="../../static/hAdmin/js/content.js?v=1.0.0"></script>-->
+<!--&lt;!&ndash; SUMMERNOTE &ndash;&gt;-->
+<!--<script src="../../static/hAdmin/js/plugins/summernote/summernote.min.js"></script>-->
+<!--<script src="../../static/hAdmin/js/plugins/summernote/summernote-zh-CN.js"></script>-->
+
 <script>
     $("#location").click(function (e) {
         SelCity(this,e);
     });
 </script>
+
+
+
 </body>
 
 </html>

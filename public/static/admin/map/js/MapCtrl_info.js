@@ -219,6 +219,7 @@ function refresh() {
 				//点击保存按钮，获取到所有的元素值，提交到服务器
 				$('#add_save').on('click',function () {
 					var gl = $('.simditor-body').html();
+					var tel = $('#tel').val();
 					var form = new FormData();
 					form.append('desc',description);
 					form.append('province',province);
@@ -233,7 +234,7 @@ function refresh() {
 					form.append('gl',gl);
 					$.ajax({
 						method:'post',
-						data:form,
+						data:{"tel":tel},
 						url:'../hotel/addHotel',
 						processData: false,
 						contentType: false,
