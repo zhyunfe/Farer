@@ -12,5 +12,5 @@ use think\Model;
 use traits\model\SoftDelete;
 class Hotel extends Model
 {
-
+    use SoftDelete;
 }

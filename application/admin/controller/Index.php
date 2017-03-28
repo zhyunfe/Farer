@@ -4,11 +4,12 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Farercase;
 use app\admin\model\Users;
+use app\admin\model\Hotel;
 class Index extends Auth
 {
     protected $is_check_login = ['*'];
 
-    public function index(Farercase $caseModel,Users $users)
+    public function index(Farercase $caseModel,Users $users,Hotel $hotel)
     {
         if (isset($_POST['type'])) {
             switch ($_POST['type']) {
@@ -19,7 +20,20 @@ class Index extends Auth
                     return '这个是数据页面';
                 break;
                 case 'hotel':
-                    return '这个是酒店管理';
+                    $count = $hotel->withTrashed()->count('id');
+                    if(isset($_POST['start'])) {
+                        $start = $_POST['start'];
+                    } else {
+                        $start = 0;
+                    }
+                    $result = $hotel->withTrashed()->field(['id','pid','name','telephone','style'])->select();
+                    foreach ($result as $value) {
+                        $value->id += 20000;
+                        $value->style = $this->getStatusTextAttr($value->style);
+                    }
+                    $this->assign('hotel',$result);
+                    $list = $this->fetch(APP_PATH."/admin/view/hotel/list.html");
+                    return ['tmp'=>$list,'pageCount'=>$count,'limit'=>10];
                 break;
                 case 'user':
                     $count = $users->withTrashed()->count('uid');
@@ -106,5 +120,16 @@ class Index extends Auth
     {
         $this->assign('title','测试界面');
         var_dump($this->fetch());
+    }
+
+    /**
+     * 获取酒店类型
+     * @param $value 酒店style标识
+     * @return mixed 对应的酒店类型
+     */
+    public function getStatusTextAttr($value)
+    {
+        $status = [0=>'经济型',1=>'豪华型',2=>'主题型'];
+        return $status[$value];
     }
 }

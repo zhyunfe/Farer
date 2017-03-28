@@ -35,7 +35,9 @@ class Farercase extends Auth
             $result = $case->save(['pid'=>1,'title'=>addslashes($obj['title']),
                 'type'=>addslashes($obj['type']),'header_image'=>addslashes($header_image),
                 'day'=>addslashes($obj['day']),'location'=>addslashes($obj['location']),
-                'href'=>addslashes($obj['href']),'traffic'=>addslashes($obj['traffic']),'hotel'=>addslashes($obj['hotel'])]);
+                'href'=>addslashes($obj['href']),'traffic'=>addslashes($obj['traffic']),
+                'price'=>addslashes($obj['price']),
+                'hotel'=>addslashes($obj['hotel'])]);
             if ($result) {
                 return json_encode(['error'=>0,'msg'=>'添加成功']);
             } else {

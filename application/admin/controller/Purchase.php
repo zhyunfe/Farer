@@ -10,6 +10,7 @@ use think\Request;
 use think\view;
 use app\admin\model\Purchase as PurchaseModel;
 
+
 class Purchase extends Auth
 {
     protected $is_check_login = ['*'];

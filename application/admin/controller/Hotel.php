@@ -68,4 +68,52 @@ class Hotel extends Auth {
         $result = $hotel->field(['id','name'])->where(['pid'=>$pid,'style'=>$style])->select();
         return $result;
     }
+
+    /**
+     * ajax查询酒店
+     * @param HotelModel $hotel
+     * @return array
+     */
+    public function listFind(HotelModel $hotel)
+    {
+        $where = "";
+
+        $pid = input('post.pid');
+        $style = input('post.type');
+
+        //如果没有选择酒店类型
+        if ($style != -1) {
+            //如果选择了地区和酒店类型执行下面的语句
+            if ($pid != "") {
+                $where = "pid like '$pid%' and style=$style";
+            } else {
+                //如果没有选择区域，执行下面的语句
+                $where = "style = $style";
+            }
+        } else {
+            $where = "pid like '$pid%'";
+        }
+        //查询出一共有多少条数据
+        $count = $hotel->withTrashed()->where($where)->count('id');
+        if(isset($_POST['start'])) {
+            $start = $_POST['start'];
+        } else {
+            $start = 0;
+        }
+        $result = $hotel->withTrashed()->field(['id','pid','name','telephone','style'])->where($where)->select();
+        //设置酒店编号和酒店类型
+        foreach ($result as $value) {
+            $value->id += 20000;
+            $value->style = $this->getStatusTextAttr($value->style);
+        }
+        //分配变量渲染模板
+        $this->assign('hotel',$result);
+        $list = $this->fetch(APP_PATH."/admin/view/hotel/listFind.html");
+        return ['tmp'=>$list,'pageCount'=>$count,'limit'=>25];
+    }
+    public function getStatusTextAttr($value)
+    {
+        $status = [0=>'经济型',1=>'豪华型',2=>'主题型'];
+        return $status[$value];
+    }
 }

@@ -47,7 +47,5 @@ abstract class Yar
      * @return mixed
      */
     public function __call($method, $args)
-    {
-
-    }
+    {}
 }

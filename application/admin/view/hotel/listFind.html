@@ -1,0 +1,26 @@
+{volist name="hotel" id="value" empty="暂时没有数据"}
+<tr>
+    <td>
+        <input type="checkbox"></td>
+    <td>{$value.id}</td>
+    <td>
+        {$value.name}
+    </td>
+    <td>
+        {$value.style}
+    </td>
+    <td>
+        {$value.pid}
+    </td>
+    <td class="am-hide-sm-only">{$value.telephone}</td>
+    <td>
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+                <a class="am-btn am-btn-default am-btn-xs am-text-secondary user_detail" >
+                    <span class="am-icon-pencil-square-o"></span>详情
+                </a>
+            </div>
+        </div>
+    </td>
+</tr>
+{/volist}

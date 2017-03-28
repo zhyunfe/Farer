@@ -368,11 +368,51 @@
                         showDetail();
                         //用户锁定事件
                         userLock(data);
+                        //ajax及时查询酒店信息
+                        hotelFind();
                     });
 
                 });
             });
 
+            function hotelFind() {
+                $('#s_province').change(function () {
+                    var province = $(this).val();
+                    hotelFindAjax(province,-1);
+                });
+                $('#s_city').change(function () {
+                    var city = $(this).val();
+                    var province = $('#s_province').val();
+                    if(city == "地级市") {city=""}
+                    if(province == "省份") {province = ""}
+                    var pid = province+city;
+                    hotelFindAjax(pid,-1);
+                });
+                $('#hoteltype').change(function () {
+                    var city = $('#s_city').val();
+                    var province = $('#s_province').val();
+                    if(city == "地级市") {city=""}
+                    if(province == "省份") {province = ""}
+                    var pid = province+city;
+                    var type = $(this).val();
+                    hotelFindAjax(pid,type);
+                })
+            }
+            function hotelFindAjax(pid,type)
+            {
+                $.ajax({
+                    method: 'post',
+                    url: '{:url("admin/hotel/listfind")}',
+                    data: {pid: pid,type:type},
+                    success: function (data) {
+                        $('#listFind').html(data.tmp);
+
+                    },
+                    fail: function (data) {},
+                    async: false,
+                    dataType: 'json'
+                });
+            }
             //添加列表的点击事件开始
             $('.add').each(function (i, obj) {
                 $(obj).attr('add',i).click(function () {
@@ -874,7 +914,7 @@
                     }
                     //获取各个表单的值
                     var case_title = $('#case_title').val();
-                    var keywords = $("input[name='keywords']").val();
+                    var keywords = $("input[name='keywords']:checked").val();
                     var location = $('#location').val();
                     var num = $('#num').val();
                     var price = $('#price').val();

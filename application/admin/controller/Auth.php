@@ -37,7 +37,7 @@ class Auth extends Controller
      */
     public function checkLogin()
     {
-        return session('?user');
+        return session('?userAdmin');
     }
 
     /**
@@ -75,7 +75,7 @@ class Auth extends Controller
             $pwd = $users->field('password')->where('email', $email)->find()['password'];
 
             if ($pwd == md5($password)) {
-                Session::set('user',$email);
+                Session::set('userAdmin',$email);
                 return true;
             } else {
                 return false;
