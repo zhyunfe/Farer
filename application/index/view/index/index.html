@@ -27,10 +27,10 @@
   <div id="index_banner">
     <div class="am-slider am-slider-default">
       <ul class="am-slides">
-        <li><a title="" href="{:url('index/place/details')}"><img src="__STATIC_URL__/moban/images/banner2.jpg"/></a></li>
-        <li><a title="" href="{:url('index/place/details')}"><img src="__STATIC_URL__/moban/images/banner4.jpg"/></a></li>
-        <li><a title="" href="{:url('index/place/details')}"><img src="__STATIC_URL__/moban/images/banner3.jpg"/></a></li>
-        <li><a title="" href="{:url('index/place/details')}"><img src="__STATIC_URL__/moban/images/banner.jpg"/></a></li>
+        {volist name="list" id="value"}
+        <li><a title="" href="{:url('index/place/details',['id'=>$value['id']])}"><img src="__PLACE_URL__/{$value['image']}"/></a></li>
+
+        {/volist}
       </ul>
     </div>
   </div>
@@ -64,6 +64,9 @@
       <div class="clear"></div>
     </ul>
   </div>
+
+
+
 
 
 

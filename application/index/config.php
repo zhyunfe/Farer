@@ -22,7 +22,8 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        '__STATIC_URL__' => 'http://www.farer.com/static/before'
+        '__STATIC_URL__' => 'http://www.farer.com/static/before',
+        '__PLACE_URL__' => 'http://www.farer.com/uploads/place'
 
     ],
 

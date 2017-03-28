@@ -4,7 +4,7 @@ use think\Controller;
 use think\Session;
 use app\index\model\Farercase;
 //use think\Session;
-
+use app\index\model\Place;
 class Index extends Auth
 {
     /**
@@ -14,8 +14,13 @@ class Index extends Auth
     // +----------------------------------------------------------------------
     // | 处理首页逻辑
     // +----------------------------------------------------------------------
-    public function index(Farercase $farercase)
+    public function index(Place $place)
     {
+
+        $obj = $place->limit(4)->select();
+
+        $this->assign('list',$obj);
+
 
         return $this->fetch();
     }

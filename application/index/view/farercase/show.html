@@ -9,70 +9,26 @@
     <div id="item_name">
     </div>
     <ul>
+        {foreach $list as $value}
         <li>
-            <a title="" class="news" href="{:url('index/farercase/details')}">
+            <a title="" class="news" href="{:url('index/farercase/details',['id'=>$value->case_id])}">
                 <div class="pic">
-                    <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+                    <img src="__PLACE_URL__/{$value->header_image}"/>
                 </div>
                 <div class="project_cont">
-                    <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
+                    <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡阿斯顿发送到.</p>
                 </div>
                 <div class="price">
-                    <p>2015/04/16</p>
+
                     <span>12</span>
                     <i class="am-icon-eye"></i>
                     <div class="clear"></div>
                 </div>
             </a>
         </li>
-        <li>
-            <a title="" class="news" href="news_detail.html">
-                <div class="pic">
-                    <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                </div>
-                <div class="project_cont">
-                    <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-                </div>
-                <div class="price">
-                    <p>2015/04/16</p>
-                    <span>12</span>
-                    <i class="am-icon-eye"></i>
-                    <div class="clear"></div>
-                </div>
-            </a>
-        </li>
-        <li>
-            <a title="" class="news" href="news_detail.html">
-                <div class="pic">
-                    <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                </div>
-                <div class="project_cont">
-                    <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-                </div>
-                <div class="price">
-                    <p>2015/04/16</p>
-                    <span>12</span>
-                    <i class="am-icon-eye"></i>
-                    <div class="clear"></div>
-                </div>
-            </a>
-        </li>
-        <li>
-            <a title="" class="news" href="news_detail.html">
-                <div class="pic">
-                    <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                </div>
-                <div class="project_cont">
-                    <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
-                </div>
-                <div class="price">
-                    <p>2015/04/16</p>
-                    <span>12</span>
-                    <i class="am-icon-eye"></i>
-                    <div class="clear"></div>
-                </div>
-            </a>
-        </li>
+        {/foreach}
+
+
     </ul>
     <div id="none">
         没有更多了

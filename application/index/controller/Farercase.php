@@ -14,9 +14,14 @@ class Farercase extends Controller
     // +----------------------------------------------------------------------
     // | 攻略列表
     // +----------------------------------------------------------------------
-    public function show()
+    public function show(FarercaseModel $farercase)
     {
-
+        $info = $farercase->all();
+        $this->assign('list',$info);
+        foreach ($info as $value)
+        {
+            
+        }
         return $this->fetch();
     }
 

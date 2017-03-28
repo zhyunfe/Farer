@@ -7,27 +7,31 @@
     });
 </script>
 <body>
+
+
 <div id="activity_detail">
-    <div class="cover">
+    <div class="cover" style=" background: url('__PLACE_URL__/{$list->image}') no-repeat center;">
+
+
         <a title="" class="return" href="trip_list.html"></a>
     </div>
     <div  class="title">
-        <label>龙门石窟<img src="__STATIC_URL__/moban/images/hot.png" style="width: 20px"></label>
+        <label>{$list->title}<img src="__STATIC_URL__/moban/images/hot.png" style="width: 20px"></label>
 
         <div class="clear"></div>
     </div>
     <div class="time">
         <div class="date">
             <img src="__STATIC_URL__/moban/images/time.png">
-            <p>开放时间：2017/01/23</p>
+            <p>开放时间：{$list->open_time}</p>
             <div class="clear"></div>
         </div>
         <ul>
             <li class="phone">
-                <p>门票价格<span>￥230/人</span></p>
+                <p>门票价格<span>￥{$list->price}/人</span></p>
             </li>
             <li class="phone">
-                <p>详细地点：<span>洛阳市关林庙会</span></p>
+                <p>详细地点：<span>{$list->pid}</span></p>
             </li>
         </ul>
     </div>
@@ -36,7 +40,7 @@
             <label>景区描述:</label>
             <div class="clear"></div>
             <div class="con">
-                中国三大石窟之一，历史悠久，开凿经历了多个朝代断续营造达500余年之中国三大石窟之一，历史悠久，开凿经历了多个朝代断续营造达500余年之中国三大石窟之一，历史悠久，开凿经历
+                {$list->description}
                 <div class="all_text" style="display:none;">
                     中国三大石窟之一，历史悠久，开凿经历了多个朝代，断续营造达500余年之久，共有97000余尊佛像。这里东、西两山对峙，伊水中流，形似天然门阙，石窟密布于峭壁上，南北长达1公里。龙门石窟是洛阳最经典的景点，其中最震撼的是卢舍那大佛雕像群，有半山高。
                 </div>
@@ -97,5 +101,7 @@
 
 </div>
 </div>
+{include file="public/foot" /}
+
 </body>
 
