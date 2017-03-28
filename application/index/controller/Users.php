@@ -50,7 +50,9 @@ class Users extends Auth
     // +----------------------------------------------------------------------
     public function center()
     {
-
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
         if($this->checkLogin())
         {
             $this->assign('iflo', Session::get('user'));
@@ -60,6 +62,7 @@ class Users extends Auth
         }
 //        dump(Session::get('user'));
 //        die;
+
         return $this->fetch();
     }
 
@@ -186,12 +189,57 @@ class Users extends Auth
     {
         return $this->fetch();
     }
+
+    /**
+     *
+     */
+    public function doChangePwd()
+    {
+        $oldpwd = input('post.oldpwd');
+        $newpwd = input('post.newpwd');
+        $regpwd = input('post.regpwd');
+
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
+
+
+        if($oldpwd == '' || $oldpwd == '' || $oldpwd == '' ){
+            return json(['msg'=>'不能为空']);
+        }else{
+
+            if(strcmp(md5($oldpwd),$user->password) != 0)
+            {
+
+                return json(['msg'=>'请输入正确的密码']);
+            }elseif($newpwd != $regpwd)
+            {
+                return json(['msg'=>'两次密码要一致']);
+            }else{
+                $user->password = md5($newpwd);
+                $user->save();
+
+
+                return json(['msg'=>'修改成功']);
+
+            }
+        }
+
+
+    }
+
+
     // +----------------------------------------------------------------------
     // | 用户详细信息
     // +----------------------------------------------------------------------
 
     public function details()
     {
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
+
+        $this->assign('list',$user);
         return $this->fetch();
     }
     // +----------------------------------------------------------------------
@@ -199,6 +247,57 @@ class Users extends Auth
     // +----------------------------------------------------------------------
 
     public function realname()
+    {
+        return $this->fetch();
+    }
+
+
+    public function doRealname()
+    {
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
+
+        $user->realname = input('post.realname');
+        $user->save();
+
+
+        return json(['msg'=>'修改成功']);
+
+    }
+    public function realphoto()
+    {
+        return $this->fetch();
+    }
+    public function realsex()
+    {
+        return $this->fetch();
+    }
+    public function doRealSex()
+    {
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
+       if(input('post.realsex') == 'nan')
+       {
+           $user->sex = 1;
+           $user->save();
+       }else{
+           $user->sex = 0;
+           $user->save();
+       }
+
+
+
+
+        return json(['msg'=>'修改成功']);
+
+    }
+    public function realaddr()
+    {
+        return $this->fetch();
+    }
+    public function realbirth()
     {
         return $this->fetch();
     }
@@ -210,6 +309,7 @@ class Users extends Auth
     {
         return $this->fetch();
     }
+
 
     // +----------------------------------------------------------------------
     // | 每日签到得积分
@@ -223,14 +323,18 @@ class Users extends Auth
 
         if(($user->logtime) == null)
         {
+
             $user->where("uid = $id")->update(['logtime' => time()]);
-            return json(['msg'=>'签到成功']);
+            $user->where("uid = $id")->update(['score' => 20]);
+            return json(['msg'=>'新用户第一次签到成功,积分加300']);
         }else{
 
-            $logtime = date('y-m-d',$info['logtime']);
-            if(!strcmp($logtime, date('y-m-d',time())))
+            $logtime = date('y-m-d',$user->logtime);
+
+            if(strcmp($logtime, date('y-m-d',time())) != 0)
             {
-                return json(['msg'=>'签到成功']);
+                $user->where("uid = $id")->update(['score' => $user->score+=20]);
+                return json(['msg'=>'签到成功,积分加20']);
             }else{
                 return json(['msg'=>'今天已经签到了']);
             }

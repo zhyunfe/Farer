@@ -122,7 +122,11 @@
             <ul class="am-avg-sm-2">
                 <li>
                     <img src="__STATIC_URL__/moban/images/user_center_icon5.png" />
-                    <p>积分<span>580</span></p>
+                    <p>积分<span>
+                        {if $iflo !=0}
+                            {$iflo['score']}
+                        {/if}
+                    </span></p>
                 </li>
                 <li>
                     <a href="{:url('index/users/shopcar')}">

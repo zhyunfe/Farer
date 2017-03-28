@@ -2,13 +2,13 @@
 <!-----------公共版头----------->
 <div id="header">
 
-    <span>旅游订单</span>
+    <span>个人资料</span>
 </div>
 <!-----------个人资料----------->
 <div id="user_data">
     <ul class="basic">
         <li>
-            <a class="data" href="{:url('index/users/realname')}">
+            <a class="data" href="{:url('index/users/realphoto')}">
                 <span>头像</span>
                 <i class="am-icon-chevron-right"></i>
                 <img src="__STATIC_URL__/moban/images/head.jpg"/>
@@ -16,34 +16,34 @@
             </a>
         </li>
         <li>
-            <a class="data" href="name.html">
+            <a class="data" href="{:url('index/users/realname')}">
                 <span>昵称</span>
                 <i class="am-icon-chevron-right"></i>
-                <p>麦萌de草泥马</p>
+                <p>{$list->realname}</p>
                 <div class="clear"></div>
             </a>
         </li>
         <li>
-            <a class="data" href="fill_data.html">
+            <a class="data" href="{:url('index/users/realsex')}">
                 <span>性别</span>
                 <i class="am-icon-chevron-right"></i>
-                <p>保密</p>
+                <p>{$list->sex}</p>
                 <div class="clear"></div>
             </a>
         </li>
         <li>
-            <a class="data" href="fill_data.html">
+            <a class="data" href="{:url('index/users/realaddr')}">
                 <span>居住地址</span>
                 <i class="am-icon-chevron-right"></i>
-                <p>保密</p>
+                <p>{$list->addr}</p>
                 <div class="clear"></div>
             </a>
         </li>
         <li>
-            <a class="data" href="fill_data.html">
+            <a class="data" href="{:url('index/users/realbirth')}">
                 <span>生日</span>
                 <i class="am-icon-chevron-right"></i>
-                <p>保密</p>
+                <p>{$list->birthday}</p>
                 <div class="clear"></div>
             </a>
         </li>
@@ -52,7 +52,7 @@
         <a class="data" href="{:url('index/users/signature')}">
             <span>个性签名</span>
             <i class="am-icon-chevron-right"></i>
-            <p>人生旅程，不同的是沿途..</p>
+            <p>{$list->tag}</p>
             <div class="clear"></div>
         </a>
     </div>

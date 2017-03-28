@@ -12,26 +12,44 @@
             <li>
                 <p>旧密码</p>
                 <div class="am-form-group">
-                    <input type="text/css" placeholder="请输入旧密码"/>
+                    <input type="password" placeholder="请输入旧密码" id="oldpwd"/>
                 </div>
                 <div class="clear"></div>
             </li>
             <li>
                 <p>新密码</p>
                 <div class="am-form-group">
-                    <input type="text/css" placeholder="请输入新密码"/>
+                    <input type="text/css" placeholder="请输入新密码" id="newpwd"/>
                 </div>
                 <div class="clear"></div>
             </li>
             <li>
                 <p>确认密码</p>
                 <div class="am-form-group">
-                    <input type="text/css" placeholder="请再次输入新密码"/>
+                    <input type="text/css" placeholder="请再次输入新密码" id="regpwd"/>
                 </div>
                 <div class="clear"></div>
             </li>
         </ul>
-        <input type="submit" class="yes" value="确定"> </input>
+        <button  class="yes" > 确定</button>
     </div>
 </div>
+<script>
+
+    $('.yes').on('click',function()
+    {
+
+        var url = "{:url('index/users/dochangepwd')}";
+        var date = {
+            oldpwd:$('#oldpwd').val(),
+            newpwd:$('#newpwd').val(),
+            regpwd:$('#regpwd').val(),
+
+        }
+        $.post(url,date,function (data) {
+            alert(data.msg)
+        },'JSON')
+    })
+
+</script>
 </body>

@@ -12,5 +12,10 @@ class Users extends Model
 {
     protected $autoWriteTimestamp = true;
     use SoftDelete;
+    public function getSexAttr($value)
+    {
+        $sex = [1=>'男',0=>'女'];
+        return $sex[$value];
+    }
 
 }

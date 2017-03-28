@@ -9,7 +9,8 @@
 <div id="fill_data">
     <div class="fill">
         <div class="am-form-group">
-            <input type="text/css" id="realname"/>
+            <input type="radio" name="sex" value="nan" id="nan"/><label for="nan">男</label><br>
+            <input type="radio" name="sex" value="nv" id="nv"/><label for="nv">女</label>
         </div>
     </div>
 </div>
@@ -18,11 +19,9 @@
         $('.done').on('click',function()
         {
 
-            var url = "{:url('index/users/dorealname')}";
+            var url = "{:url('index/users/dorealsex')}";
             var date = {
-                realname:$('#realname').val(),
-
-
+                realsex:$('input:checked').attr('value'),
             }
             $.post(url,date,function (data) {
                 alert(data.msg)
