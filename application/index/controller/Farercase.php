@@ -17,21 +17,28 @@ class Farercase extends Controller
     public function show(FarercaseModel $farercase)
     {
         $info = $farercase->all();
-        $this->assign('list',$info);
+
         foreach ($info as $value)
         {
-            
+
+            $value->header_image = str_replace('\\\\','/',$value->header_image);
+
         }
+        $this->assign('list',$info);
         return $this->fetch();
+
     }
 
 
     // +----------------------------------------------------------------------
     // | 攻略详情
     // +----------------------------------------------------------------------
-    public function details()
+    public function details(FarercaseModel $farercase)
     {
+        $info = $farercase->where(['case_id'=>input('param.id')])->find();
+        $info->header_image = str_replace('\\\\','/',$info->header_image);
 
+        $this->assign('list2',$info);
         return $this->fetch();
     }
 

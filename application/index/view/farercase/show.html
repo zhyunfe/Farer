@@ -13,17 +13,22 @@
         <li>
             <a title="" class="news" href="{:url('index/farercase/details',['id'=>$value->case_id])}">
                 <div class="pic">
-                    <img src="__PLACE_URL__/{$value->header_image}"/>
+                    <img src="__FARERCASE_URL__/{$value->header_image}"/>
                 </div>
                 <div class="project_cont">
-                    <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡阿斯顿发送到.</p>
+                    <p style="padding-bottom: 20px;color: #8a1f11">{$value->type}</p>
+                    <p>{$value->title}</p>
                 </div>
                 <div class="price">
 
                     <span>12</span>
                     <i class="am-icon-eye"></i>
+                    <span style="margin-right: 5px;">12</span>
+                    <span style="cursor: pointer">点赞</span>
+
                     <div class="clear"></div>
                 </div>
+
             </a>
         </li>
         {/foreach}

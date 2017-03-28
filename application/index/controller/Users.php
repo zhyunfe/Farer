@@ -216,23 +216,23 @@ class Users extends Auth
     // +----------------------------------------------------------------------
     public function doqd(UsersModel $user)
     {
-//        return json(['status' => 1,'msg'=>'邮箱重复了']);
+
         $info = Session::get('user');
         $id = $info['uid'];
         $user = UsersModel::get($id);
 
         if(($user->logtime) == null)
         {
-            $user->logtime = time();
-            $user->save();
+            $user->where("uid = $id")->update(['logtime' => time()]);
             return json(['msg'=>'签到成功']);
         }else{
+
             $logtime = date('y-m-d',$info['logtime']);
             if(!strcmp($logtime, date('y-m-d',time())))
             {
                 return json(['msg'=>'签到成功']);
             }else{
-                return json(['msg'=>'滚']);
+                return json(['msg'=>'今天已经签到了']);
             }
         }
 

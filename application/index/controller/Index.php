@@ -14,13 +14,26 @@ class Index extends Auth
     // +----------------------------------------------------------------------
     // | 处理首页逻辑
     // +----------------------------------------------------------------------
-    public function index(Place $place)
+    public function index(Place $place,Farercase $farercase)
     {
-
+        //轮播展示四个景区
         $obj = $place->limit(4)->select();
-
         $this->assign('list',$obj);
 
+
+        //下边展示3个热门景区
+        $obj2 = $place->limit(1)->select();
+
+        //截取景区简介在首页展示
+        foreach ($obj2 as $valuse)
+        {
+            $valuse->description = substr($valuse->description,0,90) . '...';
+        }
+        $this->assign('list2',$obj2);
+
+        //下边展示2个攻略
+        $obj3 = $farercase->limit(2)->select();
+        $this->assign('list3',$obj3);
 
         return $this->fetch();
     }

@@ -1,26 +1,104 @@
 
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".more").click(function(){
+            $(".all_text").toggle();
+        });
+    });
+</script>
 <body>
-<div id="news_detail">
-    <div class="cover">
 
-        <div  class="title">
-            <p>“老家河南•孟津过年”魅力孟津摄影展征稿启事</p>
-            <span>2016/12/11</span>
+
+<div id="activity_detail">
+    <div class="cover" style=" background: url('__FARERCASE_URL__/{$list2->header_image}') no-repeat center;">
+
+        <a title="" class="collect" href="#"><img src="__STATIC_URL__/moban/images/collect01.png" style="width: 30px;margin-top: 20px;margin-left: 10px;"></a>
+        <a title="" class="collect" href="#"><img src="__STATIC_URL__/moban/images/thumb.png" style="width: 30px;margin-top: 20px;margin-left: 290px;"></a>
+
+
+
+    </div>
+    <div  class="title">
+
+        <label>{$list2->title}<img src="__STATIC_URL__/moban/images/hot.png" style="width: 20px"></label>
+
+        <div class="clear"></div>
+
+    </div>
+    <div class="time">
+        <div class="date">
+            <img src="__STATIC_URL__/moban/images/time.png">
+            <p>出行天数：{$list2->day}</p>
             <div class="clear"></div>
         </div>
-        <div class="read">
-            <img class="eye " src="__STATIC_URL__/moban/images/read.png">
-            <span>999+</span>
-        </div>
+        <ul>
+            <li class="phone">
+                <p>门票价格<span>{$list2->price}/人</span></p>
+            </li>
+            <li class="phone">
+                <p>详细地点：<span>{$list2->location}</span></p>
+            </li>
+        </ul>
     </div>
-    <div class="fill">
-        <div class="con">
-            <p>
-                为响应“老家河南 孟津过年”来孟津耍吧为主题的春节旅游文化活动，由孟津县县委宣传部、孟津县文广新局、孟津县旅游局、孟津汉魏旅游开发集团公司、孟津县文联摄协主办，孟津县黑光摄影学校承办的“老家河南、孟津过年、魅力孟津”摄影展开始向广大摄影者征集展览照片。</p>
-            <img src="__STATIC_URL__/moban/images/head.jpg">
-            <p>它位于洛阳市城南十三公里，这里是香山和龙门山两山对峙，伊河水从中穿流而过，远望犹如一座天然的门阙，所以古称“伊阙”。</p>
+
+
+    <div class="all_comment">
+        <div class="item">
+            <span>游玩攻略</span>
         </div>
+        <ul>
+            <li>
+                <div class="comment_list">
+
+                    <p>
+                        {$list2->href}
+                    </p>
+                </div>
+            </li>
+        </ul>
+
     </div>
+    <div class="all_comment">
+        <div class="item">
+            <span>交通攻略</span>
+        </div>
+        <ul>
+            <li>
+                <div class="comment_list">
+
+                    <p>
+                        {$list2->traffic}
+                    </p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <div class="all_comment">
+        <div class="item">
+            <span>住宿攻略</span>
+        </div>
+        <ul>
+            <li>
+                <div class="comment_list">
+
+                    <p>
+                        {$list2->hotel}
+                    </p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+
+
+
+    <!-----------加入购物车/购买----------->
+
 </div>
+</div>
+{include file="public/foot" /}
+
 </body>
+
