@@ -58,7 +58,7 @@ class Index extends Auth
                     } else {
                         $start = 0;
                       }
-                    $result = $caseModel->field(['case_id','pid','title','header_image','location','href','create_time','user_star','seecount'])->limit($start,6)->select();
+                    $result = $caseModel->field(['case_id','title','header_image','location','href','create_time','user_star','seecount'])->limit($start,6)->select();
                     $this->assign('result',$result);
                     $tmp = $this->fetch(APP_PATH.'/admin/view/index/case.html');
                     return ['tmp'=>$tmp,'pageCount'=>$count,'limit'=>6];

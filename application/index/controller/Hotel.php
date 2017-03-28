@@ -7,6 +7,7 @@
  */
 namespace app\index\controller;
 use think\Controller;
+use think\Request;
 class Hotel extends Controller
 {
     public function choose()
@@ -19,6 +20,13 @@ class Hotel extends Controller
     public function reservation()
     {
         return $this->fetch();
+    }
+    public function getLocation()
+    {
+//        http://api.map.baidu.com/geocoder/v2/?callback=renderReverse&location=39.983424,116.322987&output=json&pois=1&ak=您的ak
+        $url = 'http://api.map.baidu.com/geocoder/v2/?callback=renderReverse&location='.input('post.longitude').','.input('post.latitude').'&output=json&pois=1'.'&ak=xDBFGIWD1ehGfHyrtEWv2WgMg5yOhm1F';
+        $location = file_get_contents($url);
+        return $location;
     }
 
 
