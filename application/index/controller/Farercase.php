@@ -11,6 +11,13 @@ use app\index\model\Farerdiqu;
 use think\Controller;
 class Farercase extends Controller
 {
+//
+//    public function user()
+//    {
+//        $farer = FarercaseModel::find('3');
+//        $farer->user();
+//    }
+
     // +----------------------------------------------------------------------
     // | 攻略列表
     // +----------------------------------------------------------------------
@@ -40,6 +47,31 @@ class Farercase extends Controller
 
         $this->assign('list2',$info);
         return $this->fetch();
+    }
+
+
+    public function docollect(FarercaseModel $farercase)
+    {
+        $id = input('post.id');
+
+        $info = $farercase->find($id);
+        $has = $info->users();
+        dump($has);
+        die;
+        $arr = [];
+        foreach ($has as $value)
+        {
+            $arr[] = $value->toArray();
+        }
+        if(empty($arr))
+        {
+            return json(['msg'=>'收藏成功']);
+        }
+//        $info = $farercase->where(['case_id'=>input('param.id')])->find();
+//        $info->header_image = str_replace('\\\\','/',$info->header_image);
+//
+//        $this->assign('list2',$info);
+//        return $this->fetch();
     }
 
 

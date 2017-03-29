@@ -37,7 +37,7 @@
                 <img src="__STATIC_URL__/moban/images/bannar.jpg"/>
                 {else}
                      <a title="" href="{:url('index/users/details')}">
-                <img src={$iflo["photo"]}>
+                <img src={$iflo1->photo}>
                 {/if}
             </a>
         </div>
@@ -48,11 +48,11 @@
 
 
 
-            <label>{$iflo['uid']}</label>
+            <label>{$iflo1->realname}</label>
 
 
 
-            <p>{$iflo['tag']}</p>
+            <p>{$iflo1->tag}</p>
             {/if}
         </div>
         {if $iflo}
@@ -124,7 +124,7 @@
                     <img src="__STATIC_URL__/moban/images/user_center_icon5.png" />
                     <p>积分<span>
                         {if $iflo !=0}
-                            {$iflo['score']}
+                            {$iflo1->score}
                         {/if}
                     </span></p>
                 </li>
