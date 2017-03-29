@@ -17,5 +17,14 @@ class Users extends Model
         $sex = [1=>'男',0=>'女'];
         return $sex[$value];
     }
+    public function comment()
+    {
+        return $this->hasMany('Comment','user_id','id');
+    }
+
+    public function farercase()
+    {
+        return $this->belongsToMany('Farercase','tp_user_farercase','farercase_id','user_id');
+    }
 
 }

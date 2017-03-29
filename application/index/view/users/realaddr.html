@@ -9,10 +9,25 @@
 <div id="fill_data">
     <div class="fill">
         <div class="am-form-group">
-            <input type="text/css" value="麦萌的草泥马"/>
+            <input type="text/css" id="realaddr"/>
         </div>
     </div>
 </div>
 <div class="done">完成</div>
+<script>
+    $('.done').on('click',function()
+    {
 
+        var url = "{:url('index/users/dorealaddr')}";
+        var date = {
+            realaddr:$('#realaddr').val(),
+
+
+        }
+        $.post(url,date,function (data) {
+            alert(data.msg)
+        },'JSON')
+    })
+
+</script>
 </body>

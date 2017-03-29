@@ -56,6 +56,7 @@ class Users extends Auth
         if($this->checkLogin())
         {
             $this->assign('iflo', Session::get('user'));
+            $this->assign('iflo1', $user);
 
         }else{
             $this->assign('iflo',0);
@@ -293,13 +294,50 @@ class Users extends Auth
         return json(['msg'=>'修改成功']);
 
     }
+
+    //修改地址
     public function realaddr()
     {
+
         return $this->fetch();
     }
+
+    public function doRealAddr()
+    {
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
+
+        $user->addr = input('post.realaddr');
+        $user->save();
+
+
+        return json(['msg'=>'修改成功']);
+
+
+
+
+    }
+    //修改生日
     public function realbirth()
     {
         return $this->fetch();
+    }
+    public function doRealBirth()
+    {
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
+
+        $user->birthday = input('post.realbirth');
+        $user->save();
+
+
+        return json(['msg'=>'修改成功']);
+
+
+
+
     }
     // +----------------------------------------------------------------------
     // | 用户签名
@@ -308,6 +346,23 @@ class Users extends Auth
     public function signature()
     {
         return $this->fetch();
+    }
+    public function doRealTag()
+    {
+
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $user = UsersModel::get($id);
+
+        $user->tag = input('post.realtag');
+        $user->save();
+
+
+        return json(['msg'=>'修改成功']);
+
+
+
+
     }
 
 
