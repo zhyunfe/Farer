@@ -52,13 +52,6 @@ class Index extends Auth
 
         return $this->fetch();
     }
-
-
-
-
-
-
-
     public function successLoad()
     {
         $this->assign('title','loadiing');

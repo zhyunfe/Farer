@@ -24,8 +24,16 @@ class Hotel extends Controller
         return $this->fetch();
     }
 
-    public function holist()
+    public function holist(HotelModel $hotel)
     {
+        $province = input('post.s_province');
+        $city     = input('post.s_city');
+        if($province == '省份'){$province = "";}
+        if($city == "地级市"){$city = "";}
+        $pid = $province.$city;
+        $result = $hotel->field(['id','location','header_image','name'])->where("pid like '%$pid%'")->select();
+        $this->assign('result',$result);
+        $this->assign('pid',$pid);
         return $this->fetch();
     }
     public function getLocation()
@@ -40,14 +48,36 @@ class Hotel extends Controller
     public function hotel_sel(HotelModel $hotel,CommentModel $comment)
     {
         $content = input('post.content');
-        $order   = input('post.order');
-        if ($content == "") {
-            $hotel->field(['id','location','header_image'])->select();
-            foreach ($hotel as $value) {
-
-            }
-        } else {
-
+        $num     = input('post.num');
+        $pid     = input('post.pid');
+        switch ($num) {
+            case 0:
+                $order = "id";
+                break;
+            case 1:
+                $order = "id";
+                break;
+            case 2:
+                $order = "price";
+                break;
+            case 3:
+                $order = "room.price desc";
+                break;
         }
+        if ($content == "") {
+
+            $result = $hotel->field(['id','location','header_image','name'])->where("pid like '%$pid%'")->select();
+            //查询每一个酒店对应的评论次数
+//            foreach ($result as $key=>$value) {
+//                $count = $comment->field(['id'])->order($order)->where(['target_id'=>$value->id,'type'=>1])->count();
+//                $value->commentNum = $count;
+//            }
+//            $result = $hotel->comment()->select();
+//            dump($result);
+        } else {
+            $result = $hotel->field(['id','location','header_image','name'])->where("name like '%$content%' and pid like '%$pid%'")->select();
+        }
+        $this->assign('result',$result);
+        return $this->fetch();
     }
 }

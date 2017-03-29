@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>特产商城</title>
+    <title>酒店列表</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -45,211 +45,46 @@
         <div class="clear"></div>
     </div>
     <div class="project_con" id="hotel_sel">
+        <input type="hidden" value="{$pid}" id="pid">
         <ul>
+            {volist name="result" id="value" empty="暂时没有数据"}
             <li style="height: 110px">
-                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
+                <a title="" class="news" href="{:url('index/hotel/hodetail',['id'=>$value.id])}">
                     <div class="pic">
-                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+                        <img src="__HOTEL_URL__/{$value.header_image}"/>
                     </div>
                     <div class="project_cont">
-                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><H2>{$value.name}</H2></p>
                         <p><small>6767点评</small></p>
                     </div>
                     <div class="price" style="margin: 0px;text-align: left;padding: 0px">
-                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <small style="width: 50%;display: inline-block;float: left">{$value.location|mb_substr=0,7,'utf-8'}</small>
                         <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
+                    <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                </span>
                         <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
                         <div class="clear"></div>
                     </div>
                 </a>
             </li>
-            <li style="height: 110px">
-                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
-                    <div class="pic">
-                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                    </div>
-                    <div class="project_cont">
-                        <p><H2>北京大舅点接口接口</H2></p>
-                        <p><small>6767点评</small></p>
-                    </div>
-                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
-                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
-                        <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
-                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
-                        <div class="clear"></div>
-                    </div>
-                </a>
-            </li>
-            <li style="height: 110px">
-                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
-                    <div class="pic">
-                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                    </div>
-                    <div class="project_cont">
-                        <p><H2>北京大舅点接口接口</H2></p>
-                        <p><small>6767点评</small></p>
-                    </div>
-                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
-                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
-                        <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
-                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
-                        <div class="clear"></div>
-                    </div>
-                </a>
-            </li>
-            <li style="height: 110px">
-                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
-                    <div class="pic">
-                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                    </div>
-                    <div class="project_cont">
-                        <p><H2>北京大舅点接口接口</H2></p>
-                        <p><small>6767点评</small></p>
-                    </div>
-                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
-                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
-                        <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
-                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
-                        <div class="clear"></div>
-                    </div>
-                </a>
-            </li>
-            <li style="height: 110px">
-                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
-                    <div class="pic">
-                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                    </div>
-                    <div class="project_cont">
-                        <p><H2>北京大舅点接口接口</H2></p>
-                        <p><small>6767点评</small></p>
-                    </div>
-                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
-                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
-                        <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
-                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
-                        <div class="clear"></div>
-                    </div>
-                </a>
-            </li>
-            <li style="height: 110px">
-                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
-                    <div class="pic">
-                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                    </div>
-                    <div class="project_cont">
-                        <p><H2>北京大舅点接口接口</H2></p>
-                        <p><small>6767点评</small></p>
-                    </div>
-                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
-                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
-                        <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
-                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
-                        <div class="clear"></div>
-                    </div>
-                </a>
-            </li>
-            <li style="height: 110px">
-                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
-                    <div class="pic">
-                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                    </div>
-                    <div class="project_cont">
-                        <p><H2>北京大舅点接口接口</H2></p>
-                        <p><small>6767点评</small></p>
-                    </div>
-                    <div class="price" style="margin: 0px;text-align: left;padding: 0px;">
-                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
-                        <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
-                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
-                        <div class="clear"></div>
-                    </div>
-                </a>
-            </li>
-            <li style="height: 110px">
-                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
-                    <div class="pic">
-                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
-                    </div>
-                    <div class="project_cont">
-                        <p><H2>北京大舅点接口接口</H2></p>
-                        <p><small>6767点评</small></p>
-                    </div>
-                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
-                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
-                        <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
-                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
-                        <div class="clear"></div>
-                    </div>
-                </a>
-            </li>
+            {/volist}
         </ul>
     </div>
 </div>
 <!--footer-->
-<div id="footer">
-    <div class="first">
-        <ul class="am-avg-sm-2">
-            <li>
-                <a title=""  href="index.html">
-                    <img src="__STATIC_URL__/moban/images/icon-footer1-a.png"/>
-                    <p>首页</p>
-                </a>
-            </li>
-            <li>
-                <a title="" href="trip_list.html">
-                    <img alt="" src="__STATIC_URL__/moban/images/icon-footer2-a.png"/>
-                    <p>孟津旅游</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="beautiful">
-        <a title=""  href="beautiful_list.html">
-            <img alt="" src="__STATIC_URL__/moban/images/icon-footer3-a.png"/>
-        </a>
-    </div>
-    <div class="last">
-        <ul class="am-avg-sm-2">
-            <li class="active">
-                <a title="" href="specialty_mall.html">
-                    <img alt="" src="__STATIC_URL__/moban/images/icon-footer04-a.png"/>
-                    <p>特产商城</p>
-                </a>
-            </li>
-            <li>
-                <a title="" href="user_center.html">
-                    <img alt="" src="__STATIC_URL__/moban/images/icon-footer5-a.png"/>
-                    <p>我的</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+{include file="public/foot" /}
 <script>
+    var position = $('#pid').val();
+    console.log(position);
     $('#hotel_search').keyup(function () {
         var content = $(this).val();
+
         $.ajax({
             method:'post',
             url:"{:url('index/hotel/hotel_sel')}",
-            data:{content:content},
+            data:{content:content,pid:position},
             success:function (data) {
-                $('hotel_sel').html(data);
+                $('#hotel_sel').html(data);
             }
         })
     });
@@ -258,20 +93,20 @@
             $('#hotel_or li').removeClass('am-active');
             $(this).addClass('am-active');
             var num = $(this).attr('num');
-            var type = ['all', 'sall','lower','heigher'];
             console.log($(this).text());
             $.ajax({
                 method: 'post',
                 url: '{:url("index/hotel/hotel_sel")}',
-                data: {content:"",order:type[num]},
+                data: {content:"",num:num},
                 success: function (data) {
-                    $('#content').html(data);
+                    alert(23);
+                    $('#hotel_sel').html('');
+                    console.log(data);
                 },
                 fail: function (data) {
 
                 },
-                async: false,
-                dataType: 'json'
+                async: false
             });
         })
     })

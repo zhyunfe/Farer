@@ -64,7 +64,7 @@ function refresh() {
 		'<div id="file-list"></div>'+
 		'<div class="am-form-group">'+
 		'<label for="hotel_phone">联系方式</label>'+
-		'<input type="text" class="" id="hotel_phone" placeholder="联系方式">'+
+		'<input type="number" class="" id="hotel_phone" placeholder="联系方式" maxlength="11">'+
 		'</div>'+
 		'<div class="am-form-group">'+
 		'<label class="am-checkbox-inline">'+
@@ -236,7 +236,7 @@ function refresh() {
 					$.ajax({
 						method:'post',
 						data:form,
-						url:'hotel/addHotel',
+						url:'../hotel/addHotel',
 						processData: false,
 						contentType: false,
 						success:function (data) {
@@ -276,7 +276,7 @@ function refresh() {
 				placeholder : '这里输入内容...',
 				toolbar : toolbar,  //工具栏
 				upload : {
-					url : "../admin/index/upload", //文件上传的接口地址
+					url : "../index/upload", //文件上传的接口地址
 					params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
 					fileKey: 'image', //服务器端获取文件数据的参数名
 					connectionCount: 3,

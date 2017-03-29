@@ -227,8 +227,6 @@
                                 <i class="am-icon-angle-right"></i>
                                 <span>攻略列表</span>
                             </a>
-
-
                             <a class="info">
                                 <i class="am-icon-angle-right"></i>
                                 <span>游记列表</span>
@@ -282,14 +280,14 @@
     <!--左侧栏结束-->
     <div class="tpl-content-wrapper">
         <!--内容公共部分-->
-        <div class="tpl-content-page-title">Farer数据信息</div>
-        <ol class="am-breadcrumb">
-            <li>
-                <a href="#" class="am-icon-home">首页</a></li>
-            <li>
-                <a href="#">分类</a></li>
-            <li class="am-active">内容</li>
-        </ol>
+        <!--<div class="tpl-content-page-title">Farer数据信息</div>-->
+        <!--<ol class="am-breadcrumb">-->
+            <!--<li>-->
+                <!--<a href="#" class="am-icon-home">首页</a></li>-->
+            <!--<li>-->
+                <!--<a href="#">分类</a></li>-->
+            <!--<li class="am-active">内容</li>-->
+        <!--</ol>-->
         <!--内容公共部分-->
         <div id="content">
 
@@ -325,7 +323,7 @@
                     $('.select').removeClass('active');
                     $(this).addClass('active');
                     var num = $(this).attr('num');
-                    var type = ['index', 'data','manage','form'];
+                    var type = ['index', 'data', 'manage', 'form'];
                     $.ajax({
                         method: 'post',
                         url: '{:url("admin/index/index")}',
@@ -345,7 +343,7 @@
 
             //信息列表点击事件
             $('.info').each(function (i, obj) {
-                var type = ['user','hotel','case','note'];
+                var type = ['user', 'hotel', 'case', 'note'];
                 $(obj).attr('info', i).click(function () {
                     $('#page').html('');
                     $(this).addClass('active').siblings().removeClass('active');
@@ -358,16 +356,19 @@
                         success: function (data) {
                             $('#content').html(data.tmp);
                         },
-                        fail: function (data) {},
+                        fail: function (data) {
+                        },
                         async: false,
                         dataType: 'json'
                     }).always(function (data) {
                         //分页数据处理
-                        pageController(data,type,info)
+                        pageController(data, type, info)
                         //显示用户详情
                         showDetail();
                         //用户锁定事件
                         userLock(data);
+                        //用户修改事件
+                        userModify();
                         //ajax及时查询酒店信息
                         hotelFind();
                     });
@@ -375,6 +376,25 @@
                 });
             });
 
+            //实现用户修改事件
+            function userModify()
+            {
+                $('#userUp').click(function (){
+                   $.ajax({
+                       method:'post',
+                       url:"{:url('admin/users/userModify')}",
+                       data:$('#userUpdate').serialize(),
+                       async:false,
+                       success:function (data) {
+                           console.log(data);
+                       }
+                   })
+                });
+            }
+
+            /**
+             *  实现ajax实时酒店搜索功能
+             */
             function hotelFind() {
                 $('#s_province').change(function () {
                     var province = $(this).val();
@@ -398,6 +418,7 @@
                     hotelFindAjax(pid,type);
                 })
             }
+            //酒店查询的Ajax方法
             function hotelFindAjax(pid,type)
             {
                 $.ajax({
@@ -413,6 +434,7 @@
                     dataType: 'json'
                 });
             }
+
             //添加列表的点击事件开始
             $('.add').each(function (i, obj) {
                 $(obj).attr('add',i).click(function () {
@@ -443,6 +465,9 @@
                     });
                 });
             });
+
+
+            //添加商品的方法
             function addPurchase()
             {
                 var form = new FormData();
@@ -529,7 +554,7 @@
                             });
                         })
                     });
-//                    //交叉点击step1的下一步时step1和step2交叉显示
+                   //交叉点击step1的下一步时step1和step2交叉显示
                     var flag = true;
                     if (flag) {
                         $('#purchase_step2').removeClass('am-animation-reverse').show();
@@ -541,6 +566,7 @@
                 });
                initSimditor($('#editor'),"这里输入产品介绍...");
             }
+            //初始化编辑器
             function initSimditor(obj,str)
             {
                 var editor = new Simditor({
@@ -557,6 +583,7 @@
                     }
                 });
             }
+            //添加景区的方法
             function addPlace()
             {
                 getTime();
@@ -607,6 +634,7 @@
                 });
 
             }
+            //设置房间入住时间
             function getTime()
             {
                 var date = new Date();
@@ -639,6 +667,8 @@
                     $(this).datepicker('close');
                 });
             }
+
+            //添加房间
             function addRoom()
             {
                 var parentid = 0;
@@ -669,13 +699,14 @@
                                     }
                                 });
                             } else {
+                                $('#hotellist').html('');
                                 for (i=0;i<data.length;i ++) {
-                                    $('#hotellist').html('');
-                                    $('<option>').appendTo($('#hotellist')).attr('value',data[i].name).html((20000+data[i].id)+ ' - ' +data[i].name);
-                                    $('#hotellist option:first-child').html((20000+data[i].id) + ' - ' +data[0].name);
+                                    $('#hotellist').append('<option value='+data[i].name+'>'+(20000+data[i].id)+'-' + data[i].name+'</option>');
+//                                    $('<option>').appendTo($('#hotellist')).attr('value',data[i].name).attr('num',i).html((20000+data[i].id)+ ' - ' +data[i].name);
+//                                    $('#hotellist option:first-child').html((20000+data[i].id) + ' - ' +data[0].name);
                                 }
                                 $('#hotel_name').focus(function () {
-                                    var name = $('#hotellist option:first-child').text();
+                                    var name = $('#hotellist').find("option:selected").text();
                                     $(this).val(name);
                                     parentid = name.split('-')[0] - 20000;
                                 });
@@ -740,6 +771,7 @@
                     }
                 })
             }
+            //上传图片
             function uploadImg(roomid)
             {
                 $.ajax({

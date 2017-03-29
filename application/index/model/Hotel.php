@@ -11,6 +11,6 @@ class Hotel extends Model
 {
     public function comment()
     {
-        return $this->hasMany('Comment','id','pid');
+        return $this->hasMany('Comment','target_id');
     }
 }
