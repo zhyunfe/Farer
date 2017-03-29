@@ -19,12 +19,20 @@ class Users extends Model
     }
     public function comment()
     {
-        return $this->hasMany('Comment','user_id','id');
+        return $this->hasMany('Comment','user_id','uid');
     }
+
+
+    public function connect()
+    {
+        return $this->hasMany('Connect','uid','uid');
+    }
+
+
 
     public function farercase()
     {
-        return $this->belongsToMany('Farercase','tp_user_farercase','farercase_id','user_id');
+        return $this->belongsToMany('Farercase','tp_farercase_users','farercase_id','user_id');
     }
 
 }

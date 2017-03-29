@@ -180,7 +180,8 @@ class Auth extends Controller
             'email'      => input('post.email'),
             'password'   =>input('post.password'),
             'create_ip'  => ip2long($ip),
-            'ifpassword' => input('post.ifpassword')
+            'ifpassword' => input('post.ifpassword'),
+            'score'      => 300
         ];
         if (!$validate->check($data)) {
             return json(['status' => 0,'msg'=>$validate->getError()]);
