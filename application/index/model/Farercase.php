@@ -20,12 +20,16 @@ class Farercase extends Model
     }
 
 
+    public function Users2()
+    {
+        return $this->belongsToMany('Users','tp_farercase_users','userid','farercaseid');
+    }
+
+
     public function Users()
     {
-        return $this->belongsToMany('Users','user_farercase','user_id','farercase_id');
+        return $this->belongsToMany('Users','tp_dianzan_farercase_users','userid','faercaseid');
     }
 
 }
 
-// create table user_farercase   userid  tagid
-//                                  19      1

@@ -24,7 +24,7 @@ class Users extends Model
 
     public function farercase()
     {
-        return $this->belongsToMany('Farercase','tp_user_farercase','farercase_id','user_id');
+        return $this->belongsToMany('Farercase','tp_farercase_users','farercase_id','user_id');
     }
 
 }

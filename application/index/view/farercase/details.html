@@ -11,14 +11,26 @@
 
 <div id="activity_detail">
     <div class="cover" style=" background: url('__FARERCASE_URL__/{$list2->header_image}') no-repeat center;">
-
+        {if $user}
         <a title="" class="collect" href="javascript:go();" id="chz_collect" aa="{$list2->case_id}"><img src="__STATIC_URL__/moban/images/collect01.png" style="width: 30px;margin-top: 20px;margin-left: 10px;"></a>
-        <a title="" class="collect" href="#" id="chz_zan"><img src="__STATIC_URL__/moban/images/thumb.png" style="width: 30px;margin-top: 20px;margin-left: 290px;"></a>
-
+        <a title="" class="collect" href="javascript:goto();" id="chz_zan"><img src="__STATIC_URL__/moban/images/thumb.png" style="width: 30px;margin-top: 20px;margin-left: 290px;"></a>
+        {/if}
         <script>
             function go(){
 
                 var url = "{:url('index/farercase/docollect')}";
+                var date = {
+                    id:$('#chz_collect').attr('aa')
+
+
+                }
+                $.post(url,date,function (data) {
+                    alert(data.msg)
+                },'JSON')
+            }
+            function goto(){
+
+                var url = "{:url('index/farercase/dianzan')}";
                 var date = {
                     id:$('#chz_collect').attr('aa')
 
