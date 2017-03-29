@@ -8,9 +8,11 @@
 namespace app\index\controller;
 use app\index\model\Farercase as FarercaseModel;
 use app\index\model\Farerdiqu;
+use app\index\model\Look_farercase_users;
 use app\index\model\Users;
 use app\index\model\Farercase_users;
 use app\index\model\Dianzan_farercase_users;
+
 use app\index\controller\Auth;
 use think\Session;
 
@@ -35,18 +37,17 @@ class Farercase extends Auth
     // +----------------------------------------------------------------------
     // | 攻略列表
     // +----------------------------------------------------------------------
-    public function show(FarercaseModel $farercase,Dianzan_farercase_users $dianzan_farercase_users)
+    public function show(FarercaseModel $farercase,Dianzan_farercase_users $dianzan_farercase_users,Look_farercase_users $look_farercase_users)
     {
         $info = $farercase->all();
         foreach ($info as $value) {
             $value->header_image = str_replace('\\\\', '/', $value->header_image);
             $id = $value->case_id;
-//            $cishu = $dianzan_farercase_users->where(['faercaseid'=>$id])->select()->count();
-            $cishu = FarercaseModel::withCount('users')->select($id);
 
-            foreach ($cishu as $value) {
-                echo $value->users_count.'<br>';
-            }
+            $cishu = $dianzan_farercase_users->where(['faercaseid'=>$id])->count();
+
+            $value->num = $cishu;
+
 
         }
 
@@ -61,9 +62,38 @@ class Farercase extends Auth
     // +----------------------------------------------------------------------
     // | 攻略详情
     // +----------------------------------------------------------------------
-    public function details(FarercaseModel $farercase)
+    public function details(FarercaseModel $farercase,Look_farercase_users $look_farercase_users)
     {
+
+
         $info = $farercase->where(['case_id'=>input('param.id')])->find();
+        $info1 = Session::get('user');
+        $id2 = $info1['uid'];
+        $has = $info->users3;
+        $flag = true;
+        foreach ($has as $value)
+        {
+            if($value->uid == $id2)
+            {
+                $flag = false;
+            }
+        }
+
+        if($flag)
+        {
+            $data=[[
+
+                'userid' => Session::get('user')['uid'],
+
+                'farercaseid'   => $id2,
+            ]];
+            $look_farercase_users->saveAll($data);
+            $info->user_star +=1;
+            $info->save();
+        }
+
+
+
         $info->header_image = str_replace('\\\\','/',$info->header_image);
         $user = Session::get('user');
         $this->assign('user',$user);

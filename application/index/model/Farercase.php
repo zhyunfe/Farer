@@ -31,5 +31,10 @@ class Farercase extends Model
         return $this->belongsToMany('Users','tp_dianzan_farercase_users','userid','faercaseid');
     }
 
+    public function Users3()
+    {
+        return $this->belongsToMany('Users','tp_look_farercase_users','userid','farercaseid');
+    }
+//select a.rno  from (select rno from borrow where bno =112266) as a, (select rno from borrow where bno=449901) as b  where a.rno = b.rno;
 }
 

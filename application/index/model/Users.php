@@ -19,8 +19,16 @@ class Users extends Model
     }
     public function comment()
     {
-        return $this->hasMany('Comment','user_id','id');
+        return $this->hasMany('Comment','user_id','uid');
     }
+
+
+    public function connect()
+    {
+        return $this->hasMany('Connect','uid','uid');
+    }
+
+
 
     public function farercase()
     {

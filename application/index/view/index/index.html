@@ -84,6 +84,7 @@
       <div class="am-tabs-bd">
         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
           <ul>
+            {foreach $list3 as $value}
             <li class="view">
               <div class="pic">
                 <img src="__STATIC_URL__/moban/images/trip_list_02.jpg">
@@ -97,11 +98,11 @@
                 <div class="clear"></div>
               </div>
               <div class="con">
-                <span>黄河小浪底</span>
+                <span>{$value->title}</span>
                 <p>卫坡古民居翠湾果岭观唐生态园炎帝本草园洛阳粤钰青...</p>
               </div>
             </li>
-
+            {/foreach}
           </ul>
         </div>
         <div class="am-tab-panel am-fade" id="tab2">
