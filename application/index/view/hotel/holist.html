@@ -9,11 +9,11 @@
     <meta content="telephone=no" name="format-detection">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <!--库-->
-    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/amazeui.css">
-    <script type="text/javascript" src="__STATIC_URL__/index/js/jquery.min.js"></script>
-    <script type="text/javascript" src="__STATIC_URL__/index/js/amazeui.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/moban/css/amazeui.css">
+    <script type="text/javascript" src="__STATIC_URL__/moban/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__STATIC_URL__/moban/js/amazeui.js"></script>
     <!-- 样式 -->
-    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/index/css/style.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC_URL__/moban/css/style.css">
 </head>
 <body>
 <!-----------公共版头----------->
@@ -25,70 +25,181 @@
             <div class="search">
                 <div class="in_search">
                     <div class="am-form-group">
-                        <input type="search" placeholder="要买什么？" />
+                        <input type="search" id="hotel_search" placeholder="搜索" />
                     </div>
                     <a class="am-icon-search" href="#"></a>
                 </div>
             </div>
         </div>
-        <a class="car" href="my_project_cart.html">
-            <img src="__STATIC_URL__/index/images/icon-shop_car.png"/>
-        </a>
+        <div class="am-dropdown" data-am-dropdown>
+            <span class="am-dropdown-toggle" style="width: 40px;height: 40px;margin: 15px 0px 0px 5px;display: inline-block;font-size: 1.2em" data-am-dropdown-toggle><a
+                    href="javascript:;">排序</a></span>
+           <ul class="am-dropdown-content" id="hotel_or">
+               <li class="am-active"><a href="javascript:;">综合排序</a></li>
+               <li><a href="javascript:;">销量最多</a></li>
+               <li><a href="javascript:;">价格从低到高</a></li>
+               <li><a href="javascript:;">价格从高到低</a></li>
+
+            </ul>
+        </div>
         <div class="clear"></div>
     </div>
-    <div class="project_con">
+    <div class="project_con" id="hotel_sel">
         <ul>
-            <li>
+            <li style="height: 110px">
                 <a title="" class="news" href="{:url('index/hotel/hodetail')}">
                     <div class="pic">
-                        <img src="__STATIC_URL__/index/images/project_02.jpg"/>
+                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
                     </div>
                     <div class="project_cont">
-                        <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
+                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><small>6767点评</small></p>
                     </div>
-                    <div class="price">
-                        <p>￥158</p>
-                        <span>梦想西瓜庄园</span>
+                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
+                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <span style="float: left;">
+                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                        </span>
+                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
                         <div class="clear"></div>
                     </div>
                 </a>
             </li>
-            <li>
-                <a title="" class="news" href="project_basic.html">
+            <li style="height: 110px">
+                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
                     <div class="pic">
-                        <img src="__STATIC_URL__/index/images/project_02.jpg"/>
+                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
                     </div>
                     <div class="project_cont">
-                        <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
+                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><small>6767点评</small></p>
                     </div>
-                    <div class="price">
-                        <p>￥158</p>
-                        <span>梦想西瓜庄园</span>
+                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
+                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <span style="float: left;">
+                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                        </span>
+                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
                         <div class="clear"></div>
                     </div>
                 </a>
             </li>
-            <li>
-                <a title="" class="news" href="project_basic.html">
+            <li style="height: 110px">
+                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
                     <div class="pic">
-                        <img src="__STATIC_URL__/index/images/project_02.jpg"/>
+                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
                     </div>
                     <div class="project_cont">
-                        <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优门峡...</p>
+                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><small>6767点评</small></p>
                     </div>
-                    <div class="price">
-                        <p>￥158</p>
-                        <span>梦想西瓜庄园</span>
+                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
+                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <span style="float: left;">
+                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                        </span>
+                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </li>
+            <li style="height: 110px">
+                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
+                    <div class="pic">
+                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+                    </div>
+                    <div class="project_cont">
+                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><small>6767点评</small></p>
+                    </div>
+                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
+                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <span style="float: left;">
+                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                        </span>
+                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </li>
+            <li style="height: 110px">
+                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
+                    <div class="pic">
+                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+                    </div>
+                    <div class="project_cont">
+                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><small>6767点评</small></p>
+                    </div>
+                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
+                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <span style="float: left;">
+                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                        </span>
+                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </li>
+            <li style="height: 110px">
+                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
+                    <div class="pic">
+                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+                    </div>
+                    <div class="project_cont">
+                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><small>6767点评</small></p>
+                    </div>
+                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
+                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <span style="float: left;">
+                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                        </span>
+                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </li>
+            <li style="height: 110px">
+                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
+                    <div class="pic">
+                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+                    </div>
+                    <div class="project_cont">
+                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><small>6767点评</small></p>
+                    </div>
+                    <div class="price" style="margin: 0px;text-align: left;padding: 0px;">
+                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <span style="float: left;">
+                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                        </span>
+                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
+                        <div class="clear"></div>
+                    </div>
+                </a>
+            </li>
+            <li style="height: 110px">
+                <a title="" class="news" href="{:url('index/hotel/hodetail')}">
+                    <div class="pic">
+                        <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+                    </div>
+                    <div class="project_cont">
+                        <p><H2>北京大舅点接口接口</H2></p>
+                        <p><small>6767点评</small></p>
+                    </div>
+                    <div class="price" style="margin: 0px;text-align: left;padding: 0px">
+                        <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                        <span style="float: left;">
+                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                        </span>
+                        <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
                         <div class="clear"></div>
                     </div>
                 </a>
             </li>
         </ul>
-        <div id="none">
-            没有更多了
-        </div>
     </div>
-
 </div>
 <!--footer-->
 <div id="footer">
@@ -96,13 +207,13 @@
         <ul class="am-avg-sm-2">
             <li>
                 <a title=""  href="index.html">
-                    <img src="__STATIC_URL__/index/images/icon-footer1-a.png"/>
+                    <img src="__STATIC_URL__/moban/images/icon-footer1-a.png"/>
                     <p>首页</p>
                 </a>
             </li>
             <li>
                 <a title="" href="trip_list.html">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer2-a.png"/>
+                    <img alt="" src="__STATIC_URL__/moban/images/icon-footer2-a.png"/>
                     <p>孟津旅游</p>
                 </a>
             </li>
@@ -110,25 +221,60 @@
     </div>
     <div class="beautiful">
         <a title=""  href="beautiful_list.html">
-            <img alt="" src="__STATIC_URL__/index/images/icon-footer3-a.png"/>
+            <img alt="" src="__STATIC_URL__/moban/images/icon-footer3-a.png"/>
         </a>
     </div>
     <div class="last">
         <ul class="am-avg-sm-2">
             <li class="active">
                 <a title="" href="specialty_mall.html">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer04-a.png"/>
+                    <img alt="" src="__STATIC_URL__/moban/images/icon-footer04-a.png"/>
                     <p>特产商城</p>
                 </a>
             </li>
             <li>
                 <a title="" href="user_center.html">
-                    <img alt="" src="__STATIC_URL__/index/images/icon-footer5-a.png"/>
+                    <img alt="" src="__STATIC_URL__/moban/images/icon-footer5-a.png"/>
                     <p>我的</p>
                 </a>
             </li>
         </ul>
     </div>
 </div>
+<script>
+    $('#hotel_search').keyup(function () {
+        var content = $(this).val();
+        $.ajax({
+            method:'post',
+            url:"{:url('index/hotel/hotel_sel')}",
+            data:{content:content},
+            success:function (data) {
+                $('hotel_sel').html(data);
+            }
+        })
+    });
+    $('#hotel_or li').each(function (i,obj) {
+        $(obj).attr('num', i).click(function () {
+            $('#hotel_or li').removeClass('am-active');
+            $(this).addClass('am-active');
+            var num = $(this).attr('num');
+            var type = ['all', 'sall','lower','heigher'];
+            console.log($(this).text());
+            $.ajax({
+                method: 'post',
+                url: '{:url("index/hotel/hotel_sel")}',
+                data: {content:"",order:type[num]},
+                success: function (data) {
+                    $('#content').html(data);
+                },
+                fail: function (data) {
+
+                },
+                async: false,
+                dataType: 'json'
+            });
+        })
+    })
+</script>
 </body>
 </html>

@@ -92,7 +92,7 @@ class Index extends Auth
 
     public function upload(){
         $file = request()->file('image');
-        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+        $info = $file->move('uploads/public','');
         if($info){
             return true;
         }else{

@@ -32,7 +32,7 @@ class Farercase extends Auth
         if($info){
             $header_image = $info->getSaveName();
             $obj = input('post.');
-            $result = $case->save(['pid'=>1,'title'=>addslashes($obj['title']),
+            $result = $case->save(['title'=>addslashes($obj['title']),
                 'type'=>addslashes($obj['type']),'header_image'=>addslashes($header_image),
                 'day'=>addslashes($obj['day']),'location'=>addslashes($obj['location']),
                 'href'=>addslashes($obj['href']),'traffic'=>addslashes($obj['traffic']),

@@ -9,5 +9,8 @@ namespace app\index\model;
 use think\Model;
 class Hotel extends Model
 {
-
+    public function comment()
+    {
+        return $this->hasMany('Comment','id','pid');
+    }
 }

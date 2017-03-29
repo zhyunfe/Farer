@@ -59,7 +59,7 @@ function refresh() {
 		'<button type="button" class="am-btn am-btn-default am-btn-sm">'+
 		'<i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>'+
 		'</div>'+
-		'<input type="file" id="doc-ipt-file-2">'+
+		'<input type="file" id="doc-ipt-file-2" name="file">'+
 		'</div>'+
 		'<div id="file-list"></div>'+
 		'<div class="am-form-group">'+
@@ -232,10 +232,11 @@ function refresh() {
 					form.append('service',service);
 					form.append('phone',phone);
 					form.append('gl',gl);
+					// console.log(file);
 					$.ajax({
 						method:'post',
-						data:{"tel":tel},
-						url:'../hotel/addHotel',
+						data:form,
+						url:'hotel/addHotel',
 						processData: false,
 						contentType: false,
 						success:function (data) {
@@ -275,14 +276,14 @@ function refresh() {
 				placeholder : '这里输入内容...',
 				toolbar : toolbar,  //工具栏
 				upload : {
-					url : 'upload', //文件上传的接口地址
+					url : "../admin/index/upload", //文件上传的接口地址
 					params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
 					fileKey: 'image', //服务器端获取文件数据的参数名
 					connectionCount: 3,
 					leaveConfirm: '正在上传文件'
 				}
 			});
-				console.log(step1);
+
 		});
 	});
 	if(!ShowAdress){
