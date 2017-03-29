@@ -1,21 +1,23 @@
 <ul>
+    {volist name="result" id="value" empty="暂时没有数据"}
     <li style="height: 110px">
-        <a title="" class="news" href="{:url('index/hotel/hodetail')}">
+        <a title="" class="news" href="{:url('index/hotel/hodetail',['id'=>$value.id])}">
             <div class="pic">
-                <img src="__STATIC_URL__/moban/images/project_02.jpg"/>
+                <img src="__HOTEL_URL__/{$value.header_image}"/>
             </div>
             <div class="project_cont">
-                <p><H2>北京大舅点接口接口</H2></p>
+                <p><H2>{$value.name}</H2></p>
                 <p><small>6767点评</small></p>
             </div>
             <div class="price" style="margin: 0px;text-align: left;padding: 0px">
-                <small style="width: 50%;display: inline-block;float: left">北京站-北京</small>
+                <small style="width: 50%;display: inline-block;float: left">{$value.location|mb_substr=0,7,'utf-8'}</small>
                 <span style="float: left;">
-                            <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
-                        </span>
+                    <span style="color: rgb(252,156,45);font-size: 1.5em;display: inline-block;text-wrap: none">￥158</span>
+                </span>
                 <small style="color: #cccccc;display: inline-block;float: left;line-height: 40px">起</small>
                 <div class="clear"></div>
             </div>
         </a>
     </li>
+    {/volist}
 </ul>

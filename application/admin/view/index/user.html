@@ -1,7 +1,7 @@
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span>用户列表</span>
+                    <legend>用户列表</legend>
                 </div>
                 <div class="tpl-portlet-input tpl-fz-ml">
                     <div class="portlet-input input-small input-inline">
@@ -35,7 +35,7 @@
                                         <input type="checkbox"></td>
                                     <td>{$value->uid}</td>
                                     <td>
-                                        <a href="#">{$value->photo}</a></td>
+                                        <img id="header_image" alt="80*80" src="__STATIC_UPLOAD_URL__/users/{$value->photo}" width="30" height="30" /></td>
                                     <td>
                                         <a href="#">{$value->username}</a></td>
                                     <td class="am-hide-sm-only">{$value->create_ip|long2ip}</td>

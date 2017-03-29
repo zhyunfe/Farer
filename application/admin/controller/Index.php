@@ -42,13 +42,13 @@ class Index extends Auth
                     } else {
                         $start = 0;
                     }
-                    $result = $users->withTrashed()->field(['uid','username','photo','create_ip','create_time','update_time','delete_time'])->limit($start,3)->select();
+                    $result = $users->withTrashed()->field(['uid','username','photo','create_ip','create_time','update_time','delete_time'])->limit($start,25)->select();
                     foreach ($result as $value) {
                         $value->uid += 100000;
                     }
                     $this->assign('result',$result);
                     $tmp = $this->fetch(APP_PATH."/admin/view/index/user.html");
-                    return ['tmp'=>$tmp,'pageCount'=>$count,'limit'=>3];
+                    return ['tmp'=>$tmp,'pageCount'=>$count,'limit'=>25];
                 break;
                 case 'case':
 
@@ -93,10 +93,11 @@ class Index extends Auth
     public function upload(){
         $file = request()->file('image');
         $info = $file->move('uploads/public','');
+        $file_path ="http://www.farer.com/uploads/".$info->getSaveName();
         if($info){
-            return true;
+            return ['success'=>true,'msg'=>'上传成功','file_path'=>$file_path];
         }else{
-            return false;
+            return ['success'=>false,'msg'=>'上传失败','file_path'=>$file_path];
         }
     }
     public function caseUpload(){

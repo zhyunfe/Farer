@@ -43,7 +43,7 @@ class Hotel extends Auth {
             $result   = $hotel->save(['pid'        =>$pid,
                                       'name'        =>$obj['name'],
                                       'header_image'=>$header_image,
-                                      'location'    =>$location,
+                                      'location'    =>$obj['location'],
                                       'style'       =>$obj['type'],
                                       'introduce'   =>$obj['desc'],
                                       'telephone'   =>$obj['phone'],
@@ -91,7 +91,7 @@ class Hotel extends Auth {
                 $where = "style = $style";
             }
         } else {
-            $where = "pid like '$pid%'";
+            $where = "pid like '%$pid%'";
         }
         //查询出一共有多少条数据
         $count = $hotel->withTrashed()->where($where)->count('id');

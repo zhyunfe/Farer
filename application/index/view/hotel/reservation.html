@@ -5,7 +5,7 @@
 
 </div>
 <div style="width:100%;height: 70px"></div>
-<form class="am-form">
+<form class="am-form" method="post" action="{:url('index/hotel/holist')}">
     <div class="form-group-sm-12">
         <span class="address am-u-sm-12" style="line-height: 25px;height:25px;color: rgb(252,156,45)">目的地/酒店</span>
     </div>
@@ -31,22 +31,21 @@
             <div class="am-u-sm-5">
                 <span  style="text-align: center;color: rgb(252,156,45)">入住时间</span>
                 <p id="my-start" style="border-bottom: 1px solid #cccccc;height: 35px;line-height: 40px;width: 80%">
-                    <span id="my-startDate">2017-03-05</span>
+                    <span id="my-startDate" name="start">2017-04-01</span>
                 </p>
             </div>
             <div class="am-u-sm-5" >
                 <span style="text-align: center;color: rgb(252,156,45)">离店时间</span>
                 <p id="my-end"style="border-bottom: 1px solid #cccccc;height: 35px;line-height: 40px;width: 80%">
-                    <span id="my-endDate">2017-03-05</span>
+                    <span id="my-endDate" name="end">2017-04-02</span>
                 </p>
             </div>
         </div>
     </div>
-</form>
 <div style="width:100%;height: 20px"></div>
 <div class="am-u-sm-12"style="height: 100%;">
     <span class="am-u-md-4">&nbsp;</span>
-    <div id="doc-geo-demo" style="width: 100%;"></div>
+    <div id="doc-geo-demo" style="width: 100%;height: 180px"></div>
     <span class="am-u-md-2">&nbsp;</span>
 </div>
 <div class="am-u-sm-12" style="position: fixed;bottom: 10%">
@@ -54,7 +53,7 @@
     <button type="submit" class="am-btn am-u-sm-3" style="background-color: rgb(252,156,45);color: white" id="submit">查看</button>
     <span class="am-u-sm-3">&nbsp;</span>
 </div>
-
+</form>
 <div class="am-u-sm-12">
 
 </div>
@@ -142,21 +141,25 @@
         $('#city').show();
     });
 
-    //提交事件
-    $('#submit').click(function () {
-        var province = $('#s_province').val();
-        if(province == "省份"){province = ""}
-        var city     = $('#s_city').val();
-        if(city == "地级市"){city = ""}
-        var position = province + city;
-        var start_time = $('#my-startDate').text();
-        var end_time   = $('#my-endDate').text();
-        $.ajax({
-            method:'post',
-            url:"{:url('index/hotel/')}"
-        });
-        console.log(position,start_time,end_time);
-    })
+//    //提交事件
+//    $('#submit').click(function () {
+//        var province = $('#s_province').val();
+//        if(province == "省份"){province = ""}
+//        var city     = $('#s_city').val();
+//        if(city == "地级市"){city = ""}
+//        var position = province + city;
+//        var start_time = $('#my-startDate').text();
+//        var end_time   = $('#my-endDate').text();
+//        $.ajax({
+//            method:'post',
+//            url:"{:url('index/hotel/holist')}"
+//            data:{pid:position,start:start_time,end:end_time},
+//            success:function () {
+//
+//            }
+//        });
+//        console.log(position,start_time,end_time);
+//    })
 
 
 </script>

@@ -42,4 +42,22 @@ class Users extends Auth
             return ['error'=>1,'msg'=>'恢复失败'];
         }
     }
+    public function userModify(UsersModel $usersModel)
+    {
+        $key = input('post.key');
+        $value = input('post.value');
+        $uid = input('post.uid');
+        dump($value);
+        $usersModel->save([$key=>$value],['uid'=>$uid]);
+//        dump($usersModel->getLastSql());
+    }
+    public function changePhoto(UsersModel $users)
+    {
+        $file = request()->file('file');
+        $uid  = input('post.uid');
+        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads/users');
+        $path = $info->getSaveName();
+        $users->save(['photo'=>$path],['uid'=>$uid]);
+        return ['path'=>$path];
+    }
 }
