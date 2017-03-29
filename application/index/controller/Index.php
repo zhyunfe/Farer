@@ -3,6 +3,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Session;
 use app\index\model\Farercase;
+use app\index\model\Purchase;
 //use think\Session;
 use app\index\model\Place;
 class Index extends Auth
