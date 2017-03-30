@@ -43,7 +43,6 @@ class Farercase extends Auth
         foreach ($info as $value) {
             $value->header_image = str_replace('\\\\', '/', $value->header_image);
             $id = $value->case_id;
-
             $cishu = $dianzan_farercase_users->where(['faercaseid'=>$id])->count();
 
             $value->num = $cishu;
@@ -67,9 +66,12 @@ class Farercase extends Auth
 
 
         $info = $farercase->where(['case_id'=>input('param.id')])->find();
+        $id = $info->case_id;
         $info1 = Session::get('user');
         $id2 = $info1['uid'];
+
         $has = $info->users3;
+
         $flag = true;
         foreach ($has as $value)
         {
@@ -82,10 +84,8 @@ class Farercase extends Auth
         if($flag)
         {
             $data=[[
-
-                'userid' => Session::get('user')['uid'],
-
-                'farercaseid'   => $id2,
+                'userid' => $id2,
+                'farercaseid'   => $id,
             ]];
             $look_farercase_users->saveAll($data);
             $info->user_star +=1;

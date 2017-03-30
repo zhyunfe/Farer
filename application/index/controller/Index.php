@@ -7,6 +7,7 @@ use app\index\model\Purchase;
 use app\index\model\Notes;
 //use think\Session;
 use app\index\model\Place;
+use app\index\model\Users;
 class Index extends Auth
 {
     /**
@@ -54,6 +55,18 @@ class Index extends Auth
 
         //展示两篇游记
         $obj5 = $notes->limit(2)->select();
+
+        foreach ($obj5 as $value)
+        {
+
+            $info = $value->user_id;
+            $us = Users::get($info)->username;
+            $tx = Users::get($info)->photo;
+
+            $value->uname = $us;
+        }
+
+
         $this->assign('list3',$obj3);
         $this->assign('list4',$obj4);
         $this->assign('list2',$obj2);

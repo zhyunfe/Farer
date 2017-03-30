@@ -8,14 +8,15 @@
 <div id="beautiful_country">
     <div id="item_name"></div>
     <ul class="am-avg-sm-2">
+        {foreach $notes as $value}
         <li class="beautiful_list">
-            <a  title="" href="{:url('index/notes/details')}">
+            <a  title="" href="{:url('index/notes/details',['id'=>$value['nid']])}">
                 <div class="pic">
-                    <img src="__STATIC_URL__/moban/images/beautiful_01.jpg"/>
+                    <img src="__NOTES_URL__/{$value->header_image}"/>
                 </div>
                 <div class="name">
                     <img alt="" class="head" src="__STATIC_URL__/moban/images/head.jpg">
-                    <span>181***5241</span>
+                    <span>{$value->uname}</span>
                     <div class="num">
                         <i class="am-icon-eye"></i>
                         <span>2</span>
@@ -24,70 +25,12 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                <label>偶遇洛阳</label>
-                <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
+                <label>{$value->title}</label>
+
             </a>
         </li>
-        <li class="beautiful_list">
-            <a  title="" href="beautiful_detail.html">
-                <div class="pic">
-                    <img src="__STATIC_URL__/moban/images/beautiful_02.jpg"/>
-                </div>
-                <div class="name">
-                    <img alt="" class="head" src="__STATIC_URL__/moban/images/head.jpg">
-                    <span>181***5241</span>
-                    <div class="num">
-                        <i class="am-icon-eye"></i>
-                        <span>2</span>
-                        <i class="am-icon-comments"></i>
-                        <span>0</span>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <label>偶遇洛阳</label>
-                <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
-            </a>
-        </li>
-        <li class="beautiful_list">
-            <a  title="" href="beautiful_detail.html">
-                <div class="pic">
-                    <img src="__STATIC_URL__/moban/images/beautiful_01.jpg"/>
-                </div>
-                <div class="name">
-                    <img alt="" class="head" src="__STATIC_URL__/moban/images/head.jpg">
-                    <span>181***5241</span>
-                    <div class="num">
-                        <i class="am-icon-eye"></i>
-                        <span>2</span>
-                        <i class="am-icon-comments"></i>
-                        <span>0</span>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <label>偶遇洛阳</label>
-                <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
-            </a>
-        </li>
-        <li class="beautiful_list">
-            <a  title="" href="beautiful_detail.html">
-                <div class="pic">
-                    <img src="__STATIC_URL__/moban/images/beautiful_02.jpg"/>
-                </div>
-                <div class="name">
-                    <img alt="" class="head" src="__STATIC_URL__/moban/images/head.jpg">
-                    <span>181***5241</span>
-                    <div class="num">
-                        <i class="am-icon-eye"></i>
-                        <span>2</span>
-                        <i class="am-icon-comments"></i>
-                        <span>0</span>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <label>偶遇洛阳</label>
-                <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
-            </a>
-        </li>
+        {/foreach}
+
     </ul>
     <div id="none">
         没有更多了

@@ -11,6 +11,7 @@ use traits\model\SoftDelete;
 
 class Notes extends Model
 {
+    protected $autoWriteTimestamp = true;
     use SoftDelete;
 
 

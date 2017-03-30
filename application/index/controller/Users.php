@@ -7,6 +7,7 @@ use think\Request;
 use think\Controller;
 use app\index\model\Users as UsersModel;
 use app\index\controller\Auth;
+use app\index\model\Notes;
 class Users extends Auth
 {
     /**
@@ -453,17 +454,41 @@ class Users extends Auth
 
 
 
-
+    // +----------------------------------------------------------------------
+    // | 提交游记
+    // +----------------------------------------------------------------------
     public function upload(){
         $file = request()->file('image');
         $info = $file->move('uploads/purchase','');
         $file_path ="http://www.farer.com/uploads/purchase/".$info->getSaveName();
-        
+
         if($info){
             return ['success'=>true,'msg'=>'上传成功','file_path'=>$file_path];
         }else{
             return ['success'=>false,'msg'=>'上传失败','file_path'=>$file_path];
         }
+    }
+
+
+
+    public function doChuanNote(Notes $notes,UsersModel $usersmodel){
+        $file = request()->file('header_image');
+
+        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads/notes');
+        $header_image = $info->getSaveName();
+
+
+        $no = Notes::create([
+            'title' => input('post.title'),
+            'content' => input('post.content'),
+            'user_id' => Session::get('user')['uid'],
+            'header_image' => $header_image
+        ]);
+
+        $user = UsersModel::get(Session::get('user')['uid']);
+        $user->note_id = $no->nid;
+        $user->save();
+
     }
 
 

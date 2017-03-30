@@ -8,7 +8,7 @@
 
 namespace app\index\controller;
 use think\Controller;
-use think\Model\Purchzse as PurModel;
+use app\index\model\Purchase as PurModel;
 class Purchase extends Controller
 {
 
@@ -17,8 +17,10 @@ class Purchase extends Controller
     // +----------------------------------------------------------------------
 
 
-    public function show()
+    public function show(PurModel $purmodel)
     {
+        $purmodel->all();
+        $this->assign('purchase',$purmodel);
         return $this->fetch();
     }
 

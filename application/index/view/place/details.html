@@ -41,55 +41,62 @@
             <div class="clear"></div>
             <div class="con">
                 {$list->description}
-                <div class="all_text" style="display:none;">
-                    中国三大石窟之一，历史悠久，开凿经历了多个朝代，断续营造达500余年之久，共有97000余尊佛像。这里东、西两山对峙，伊水中流，形似天然门阙，石窟密布于峭壁上，南北长达1公里。龙门石窟是洛阳最经典的景点，其中最震撼的是卢舍那大佛雕像群，有半山高。
-                </div>
-                <a class="more" href="javascript:void(0)">
-                    <i class="am-icon-angle-down" ></i>
-                </a>
+
+
             </div>
         </div>
     </div>
     <div class="all_comment">
         <div class="item">
-            <span>热门评论（57）</span>
+            <span>热门评论</span>
         </div>
         <ul>
+            {foreach $comment as $value}
             <li>
                 <div class="comment_list">
                     <div class="message">
-                        <span class="writer">心诚则灵July</span>
-                        <span class="date">2015/01/25</span>
+                        <span class="writer">{$value->uname}/span>
+
                         <div class="clear"></div>
                     </div>
                     <p>
-                        中国三大石窟之一，历史悠久，开凿经历了多个朝代断续营造达500余年之中国三大石窟之一，历史悠久
+                        {$value->content}
                     </p>
                 </div>
             </li>
+            {/foreach}
         </ul>
         <div class="more">
-            <a href="{:url('index/comment/topurchase')}">查看全部评价</a>
+            <a href="{:url('index/comment/giveplace',['id'=>$list->id])}">我也要发表评论</a>
         </div>
     </div>
     <div class="all_comment">
         <div class="item">
-            <span>相关攻略（57）</span>
+            <span>相关攻略</span>
         </div>
-        <ul>
+
+
+
+
+        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-4 am-gallery-bordered" data-am-gallery="{  }" >
+            {foreach $farercase as $value}
             <li>
-                <div class="comment_list">
-                    <div class="message">
-                        <span class="writer">心诚则灵July</span>
-                        <span class="date">2015/01/25</span>
-                        <div class="clear"></div>
-                    </div>
-                    <p>
-                        中国三大石窟之一，历史悠久，开凿经历了多个朝代断续营造达500余年之中国三大石窟之一，历史悠久
-                    </p>
+                <div class="am-gallery-item">
+                    <a href="{:url('index/farercase/details',['id'=>$value->case_id])}" class="">
+                        <img src="__FARERCASE_URL__/{$value->header_image}"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                        <h3 class="am-gallery-title">{$value->title}</h3>
+
+                    </a>
                 </div>
             </li>
+            {/foreach}
         </ul>
+
+
+
+
+
         <div class="more">
             <a href="{:url('index/farercase/show')}">查看全部攻略</a>
         </div>

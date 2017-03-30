@@ -1,13 +1,8 @@
 
 <body>
-
+<div id="fff" style="opacity: 0">{$id}</div>
 <div id="release">
-    <input type="text" style="width: 100%;height: 50px;" placeholder="请输入题目" id="title">
-    <div class="am-form-group am-form-file">
-        <button type="button" class="am-btn am-btn-danger am-btn-sm">
-            <i class="am-icon-cloud-upload"></i> 选择要上传的封面图片</button>
-        <input id="doc-form-file" type="file" multiple name="file">
-    </div>
+
     <div id="file-list"></div>
     <script>
         $(function() {
@@ -22,7 +17,7 @@
     </script>
     <div class="fill">
         <div class="am-form-group">
-            <textarea id="editor2" placeholder="请在这里填写费用说明" autofocus></textarea>
+            <textarea  id="editor2" placeholder="请在这里填写费用说明" autofocus ></textarea>
         </div>
     </div>
 
@@ -40,7 +35,7 @@
 <script type="text/javascript">
 
     var obj = $('#editor2');
-    var str = '输入游记';
+    var str = '发表评论';
     initSimditor(obj,str);
     //初始化编辑器
     function initSimditor(obj,str)
@@ -61,38 +56,39 @@
     }
 
 </script>
-    <script>
-        $('.done').on('click',function () {
+<script>
+    $('.done').on('click',function () {
 
-            var url = "{:url('index/users/dochuannote')}"
-            var form= new FormData();
-            var header_image = document.getElementById('doc-form-file').files[0];
-            var ti = $('#title').val()
-            var co = $('#editor2').val()
-            form.append('title',ti);
-            form.append('header_image',header_image);
-            form.append('content',co)
-            $.ajax({
-                method:'post',
-                data:form,
-                url:url,
-                processData: false,
-                contentType: false,
-                success:function (data) {
-                    alert('添加成功');
-                    location.reload();
+        var url = "{:url('index/comment/dogiveplace')}"
+        var form= new FormData();
 
-                },
-                fail:function (data) {
 
-                }
-            });
+        var co = $('#editor2').val()
+        var id = $('#fff').html();
+
+        form.append('content',co)
+        form.append('id',id)
+        $.ajax({
+            method:'post',
+            data:form,
+            url:url,
+            processData: false,
+            contentType: false,
+            success:function (data) {
+                alert(data.msg);
+                location.reload();
+
+            },
+            fail:function (data) {
+
+            }
+        });
 
 //            $.post(url,form,function (data) {
 //
 //            },'JSON')
-        })
-    </script>
+    })
+</script>
 
 
 
