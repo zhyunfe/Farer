@@ -1,5 +1,6 @@
 <?php
 namespace app\index\controller;
+use app\index\model\Connect;
 use think\Db;
 use think\Session;
 use think\Request;
@@ -43,7 +44,51 @@ class Users extends Auth
     {
         return $this->fetch();
     }
+    public function doAddUser(Connect $connect)
+    {
+        $info = Session::get('user');
+        $id = $info['uid'];
+        $name = input('post.name');
+        $phone = input('post.phone');
+        $addr = input('post.addr');
+        if(($name == '') || ($phone == '') || ($addr == ''))
+        {
+            return json(['msg'=>'gun']);
+        }else{
+            $date = [
+              'name' => $name,
+                'phone' => $phone,
+                'addr'  => $addr,
+                'uid'   => $id
+            ];
+            $connect->save($date);
+            return json(['msg'=>'ok']);
+        }
 
+    }
+    //修改联系人
+    public function chgAddUser(Connect $connect)
+    {
+
+        $info = $connect->where(['cid' => input('param.id')])->find();
+        $this->assign('list',$info);
+       return $this->fetch();
+    }
+
+
+    public function doChgAddUser(Connect $connect)
+    {
+
+        $info = $connect->where(['cid' => input('param.id')])->find();
+        $name = input('post.name');
+        $phone = input('post.phone');
+        $addr = input('post.addr');
+        $info->name = $name;
+        $info->phone = $phone;
+        $info->addr = $addr;
+        $info->save();
+        return json(['msg'=>'ok']);
+    }
 
     // +----------------------------------------------------------------------
     // | 用户的展示界面
@@ -98,6 +143,10 @@ class Users extends Auth
     // +----------------------------------------------------------------------
     public  function lianXiRen()
     {
+        $id = Session::get('user')['uid'];
+        $info = UsersModel::get($id);
+        $lxr = $info->connect;
+        $this->assign('list',$lxr);
         return $this->fetch();
     }
     // +----------------------------------------------------------------------
@@ -388,6 +437,7 @@ class Users extends Auth
 
             if(strcmp($logtime, date('y-m-d',time())) != 0)
             {
+                $user->where("uid = $id")->update(['logtime' => time()]);
                 $user->where("uid = $id")->update(['score' => $user->score+=20]);
                 return json(['msg'=>'签到成功,积分加20']);
             }else{
@@ -399,4 +449,27 @@ class Users extends Auth
 
 
     }
+
+
+
+
+
+    public function upload(){
+        $file = request()->file('image');
+        $info = $file->move('uploads/purchase','');
+        $file_path ="http://www.farer.com/uploads/purchase/".$info->getSaveName();
+        
+        if($info){
+            return ['success'=>true,'msg'=>'上传成功','file_path'=>$file_path];
+        }else{
+            return ['success'=>false,'msg'=>'上传失败','file_path'=>$file_path];
+        }
+    }
+
+
+
+
+
+
+
 }

@@ -8,11 +8,12 @@
 <!----------------收货地址列表------------------>
 <div id="offen_user">
     <ul class="cont">
+        {foreach $list as $value}
         <li class="box">
             <div class="user_info">
                 <a href="#">
-                    <p><label>张某</label><span>15670382580</span></p>
-                    <p>河南省 洛阳市 涧西区 南昌路创展国际A座1105</p>
+                    <p><label>{$value->name}</label><span>{$value->phone}</span></p>
+                    <p>{$value->addr}</p>
                 </a>
             </div>
             <div class="button">
@@ -20,66 +21,17 @@
                     <input type="radio" name="radio1" value="" data-am-ucheck>
                     设置为默认联系人
                 </label>
-                <a class="red_hollow" href="{:url('index/users/adduser')}">编辑</a>
-                <a class="red_hollow" href="#">删除</a>
+                <a class="red_hollow" href="{:url('index/users/chgadduser',['id'=>$value->cid])}">编辑</a>
+                <a class="red_hollow" href="del();">删除</a>
                 <div class="clear"></div>
             </div>
         </li>
-        <li class="box">
-            <div class="user_info">
-                <a href="#">
-                    <p><label>张某</label><span>15670382580</span></p>
-                    <p>河南省 洛阳市 涧西区 南昌路创展国际A座1105</p>
-                </a>
-            </div>
-            <div class="button">
-                <label class="am-radio am-danger">
-                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                    设置为默认联系人
-                </label>
-                <a class="red_hollow" href="add_user.html">编辑</a>
-                <a class="red_hollow" href="#">删除</a>
-                <div class="clear"></div>
-            </div>
-        </li>
-        <li class="box">
-            <div class="user_info">
-                <a href="#">
-                    <p><label>张某</label><span>15670382580</span></p>
-                    <p>河南省 洛阳市 涧西区 南昌路创展国际A座1105</p>
-                </a>
-            </div>
-            <div class="button">
-                <label class="am-radio am-danger">
-                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                    设置为默认联系人
-                </label>
-                <a class="red_hollow" href="add_user.html">编辑</a>
-                <a class="red_hollow" href="#">删除</a>
-                <div class="clear"></div>
-            </div>
-        </li>
-        <li class="box">
-            <div class="user_info">
-                <a href="#">
-                    <div><label>张某</label><span>15670382580</span></div>
-                    <p>河南省 洛阳市 涧西区 南昌路创展国际A座1105</p>
-                </a>
-            </div>
-            <div class="button">
-                <label class="am-radio am-danger">
-                    <input type="radio" name="radio1" value="" data-am-ucheck>
-                    设置为默认联系人
-                </label>
-                <a class="red_hollow" href="add_user.html">编辑</a>
-                <a class="red_hollow" href="#">删除</a>
-                <div class="clear"></div>
-            </div>
-        </li>
+        {/foreach}
     </ul>
     <div class="tc_nav">
-        <a href="add_user.html" class="color_red">增加新地址</a>
+        <a href="{:url('index/users/adduser')}" class="color_red">增加新地址</a>
     </div>
+
 </div>
 <!--footer-->
 {include file="public/foot" /}

@@ -84,7 +84,7 @@
       <div class="am-tabs-bd">
         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
           <ul>
-            {foreach $list3 as $value}
+            {foreach $list4 as $value}
             <li class="view">
               <div class="pic">
                 <img src="__STATIC_URL__/moban/images/trip_list_02.jpg">
@@ -136,6 +136,7 @@
       <span>热门游记</span>
     </div>
     <ul class="am-avg-sm-2">
+        {foreach $list5 as $value}
       <li class="beautiful_list">
         <a  title="" href="{:url('index/notes/details')}">
           <div class="pic">
@@ -156,26 +157,7 @@
           <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
         </a>
       </li>
-      <li class="beautiful_list">
-        <a  title="" href="beautiful_detail.html">
-          <div class="pic">
-            <img src="__STATIC_URL__/moban/images/beautiful_02.jpg"/>
-          </div>
-          <div class="name">
-            <img alt="" class="head" src="__STATIC_URL__/moban/images/head.jpg">
-            <span>181***5241</span>
-            <div class="num">
-              <i class="am-icon-eye"></i>
-              <span>2</span>
-              <i class="am-icon-comments"></i>
-              <span>0</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-          <label>偶遇洛阳</label>
-          <p>路易威登代购speedy枕头超奢华枕头套装，国内有速读...</p>
-        </a>
-      </li>
+        {/foreach}
     </ul>
 
   </div>

@@ -12,40 +12,42 @@
             <li>
                 <p>姓名</p>
                 <div class="am-form-group">
-                    <input type="text/css" placeholder="必填" id="name"/>
+                    <input type="text/css" id="name" placeholder={$list->name} />
+
                 </div>
                 <div class="clear"></div>
             </li>
             <li>
                 <p>手机号</p>
                 <div class="am-form-group">
-                    <input type="text/css" placeholder="必填" id="phone"/>
+                    <input type="text/css" placeholder={$list->phone} id="phone"/>
                 </div>
                 <div class="clear"></div>
             </li>
             <li>
                 <p>地址</p>
                 <div class="am-form-group">
-                    <input type="text/css" placeholder="请输入详细地址" id="addr"/>
+                    <input type="text/css" id="addr" placeholder={$list->addr} />
                 </div>
                 <div class="clear"></div>
             </li>
         </ul>
+        <input type="hidden" value={$list->cid} id='cid'>
         <button type="submit" class="yes" value="确定" id="qd">确定</button>
     </div>
-        <script>
-            $('#qd').on('click',function () {
-                var url = "{:url('index/users/doadduser')}";
-                var date  = {
-                    name:$('#name').val(),
-                    phone:$('#phone').val(),
-                    addr:$('#addr').val()
-
-                };
-                $.post(url,date,function (date) {
-                    alert(date.msg)
-                },'JSON')
-            })
-       </script>
+    <script>
+        $('#qd').on('click',function () {
+            var url = "{:url('index/users/dochgadduser')}";
+            var date  = {
+                name:$('#name').val(),
+                phone:$('#phone').val(),
+                addr:$('#addr').val(),
+                id: $('#cid').val()
+            };
+            $.post(url,date,function (date) {
+                alert(date.msg)
+            },'JSON')
+        })
+    </script>
 </div>
 </body>
