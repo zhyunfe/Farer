@@ -215,7 +215,6 @@
                             <a class="info">
                                 <i class="am-icon-angle-right"></i>
                                 <span>用户列表</span>
-                                <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                             </a>
 
                             <a class="info">
@@ -227,10 +226,10 @@
                                 <i class="am-icon-angle-right"></i>
                                 <span>攻略列表</span>
                             </a>
-                            <a class="info">
-                                <i class="am-icon-angle-right"></i>
-                                <span>游记列表</span>
-                            </a>
+                            <!--<a class="info">-->
+                                <!--<i class="am-icon-angle-right"></i>-->
+                                <!--<span>游记列表</span>-->
+                            <!--</a>-->
                         </li>
                     </ul>
                 </li>
@@ -268,10 +267,9 @@
                 </li>
 
                 <li class="tpl-left-nav-item">
-                    <a href="login.html" class="nav-link tpl-left-nav-link-list">
+                    <a class="nav-link tpl-left-nav-link-list">
                         <i class="am-icon-key"></i>
-                        <span>登录</span>
-
+                        <span>退出系统</span>
                     </a>
                 </li>
             </ul>
@@ -348,7 +346,6 @@
                     $('#page').html('');
                     $(this).addClass('active').siblings().removeClass('active');
                     var info = $(this).attr('info');
-                    console.log(info);
                     $.ajax({
                         method: 'post',
                         url: '{:url("admin/index/index")}',
@@ -371,11 +368,12 @@
                         userModify();
                         //ajax及时查询酒店信息
                         hotelFind();
+                        //显示酒店详情
+                        hotelDetail();
                     });
 
                 });
             });
-
             //实现用户修改事件
             function userModify()
             {
@@ -434,6 +432,15 @@
                     dataType: 'json'
                 });
             }
+            //酒店详情的方法
+            function hotelDetail()
+            {
+                $('.hotel_detail').each(function (i,obj) {
+                   $(this).click(function () {
+                        alert($(this).attr('value'));
+                   })
+                });
+            }
 
             //添加列表的点击事件开始
             $('.add').each(function (i, obj) {
@@ -490,6 +497,7 @@
                     var pid   = $('#location').val();
                     var price = $('#price').val();
                     var header_image = document.getElementById('purchase-file').files[0];
+                    console.log(header_image);
                     var desc = $('#editor').val();
                     form.append('title',title);
                     form.append('pid',pid);
@@ -575,7 +583,7 @@
                     placeholder : str,
                     toolbar : toolbar,  //工具栏
                     upload : {
-                        url : '../purchase/upload', //文件上传的接口地址
+                        url : '../admin/purchase/upload', //文件上传的接口地址
                         params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
                         fileKey: 'image', //服务器端获取文件数据的参数名
                         connectionCount: 3,
@@ -702,8 +710,6 @@
                                 $('#hotellist').html('');
                                 for (i=0;i<data.length;i ++) {
                                     $('#hotellist').append('<option value='+data[i].name+'>'+(20000+data[i].id)+'-' + data[i].name+'</option>');
-//                                    $('<option>').appendTo($('#hotellist')).attr('value',data[i].name).attr('num',i).html((20000+data[i].id)+ ' - ' +data[i].name);
-//                                    $('#hotellist option:first-child').html((20000+data[i].id) + ' - ' +data[0].name);
                                 }
                                 $('#hotel_name').focus(function () {
                                     var name = $('#hotellist').find("option:selected").text();
@@ -994,7 +1000,6 @@
             function addCaseData(data,obj)
             {
                 data = JSON.parse(data);
-                console.log(data.msg);
                 if(!data.error){
                     //提交成功，弹出模态框
                     $('.am-modal-hd').html(data.msg);

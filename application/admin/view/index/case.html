@@ -1,8 +1,8 @@
 
-            <div class="tpl-portlet-components">
+            <div class="tpl-portlet-components" id="case_list">
                 <div class="portlet-title">
-                    <div class="caption font-green bold">
-                        <legend>攻略列表</legend>
+                    <div class="caption ">
+                        <legend class="font-green bold">攻略列表</legend>
                     </div>
                     <div class="tpl-portlet-input tpl-fz-ml">
                         <div class="portlet-input input-small input-inline">
@@ -18,22 +18,22 @@
                     <div class="am-g">
                         <div class="tpl-table-images">
                             {foreach $result as $case}
-                            <div class="am-u-sm-12 am-u-md-6 am-u-lg-4 am-animation-fade">
+                            <div class="am-u-sm-12 am-u-md-6 am-u-lg-4 am-animation-fade" id="case{$case->case_id}">
                                 <div class="tpl-table-images-content" >
                                     <div class="tpl-table-images-content-i-time">发布时间：{$case->create_time}</div>
-                                    <div class="tpl-i-title">
-                                       <b>{$case->title}</b>
+                                    <div class="tpl-i-title " >
+                                       <b class="title{$case->case_id}">{$case->title}</b>
                                     </div>
                                     <a href="javascript:;" class="tpl-table-images-content-i">
                                         <div class="tpl-table-images-content-i-info">
-                                            <span class="ico">{$case->location}</span>
+                                            <span class="ico location{$case->case_id}">{$case->location}</span>
                                         </div>
                                         <span class="tpl-table-images-content-i-shadow"></span>
-                                        <img src="http://www.farer.com/uploads/farercase/{$case->header_image}" alt="{$case->location}">
+                                        <img src="http://www.farer.com/uploads/farercase/{$case->header_image}" class="img{$case->case_id}">
                                     </a>
                                     <div class="tpl-table-images-content-block">
-                                        <div class="tpl-i-font">
-                                            {$case->href}
+                                        <div class="tpl-i-font href{$case->case_id}">
+                                            {$case->href|mb_substr=0,10,'utf-8'}
                                         </div>
                                         <div class="tpl-i-more">
                                             <ul>
@@ -44,37 +44,162 @@
                                         </div>
                                         <div class="am-btn-toolbar" value={$case->case_id}>
                                             <div class="am-btn-group am-btn-group-xs tpl-edit-content-btn">
-                                                <button type="button" class="am-btn am-btn-default am-btn-success" value={$case->case_id} ><span class="am-icon-plus"></span> 查看</button>
-                                                <button type="button" class="am-btn am-btn-default am-btn-warning" value={$case->case_id}><span class="am-icon-archive"></span> 审核</button>
-                                                <button type="button" class="am-btn am-btn-default am-btn-danger" value={$case->case_id}><span class="am-icon-trash-o"></span> 删除</button>
-                                                <button type="button" class="am-btn am-btn-default am-btn-secondary" value={$case->case_id}><span class="am-icon-edit"></span> 编辑</button>
+                                                <button    class="am-btn am-btn-default am-btn-success  case_see" value={$case->case_id}><span class="am-icon-plus"></span> 查看</button>
+                                                <button   value={$case->case_id} class="am-btn am-btn-default am-btn-danger case_del"  tag={if $case->delete_time}0{else}1{/if}><span class="am-icon-trash-o"></span>
+                                                    {if $case->delete_time}恢复显示{else}删除{/if}</button>
+                                                <button    class="am-btn am-btn-default am-btn-secondary case_edit " value={$case->case_id}>
+                                                    <span class="am-icon-edit"></span> 编辑</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {/foreach}
-                            <!--<div class="am-u-lg-12">-->
-                                <!--<div class="am-cf">-->
-
-                                    <!--<div class="am-fr">-->
-                                        <!--<ul class="am-pagination tpl-pagination" id="page">-->
-                                            <!--<li class="am-disabled"><a href="#">«</a></li>-->
-                                            <!--<li class="am-active"><a href="#">1</a></li>-->
-                                            <!--<li><a href="#">2</a></li>-->
-                                            <!--<li><a href="#">3</a></li>-->
-                                            <!--<li><a href="#">4</a></li>-->
-                                            <!--<li><a href="#">5</a></li>-->
-                                            <!--<li><a href="#">»</a></li>-->
-                                        <!--</ul>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<hr>-->
-                            <!--</div>-->
-
                         </div>
-
                     </div>
                 </div>
                 <div class="tpl-alert"></div>
             </div>
+            <div id="case_change"></div>
+            <script>
+                //点击查看详情
+                $('.case_see').each(function (i,obj) {
+                    $(this).click(function () {
+                        var id = $(this).attr('value');
+                        window.open('http://www.farer.com/index/purchase/details/id/'+id);
+                    })
+                });
+
+                //点击删除
+                $('.case_del').each(function (i,obj) {
+                    $(this).on('click', function () {
+                        var id = $(this).attr('value');
+                        //0代表已经锁定用户，1代表还没锁定用户
+                        //0走恢复用户，1走锁定用户
+                        var tag = ($(this).attr('tag'));
+                        var btn = $(this);
+                        if (tag == 1) {
+                            $.ajax({
+                                method: 'post',
+                                data: {case_id: id},
+                                url: '{:url("admin/farercase/lock")}',
+                                success: function (data) {
+                                    btn.attr('tag', 0);
+                                    btn.text('恢复');
+                                    var cid = '#' + 'case' + id;
+                                    $(cid).hide();
+                                }, fail: function (data) {
+                                },
+                                async: false,
+                                dataType: 'json'
+                            });
+                        } else {
+                            $.ajax({
+                                method: 'post',
+                                data: {case_id: id},
+                                url: '{:url("admin/farercase/unlock")}',
+                                success: function (data) {
+                                    btn.attr('tag', 1);
+                                    btn.text('删除');
+                                }, fail: function (data) {
+                                },
+                                async: false,
+                                dataType: 'json'
+                            });
+                        }
+                    })
+                });
+
+                //点击编辑，隐藏列表页面，显示编辑页面
+                $('.case_edit').each(function (i,obj) {
+                    $(this).click(function () {
+                        var case_id = $(this).attr('value');
+                        var changeImg = "";
+                        var case_title = "";
+                        var ywcase = "";
+                        $.ajax({
+                            method:'post',
+                            data:{case_id:case_id},
+                            url:'{:url("admin/farercase/edit")}',
+                            success:function (data) {
+                                $('#case_list').hide();
+                                $('#page').hide();
+                                $('#case_change').addClass('am-animation-slide-top').html(data).show();
+                            }
+                        }).always(function () {
+                            $('#case_up').click(function () {
+                                case_title = $('#case_title').val();
+                                var keywords = $("input[name='keywords']:checked").val();
+                                var location = $('#location').val();
+                                var num = $('#num').val();
+                                var price = $('#price').val();
+                                ywcase = $('#ywcase').val();
+                                var jtcase = $('#jtcase').val();
+                                var zscase = $('#zscase').val();
+                                var case_id = $('#case_id').val();
+                                //创建formData对象，并将表单的数据添加到里面
+                                var form = new FormData();
+
+                                form.append('title',case_title);
+                                form.append('type',keywords);
+                                form.append('price',price);
+                                form.append('day',num);
+                                form.append('location',location);
+                                form.append('href',ywcase);
+                                form.append('traffic',jtcase);
+                                form.append('hotel',zscase);
+                                form.append('case_id',case_id);
+                                $.ajax({
+                                    method:'post',
+                                    url:"{:url('admin/farercase/caseSave')}",
+                                    data:form,
+                                    processData: false,
+                                    contentType: false,
+                                    success:function (data) {
+                                        alert('保存成功');
+                                    }
+                                }).always(function () {
+                                    case_title = $('#case_title').val();
+                                    ywcase = $('#ywcase').val();
+                                    console.log(case_title,ywcase);
+                                })
+
+                            });
+                            $('#doc-form-file').on('change', function() {
+                                var file = document.getElementById('doc-form-file').files[0];
+                                console.log(file);
+                                var case_id = $('#case_id').val();
+                                console.log(case_id);
+                                var form = new FormData();
+                                form.append('case_id',case_id);
+                                form.append('file',file);
+                                $.ajax({
+                                    method:'post',
+                                    url:"{:url('admin/farercase/changePhoto')}",
+                                    data:form,
+                                    processData: false,
+                                    contentType: false,
+                                    success:function (data) {
+                                        $('#header_image').attr('src','http://www.farer.com/uploads/farercase/'+data.path);
+                                        changeImg = data.path;
+                                    }
+                                })
+                            });
+                            //点击返回，显示列表页面，隐藏编辑页面
+                            $('#reback').click(function () {
+                                $('#case_change').hide();
+                                $('#page').show();
+                                $('#case_list').addClass('am-animation-slide-bottom').show();
+                                console.log(case_title,ywcase);
+                                $('.title'+case_id).val(case_title);
+                                console.log($('.title'+case_id,$('.img'+case_id)));
+                                console.log($('.href'+case_id).html());
+                                $('.img'+case_id).attr('src','http://www.farer.com/uploads/farercase/'+changeImg);
+                                $('.title'+case_id).html(case_title);
+                                console.log($('.title'+case_id).html());
+                                $('.href'+case_id).html(ywcase);
+                            });
+                        })
+                    });
+                });
+            </script>

@@ -15,4 +15,5 @@ class Farercase extends Model
 {
     protected $autoWriteTimestamp = true;
     use SoftDelete;
+    protected $deleteTime = 'delete_time';
 }

@@ -2,7 +2,7 @@
 <div id="room_step1">
     <div id="info" class="am-u-md-12">
         <div class="caption font-green bold">
-            <legend>酒店列表</legend>
+            <legend class="font-green bold">酒店列表</legend>
         </div>
         <div class="am-u-md-1">&nbsp;</div>
         <div class="am-u-md-9">
@@ -31,8 +31,6 @@
                             <table class="am-table am-table-striped am-table-hover table-main">
                                 <thead>
                                 <tr>
-                                    <th class="table-check">
-                                        <input type="checkbox" class="tpl-table-fz-check"></th>
                                     <th class="table-id">编号</th>
                                     <th class="table-title">酒店名称</th>
                                     <th class="table-title">酒店类型</th>
@@ -43,9 +41,7 @@
                                 <tbody id="listFind">
                                 {foreach $hotel as $value}
                                 <tr>
-                                    <td>
-                                        <input type="checkbox"></td>
-                                    <td>{$value->id + 10000}</td>
+                                    <td>{$value->id}</td>
                                     <td>
                                         {$value->name}
                                     </td>
@@ -56,10 +52,10 @@
                                         {$value->pid}
                                     </td>
                                     <td class="am-hide-sm-only">{$value->telephone}</td>
-                                    <td>
+                                    <td class="hotel_detail" value="{$value->id - 200000}">
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
-                                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary user_detail" >
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-secondary " >
                                                     <span class="am-icon-pencil-square-o"></span>详情
                                                 </a>
                                             </div>
@@ -81,8 +77,5 @@
 
     </div>
 
-    <!--<div id="room" class="am-u-md-6">-->
-
-    <!--</div>-->
 </div>
 </div>

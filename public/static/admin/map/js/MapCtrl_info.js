@@ -11,7 +11,7 @@ function refresh() {
 	var div_in =
 
 		'<div id="all_dizhi" class="am-u-md-6">'+
-			'<legend>添加酒店</legend>'+
+			'<legend class="font-green bold">添加酒店</legend>'+
 			'<div id="info">'+
 				'<div>'+
 					'<span class="address">区域地址：</span>'+

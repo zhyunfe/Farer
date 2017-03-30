@@ -26,14 +26,14 @@ class Index extends Auth
                     } else {
                         $start = 0;
                     }
-                    $result = $hotel->withTrashed()->field(['id','pid','name','telephone','style'])->select();
+                    $result = $hotel->withTrashed()->field(['id','pid','name','telephone','style'])->limit($start,5)->select();
                     foreach ($result as $value) {
-                        $value->id += 20000;
+                        $value->id += 200000;
                         $value->style = $this->getStatusTextAttr($value->style);
                     }
                     $this->assign('hotel',$result);
                     $list = $this->fetch(APP_PATH."/admin/view/hotel/list.html");
-                    return ['tmp'=>$list,'pageCount'=>$count,'limit'=>10];
+                    return ['tmp'=>$list,'pageCount'=>$count,'limit'=>5];
                 break;
                 case 'user':
                     $count = $users->withTrashed()->count('uid');
@@ -58,7 +58,7 @@ class Index extends Auth
                     } else {
                         $start = 0;
                       }
-                    $result = $caseModel->field(['case_id','title','header_image','location','href','create_time','user_star','seecount'])->limit($start,6)->select();
+                    $result = $caseModel->field(['case_id','title','header_image','location','href','create_time','user_star','seecount','delete_time'])->limit($start,6)->select();
                     $this->assign('result',$result);
                     $tmp = $this->fetch(APP_PATH.'/admin/view/index/case.html');
                     return ['tmp'=>$tmp,'pageCount'=>$count,'limit'=>6];

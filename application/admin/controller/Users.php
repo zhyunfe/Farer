@@ -47,9 +47,7 @@ class Users extends Auth
         $key = input('post.key');
         $value = input('post.value');
         $uid = input('post.uid');
-        dump($value);
         $usersModel->save([$key=>$value],['uid'=>$uid]);
-//        dump($usersModel->getLastSql());
     }
     public function changePhoto(UsersModel $users)
     {

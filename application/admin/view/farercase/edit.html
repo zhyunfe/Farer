@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../../static/before/successload/js/Popt.js"></script>
+    <script src="../../static/before/successload/js/cityJson.js"></script>
+    <script src="../../static/before/successload/js/citySet.js"></script>
+    <style type="text/css">
+        ._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position: relative;background-color: white }
+        ._citys span { color: #56b4f8; height: 15px; width: 15px; line-height: 15px; text-align: center; border-radius: 3px; position: absolute; right: 10px; top: 10px; border: 1px solid #56b4f8; cursor: pointer; }
+        ._citys0 { width: 100%; height: 34px; display: inline-block; border-bottom: 2px solid #56b4f8; padding: 0; margin: 0; }
+        ._citys0 li { display: inline-block; line-height: 34px; font-size: 15px; color: #888; width: 80px; text-align: center; cursor: pointer; }
+        .citySel { background-color: #56b4f8; color: #fff !important; }
+        ._citys1 { width: 100%; display: inline-block; padding: 10px 0; }
+        ._citys1 a { width: 83px; height: 35px; display: inline-block; background-color: #f5f5f5; color: #666; margin-left: 6px; margin-top: 3px; line-height: 35px; text-align: center; cursor: pointer; font-size: 13px; overflow: hidden; }
+        ._citys1 a:hover { color: #fff; background-color: #56b4f8; }
+        .AreaS { background-color: #56b4f8 !important; color: #fff !important; }
+    </style>
+</head>
+<div class="tpl-portlet-components">
+    <div class="tpl-block">
+        <div class="am-g">
+            <legend class="font-green bold" id="reback">返回</legend>
+            <div class="tpl-form-body tpl-form-line">
+                <form class="am-form tpl-form-line-form" id="caseForm">
+                    <div class="am-form-group">
+                        <label for="case_title" class="am-u-sm-3 am-form-label">标题 <span class="tpl-form-line-small-title">Title</span></label>
+                        <div class="am-u-sm-9">
+                            <input type="text" class="tpl-form-input" id="case_title" name="title1" placeholder="请输入标题文字" value="{$result->title}">
+                            <small>请填写标题文字10-20字左右。</small>
+                        </div>
+                    </div>
+                    <input type="hidden" id="case_id" value={$result->case_id}>
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-form-label">关键字 <span class="tpl-form-line-small-title">KeyWords</span></label>
+                        <div class="am-u-sm-9">
+                            {if condition="$result->type == 0"}
+                            <input type="radio" name="keywords" value="0" checked/><label class="am-form-label" >自由行攻略</label>
+                            {else /}
+                            <input type="radio" name="keywords" value="0" /><label class="am-form-label" >自由行攻略</label>
+                            {/if}
+                            {if condition="$result->type == 1"}
+                            <input type="radio" name="keywords" value="1" checked/><label class="am-form-label">景点攻略</label>
+                            {else /}
+                            <input type="radio" name="keywords" value="1"/><label class="am-form-label">景点攻略</label>
+                            {/if}
+
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="header_image" class="am-u-sm-3 am-form-label">封面图 <span class="tpl-form-line-small-title">Images</span></label>
+                        <div class="am-u-sm-9">
+                            <img id="header_image" src="__STATIC_UPLOAD_URL__/farercase/{$result->header_image}" width="120" height="100" />
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="doc-form-file" class="am-u-sm-3 am-form-label">&nbsp;</label>
+                        <div class="am-u-sm-9">
+                            <div class="am-form-group am-form-file">
+                                <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                                    <i class="am-icon-cloud-upload"></i> 修改封面图片</button>
+                                <input id="doc-form-file" type="file">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="location" class="am-u-sm-3 am-form-label">地区 <span class="tpl-form-line-small-title">Type</span></label>
+                        <div class="am-u-sm-9">
+                            <div class="place">
+                                <input type="text" name="area" id="location" placeholder="点击我选择地区" readonly value="{$result->location}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="num" class="am-u-sm-3 am-form-label">出行天数 <span class="tpl-form-line-small-title">day</span></label>
+                        <div class="am-u-sm-9">
+                            <div class="place">
+                                <input type="text" name="tian" id="num" placeholder="出行天数" value="{$result->day}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="price" class="am-u-sm-3 am-form-label">门票价格 <span class="tpl-form-line-small-title">price</span></label>
+                        <div class="am-u-sm-9">
+                            <div class="place">
+                                <input type="text" name="price" id="price" placeholder="门票价格" value="{$result->price}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="ywcase" class="am-u-sm-3 am-form-label">游玩攻略</label>
+                        <div class="am-u-sm-9">
+                            <textarea id="ywcase"  cols="30" rows="10">{$result->href}</textarea>
+                        </div>
+                    </div>
+                    <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
+                    <div class="am-form-group">
+                        <label for="jtcase" class="am-u-sm-3 am-form-label">交通攻略</label>
+                        <div class="am-u-sm-9">
+                            <textarea id="jtcase"  cols="30" rows="10">{$result->traffic}</textarea>
+                        </div>
+                    </div>
+
+                    <hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
+
+                    <div class="am-form-group">
+                        <label for="zscase" class="am-u-sm-3 am-form-label">住宿攻略</label>
+                        <div class="am-u-sm-9">
+                            <textarea id="zscase"  cols="30" rows="10">{$result->hotel}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-9 am-u-sm-push-3">
+                            <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success" id="case_up">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">保存成功</div>
+        <div class="am-modal-bd">
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<script>
+    $("#location").click(function (e) {
+        SelCity(this,e);
+    });
+</script>
+
+
+
+</body>
+
+</html>

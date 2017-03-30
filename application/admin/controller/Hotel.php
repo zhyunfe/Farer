@@ -100,16 +100,16 @@ class Hotel extends Auth {
         } else {
             $start = 0;
         }
-        $result = $hotel->withTrashed()->field(['id','pid','name','telephone','style'])->where($where)->select();
+        $result = $hotel->withTrashed()->field(['id','pid','name','telephone','style'])->where($where)->limit($start,5)->select();
         //设置酒店编号和酒店类型
         foreach ($result as $value) {
-            $value->id += 20000;
+            $value->id += 200000;
             $value->style = $this->getStatusTextAttr($value->style);
         }
         //分配变量渲染模板
         $this->assign('hotel',$result);
         $list = $this->fetch(APP_PATH."/admin/view/hotel/listFind.html");
-        return ['tmp'=>$list,'pageCount'=>$count,'limit'=>25];
+        return ['tmp'=>$list,'pageCount'=>$count,'limit'=>5];
     }
     public function getStatusTextAttr($value)
     {
