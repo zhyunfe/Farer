@@ -359,6 +359,7 @@ class Users extends Auth
         $send_code = $_POST['send_code'];
         //生成的随机数
         $mobile_code = random(4,1);
+        Session::set('codea',$mobile_code);
         if(empty($mobile)){
             exit('手机号码不能为空');
         }
@@ -385,11 +386,12 @@ class Users extends Auth
     {
 
             //echo '<pre>';print_r($_POST);print_r($_SESSION);
-            if(input('mobile_code')!=Session::get('code')){
-                exit('手机验证码输入错误。');
+            if(input('post.send_code')!=Session::get('codea')){
+                return 0;
             }else{
+                session('codea',null);
                 session('code',null);
-                exit('注册成功。');
+                return 1;
             }
 
     }

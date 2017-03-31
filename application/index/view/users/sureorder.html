@@ -50,7 +50,7 @@
 
         <div class="clear"></div>
     </div>
-    <div id="code">{$code}</div>
+    <div id="code" style = "opacity: 0">{$code}</div>
     <!-----------加入购物车/购买----------->
     <div id="book">
         <div >
@@ -80,13 +80,19 @@
         };
 
         function pd(){
-
+            alert($('#mobile_code').val())
             var url = "{:url('index/users/pd')}";
-            $.post(url, {mobile:jQuery.trim($('#mobile').val()),send_code:$('#mobile_codei').text()},function(msg) {
+            $.post(url, {mobile:jQuery.trim($('#mobile').val()),send_code:$('#mobile_code').val()},function(data) {
+                    if(data == 0)
+                    {
+                        alert('验证错误')
+                    }else{
+                        alert('谢谢惠顾')
 
+                    }
 
-            });
-        };
+            })
+        }
 
 
 
