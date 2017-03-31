@@ -10,42 +10,40 @@
 <div id="my_note">
     <div class="cont">
         <ul >
+            {foreach $farercase as $value}
             <li>
+
                 <div class="box_cont">
-                    <a title="" href="{:url('index/farercase/details')}">
+                    <a title="" href="{:url('index/farercase/details',['id'=>$value->case_id])}">
                         <div class="pic">
-                            <img src="__STATIC_URL__/moban/images/my_order01.jpg"/>
+                            <img src="__FARERCASE_URL__/{$value->header_image}"/>
                         </div>
                         <div class="project_cont">
-                            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优...</p>
+                            <p>{$value->title}</p>
                         </div>
                         <div class="clear"></div>
                     </a>
                 </div>
-                <span class="date">2015/01/25</span>
+                <span class="date">{$value->create_time}</span>
                 <div class="button">
-                    <a class="gray_hollow" href="#">删除</a>
+                    <a class="gray_hollow" href="javascript:go('{$value->case_id}')" >删除</a>
                 </div>
             </li>
-            <li>
-                <div class="box_cont">
-                    <a title="" href="beautiful_detail.html">
-                        <div class="pic">
-                            <img src="__STATIC_URL__/moban/images/my_order01.jpg"/>
-                        </div>
-                        <div class="project_cont">
-                            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优...</p>
-                        </div>
-                        <div class="clear"></div>
-                    </a>
-                </div>
-                <span class="date">2015/01/25</span>
-                <div class="button">
-                    <a class="gray_hollow" href="#">删除</a>
-                </div>
-            </li>
+            {/foreach}
         </ul>
     </div>
+         <script>
+             function go(caseid) {
+                 var url = "{:url('index/users/delcol')}"
+
+
+                $.post(url,{id:caseid},function (date) {
+
+
+                },'json')
+                 location.reload();
+             }
+        </script>
 </div>
 <!--footer-->
 {include file="public/foot" /}

@@ -26,7 +26,7 @@ return [
         '__STATIC_URL__' => 'http://www.farer.com/static/before',
         '__PLACE_URL__' => 'http://www.farer.com/uploads/place',
         '__FARERCASE_URL__' => 'http://www.farer.com/uploads/farercase',
-        '__PRUCHASE_URL__' => 'http://www.farer.com/uploads/purchase',
+        '__PURCHASE_URL__' => 'http://www.farer.com/uploads/purchase',
         '__NOTES_URL__' => 'http://www.farer.com/uploads/notes',
         '__ALL_URL__'     => 'http://www.farer.com/static',
 

@@ -79,14 +79,23 @@
     $('#hotel_search').keyup(function () {
         var content = $(this).val();
 
-        $.ajax({
-            method:'post',
-            url:"{:url('index/hotel/hotel_sel')}",
-            data:{content:content,pid:position},
-            success:function (data) {
-                $('#hotel_sel').html(data);
-            }
-        })
+        clearTimeout(k);
+        var k = setTimeout(function () {
+
+                $.ajax({
+                    method:'post',
+                    url:"{:url('index/hotel/hotel_sel')}",
+                    data:{content:content,pid:position},
+                    success:function (data) {
+
+                        $('#hotel_sel').html(data);
+                    }
+                })
+
+
+        },500)
+
+
     });
     $('#hotel_or li').each(function (i,obj) {
         $(obj).attr('num', i).click(function () {

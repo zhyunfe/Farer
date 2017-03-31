@@ -39,10 +39,7 @@ class Index extends Auth
         $obj4= $purchase->limit(1)->select();
 
         //截取套餐简介在首页展示
-        foreach ($obj4 as $valuse)
-        {
-            $valuse->description = substr($valuse->description,0,90) . '...';
-        }
+
 
 
 

@@ -8,51 +8,42 @@
 
 <!----------------我的订单------------------>
 <div id="my_note">
-    <div class="nav">
-        <ul class="am-avg-sm-2">
-            <li><a class="cur" href="{:url('index/users/notelist')}">已发表</a></li>
-            <li><a href="{:url('index/users/notelikelist')}">草稿箱</a></li>
-        </ul>
-    </div>
+
     <div class="cont">
         <ul >
+            {foreach $notes as $value}
             <li>
                 <div class="box_cont">
                     <a title="" href="{:url('index/notes/details')}">
                         <div class="pic">
-                            <img src="__STATIC_URL__/moban/images/my_order01.jpg"/>
+                            <img src="__NOTES_URL__/{$value->header_image}"/>
                         </div>
                         <div class="project_cont">
-                            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优...</p>
+                            <p>{$value->title}</p>
                         </div>
                         <div class="clear"></div>
                     </a>
                 </div>
-                <span class="date">2015/01/25</span>
+                <span class="date">{$value->create_time}</span>
                 <div class="button">
-                    <a class="gray_hollow" href="#">删除</a>
-                    <a class="gray_hollow" href="#">修改</a>
+                    <a class="gray_hollow" href="javascript:go('{$value->nid}')" >删除</a>
+
                 </div>
             </li>
-            <li>
-                <div class="box_cont">
-                    <a title="" href="beautiful_detail.html">
-                        <div class="pic">
-                            <img src="__STATIC_URL__/moban/images/my_order01.jpg"/>
-                        </div>
-                        <div class="project_cont">
-                            <p>孟津袖珍西瓜皮薄质优、携带方便、色泽艳丽、皮薄质优...</p>
-                        </div>
-                        <div class="clear"></div>
-                    </a>
-                </div>
-                <span class="date">2015/01/25</span>
-                <div class="button">
-                    <a class="gray_hollow" href="#">删除</a>
-                    <a class="gray_hollow" href="#">修改</a>
-                </div>
-            </li>
+            {/foreach}
         </ul>
+        <script>
+            function go(caseid) {
+                var url = "{:url('index/users/delnote')}"
+
+
+                $.post(url,{id:caseid},function (date) {
+
+
+                },'json')
+                location.reload();
+            }
+        </script>
     </div>
 </div>
 <!--footer-->

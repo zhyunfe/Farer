@@ -28,11 +28,14 @@ class Users extends Model
         return $this->hasMany('Connect','uid','uid');
     }
 
-
+    public function notes()
+    {
+        return $this->hasMany('Notes','user_id','uid');
+    }
 
     public function farercase()
     {
-        return $this->belongsToMany('Farercase','tp_farercase_users','farercase_id','user_id');
+        return $this->belongsToMany('Farercase','tp_farercase_users','farercaseid','userid');
     }
 
 }

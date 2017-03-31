@@ -8,6 +8,8 @@ use think\Controller;
 use app\index\model\Users as UsersModel;
 use app\index\controller\Auth;
 use app\index\model\Notes;
+use app\index\model\Purchase;
+use app\index\model\Farercase_users;
 class Users extends Auth
 {
     /**
@@ -161,6 +163,9 @@ class Users extends Auth
 
     public  function collect()
     {
+        $user = UsersModel::get(Session::get('user')['uid']);
+        $fa = $user->farercase;
+        $this->assign('farercase',$fa);
         return $this->fetch();
     }
     public  function proList()
@@ -181,14 +186,24 @@ class Users extends Auth
     // +----------------------------------------------------------------------
     public  function noteList()
     {
+        $id = Session::get('user')['uid'];
+        $user = UsersModel::get($id);
+        $notes = $user->notes;
+
+
+
+        $this->assign('notes',$notes);
         return $this->fetch();
     }
-    // +----------------------------------------------------------------------
-    // | 用户发表的游记列表草稿箱
-    // +----------------------------------------------------------------------
-    public  function noteLikelist()
+    //用户删除游记
+    public function delnote(Notes $notes)
     {
-        return $this->fetch();
+
+        $id = input('post.id');
+
+        $fa=$notes->where("nid = $id")->find();
+
+        $fa->delete();
     }
 
 
@@ -224,14 +239,180 @@ class Users extends Auth
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // +----------------------------------------------------------------------
     // | 确认订单
     // +----------------------------------------------------------------------
-
+    public function random1($length = 6 , $numeric = 0) {
+        PHP_VERSION < '4.2.0' && mt_srand((double)microtime() * 1000000);
+        if($numeric) {
+            $hash = sprintf('%0'.$length.'d', mt_rand(0, pow(10, $length) - 1));
+        } else {
+            $hash = '';
+            $chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghjkmnpqrstuvwxyz';
+            $max = strlen($chars) - 1;
+            for($i = 0; $i < $length; $i++) {
+                $hash .= $chars[mt_rand(0, $max)];
+            }
+        }
+        return $hash;
+    }
     public function sureOrder()
     {
+
+
+        Session::set('code',$this->random1(6,1));
+        $code = Session::get('code');
+
+
+        $info = Purchase::get(input('param.id'));
+        $this->assign('info',$info);
+        $this->assign('code',$code);
         return $this->fetch();
     }
+
+
+    public function yzm()
+    {
+
+
+
+
+
+        //请求数据到短信接口，检查环境是否 开启 curl init。
+        function Post($curlPost,$url){
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_NOBODY, true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $curlPost);
+            $return_str = curl_exec($curl);
+            curl_close($curl);
+            return $return_str;
+        }
+
+        //将 xml数据转换为数组格式。
+        function xml_to_array($xml){
+            $reg = "/<(\w+)[^>]*>([\\x00-\\xFF]*)<\\/\\1>/";
+            if(preg_match_all($reg, $xml, $matches)){
+                $count = count($matches[0]);
+                for($i = 0; $i < $count; $i++){
+                    $subxml= $matches[2][$i];
+                    $key = $matches[1][$i];
+                    if(preg_match( $reg, $subxml )){
+                        $arr[$key] = xml_to_array( $subxml );
+                    }else{
+                        $arr[$key] = $subxml;
+                    }
+                }
+            }
+            return $arr;
+        }
+
+        //random() 函数返回随机整数。
+        function random($length = 6 , $numeric = 0) {
+            PHP_VERSION < '4.2.0' && mt_srand((double)microtime() * 1000000);
+            if($numeric) {
+                $hash = sprintf('%0'.$length.'d', mt_rand(0, pow(10, $length) - 1));
+            } else {
+                $hash = '';
+                $chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghjkmnpqrstuvwxyz';
+                $max = strlen($chars) - 1;
+                for($i = 0; $i < $length; $i++) {
+                    $hash .= $chars[mt_rand(0, $max)];
+                }
+            }
+            return $hash;
+        }
+        //短信接口地址
+        $target = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";
+        //获取手机号
+        $mobile = $_POST['mobile'];
+        //获取验证码
+        $send_code = $_POST['send_code'];
+        //生成的随机数
+        $mobile_code = random(4,1);
+        if(empty($mobile)){
+            exit('手机号码不能为空');
+        }
+        //防用户恶意请求
+        if(empty(Session::get('code')) or $send_code!=Session::get('code')){
+            exit('请求超时，请刷新页面后重试');
+        }
+
+        $post_data = "account=C85152163&password=438f7be3605288e525657ce86eada1d2&mobile=".$mobile."&content=".rawurlencode("您的验证码是：".$mobile_code."。请不要把验证码泄露给其他人。");
+        //用户名请登录用户中心->验证码、通知短信->帐户及签名设置->APIID
+        //查看密码请登录用户中心->验证码、通知短信->帐户及签名设置->APIKEY
+        $gets =  xml_to_array(Post($post_data, $target));
+        if($gets['SubmitResult']['code']==2){
+            $_SESSION['mobile'] = $mobile;
+            $_SESSION['mobile_code'] = $mobile_code;
+        }
+        echo $gets['SubmitResult']['msg'];
+
+    }
+
+
+
+    public function pd()
+    {
+
+            //echo '<pre>';print_r($_POST);print_r($_SESSION);
+            if(input('mobile_code')!=Session::get('code')){
+                exit('手机验证码输入错误。');
+            }else{
+                session('code',null);
+                exit('注册成功。');
+            }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // +----------------------------------------------------------------------
     // | 修改密码
     // +----------------------------------------------------------------------
@@ -492,7 +673,23 @@ class Users extends Auth
     }
 
 
+    //用户删除收藏
+    public function delcol(Farercase_users $farercase_users)
+    {
 
+        $id = input('post.id');
+        $uid = Session::get('user')['uid'];
+        $fa=$farercase_users->where("farercaseid = $id and userid = $uid")->find();
+
+        $fa->delete();
+    }
+
+
+    //手机验证
+    public function tel()
+    {
+        return $this->fetch();
+    }
 
 
 

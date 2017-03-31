@@ -3,7 +3,7 @@
 <div id="beautiful_detail">
     <div class="cover" style=" background: url('__NOTES_URL__/{$note->header_image}') no-repeat center;">
 
-        <a title="" class="collect" href="#"><img src="__STATIC_URL__/moban/images/collect01.png"></a>
+        <a title="" class="collect" href="javascript:go();" id="chz_collect" aa="{$note->nid}"><img src="__STATIC_URL__/moban/images/collect01.png"></a>
         <div  class="title">
             <p>{$note->title}</p>
             <div class="writer">
@@ -13,9 +13,20 @@
             </div>
             <div class="clear"></div>
         </div>
-        <div class="read">
-            <img class="eye " src="__STATIC_URL__/moban/images/read.png">
-            <span>999+</span>
+
+        <div id="leave">
+            <div class="comment">
+                <a href="{:url('index/notes/notecomment',['id'=>$note->nid])}">
+                    <img src="__STATIC_URL__/moban/images/comment.png">
+                    <span>{$note->pinlun}</span>
+                </a>
+            </div>
+            <div class="thumb">
+                <a title=""href="javascript:goto();" id="chz_zan">
+                    <img src="__STATIC_URL__/moban/images/thumb.png">
+                    <span>{$note->cishu}</span>
+                </a>
+            </div>
         </div>
 
     </div>
@@ -23,4 +34,30 @@
         {$note->content}
     </div>
 </div>
+<script>
+    function go(){
+
+        var url = "{:url('index/notes/docollect')}";
+        var date = {
+            id:$('#chz_collect').attr('aa')
+
+
+        }
+        $.post(url,date,function (data) {
+            alert(data.msg)
+        },'JSON')
+    }
+    function goto(){
+
+        var url = "{:url('index/notes/dianzan')}";
+        var date = {
+            id:$('#chz_collect').attr('aa')
+
+
+        }
+        $.post(url,date,function (data) {
+            alert(data.msg)
+        },'JSON')
+    }
+</script>
 </body>

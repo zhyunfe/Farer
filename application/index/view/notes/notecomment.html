@@ -1,0 +1,28 @@
+
+
+<body>
+<!-----------公共版头----------->
+<div id="header">
+    <span>评论列表</span>
+</div>
+<div id="note_comment_list">
+
+    <ul>
+        {foreach $comment as $value}
+        <li>
+            <div class="pic"><img src="images/head1.jpg"></div>
+            <div class="con">
+                <label>{$value->uname}</label>
+                <p>{$value->content}</p>
+                <span>发表于：{$value->create_time}</span>
+            </div>
+
+        </li>
+        {/foreach}
+    </ul>
+    <div class="button_mo">
+        <a href="{:url('index/comment/givenotes',['id'=>$id])}">写评论</a>
+    </div>
+</div>
+
+</body>

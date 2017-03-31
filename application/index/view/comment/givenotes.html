@@ -1,0 +1,97 @@
+
+<body>
+<div id="fff" style="opacity: 0">{$id}</div>
+<div id="release">
+
+    <div id="file-list"></div>
+    <script>
+        $(function() {
+            $('#doc-form-file').on('change', function() {
+                var fileNames = '';
+                $.each(this.files, function() {
+                    fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                });
+                $('#file-list').html(fileNames);
+            });
+        });
+    </script>
+    <div class="fill">
+        <div class="am-form-group">
+            <textarea  id="editor2" placeholder="请在这里填写费用说明" autofocus ></textarea>
+        </div>
+    </div>
+
+    <div style="position: fixed;z-index: 1000">
+
+        <button type="submit" class="done" >发布</button>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="__ALL_URL__/admin/hAdmin/js/plugins/simditor/module.js"></script>
+<script type="text/javascript" src="__ALL_URL__/admin/hAdmin/js/plugins/simditor/uploader.js"></script>
+<script type="text/javascript" src="__ALL_URL__/admin/hAdmin/js/plugins/simditor/hotkeys.js"></script>
+<script type="text/javascript" src="__ALL_URL__/admin/hAdmin/js/plugins/simditor/simditor.js"></script>
+<script type="text/javascript">
+
+    var obj = $('#editor2');
+    var str = '发表评论';
+    initSimditor(obj,str);
+    //初始化编辑器
+    function initSimditor(obj,str)
+    {
+        var editor = new Simditor({
+            textarea: obj,
+
+            placeholder : str,
+            toolbar : toolbar,  //工具栏
+            upload : {
+                url : 'upload', //文件上传的接口地址
+                params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+                fileKey: 'image', //服务器端获取文件数据的参数名
+                connectionCount: 3,
+                leaveConfirm: '正在上传文件'
+            }
+        });
+    }
+
+</script>
+<script>
+    $('.done').on('click',function () {
+
+        var url = "{:url('index/comment/dogivenotes')}"
+        var form= new FormData();
+
+
+        var co = $('#editor2').val()
+        var id = $('#fff').html();
+
+        form.append('content',co)
+        form.append('id',id)
+        $.ajax({
+            method:'post',
+            data:form,
+            url:url,
+            processData: false,
+            contentType: false,
+            success:function (data) {
+                alert(data.msg);
+                location.reload();
+
+            },
+            fail:function (data) {
+
+            }
+        });
+
+//            $.post(url,form,function (data) {
+//
+//            },'JSON')
+    })
+</script>
+
+
+
+
+</body>
+</html>

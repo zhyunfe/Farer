@@ -9,5 +9,8 @@ namespace app\index\model;
 use think\Model;
 class Purchase extends Model
 {
-
+    public function Comment()
+    {
+        return $this->hasMany('Comment','purchase_id','id');
+    }
 }

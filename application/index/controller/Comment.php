@@ -19,7 +19,20 @@ class Comment extends Controller
 
     public function givePlace()
     {
-       
+
+        $this->assign('id',input('param.id'));
+        return $this->fetch();
+    }
+
+    public function givePurchase()
+    {
+
+        $this->assign('id',input('param.id'));
+        return $this->fetch();
+    }
+    public function giveNotes()
+    {
+
         $this->assign('id',input('param.id'));
         return $this->fetch();
     }
@@ -42,5 +55,46 @@ class Comment extends Controller
 
         return json(['msg'=>'gun']);
     }
+
+    public function doGivePurchase(ComModel $comment)
+    {
+        $content = input('post.content');
+        ComModel::create(
+            ['type' => 4,
+                'content' => $content,
+                'purchase_id' => input('post.id'),
+                'user_id'  => Session::get('user')['uid']
+
+            ]
+
+
+        );
+
+
+
+        return json(['msg'=>'gun']);
+    }
+
+
+    public function doGiveNotes(ComModel $comment)
+    {
+        $content = input('post.content');
+        ComModel::create(
+            ['type' => 1,
+                'content' => $content,
+                'notes_id' => input('post.id'),
+                'user_id'  => Session::get('user')['uid']
+
+            ]
+
+
+        );
+
+
+
+        return json(['msg'=>'gun']);
+    }
+
+
 
 }

@@ -92,13 +92,10 @@
             {volist name="list4" id="value"}
             <li class="view">
               <div class="pic">
-                <img src="__PURCHASE_URL__/{$value['header_image']}">
+                <img src="__PURCHASE_URL__/{$value->header_image}">
                 <div class="cont">
                   <a title="" class="button" href="{:url('index/purchase/details',['id'=>$value['id']])}">查看详情</a>
-                  <div class="num">
-                    <p><span>20/30</span>人报名</p>
-                    <p>出发时间<span>2017/10/02</span></p>
-                  </div>
+
                 </div>
                 <div class="clear"></div>
               </div>
@@ -150,12 +147,7 @@
           <div class="name">
             <img alt="" class="head" src="__STATIC_URL__/moban/images/head.jpg">
             <span>{$value->uname}</span>
-            <div class="num">
-              <i class="am-icon-eye"></i>
-              <span>2</span>
-              <i class="am-icon-comments"></i>
-              <span>0</span>
-            </div>
+
             <div class="clear"></div>
           </div>
           <label>{$value->title}</label>
@@ -185,10 +177,9 @@
           </div>
           <div class="price">
 
-            <span>12</span>
+
             <i class="am-icon-eye"></i>
-            <span style="margin-right: 5px;">12</span>
-            <span style="cursor: pointer">点赞</span>
+
 
             <div class="clear"></div>
           </div>

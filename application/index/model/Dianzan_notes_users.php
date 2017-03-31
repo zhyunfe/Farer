@@ -7,13 +7,10 @@
  */
 namespace app\index\model;
 use think\Model;
-use traits\model\SoftDelete;
 
-class Comment extends Model
+
+class Dianzan_notes_users extends Model
 {
-    use SoftDelete;
-    protected $autoWriteTimestamp = true;
-
 
 
 }

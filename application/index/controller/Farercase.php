@@ -8,11 +8,11 @@
 namespace app\index\controller;
 use app\index\model\Farercase as FarercaseModel;
 use app\index\model\Farerdiqu;
-use app\index\model\Look_farercase_users;
+
 use app\index\model\Users;
 use app\index\model\Farercase_users;
 use app\index\model\Dianzan_farercase_users;
-
+use app\index\model\Look_farercase_users;
 use app\index\controller\Auth;
 use think\Session;
 

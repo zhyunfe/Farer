@@ -8,13 +8,13 @@
 </script>
 <body>
 <div id="activity_detail">
-    <div class="cover">
+    <div class="cover" style=" background: url('__PURCHASE_URL__/{$purchase->header_image}') no-repeat center;">
         <a title="" class="return" href="trip_list.html"></a>
     </div>
     <div  class="title">
-        <label>龙门石窟：一场灵魂与身体的旅行</label>
+        <label>{$purchase->title}</label>
         <div class="sprice">
-            报名费：<font>￥230</font>起/人
+            报名费：<font>￥{$purchase->price}</font>起/人
         </div>
         <div class="clear"></div>
     </div>
@@ -29,7 +29,7 @@
                 <p>活动咨询：<span>0379-656445441</span></p>
             </li>
             <li class="phone">
-                <p>集合地点：<span>洛阳市关林庙会</span></p>
+                <p>集合地点：<span>{$purchase->pid}</span></p>
             </li>
         </ul>
     </div>
@@ -46,52 +46,41 @@
         <ul class="am-tabs-nav am-cf">
             <li class="am-active"><a href="[data-tab-panel-0]">产品介绍</a></li>
             <li class=""><a href="[data-tab-panel-1]">费用说明</a></li>
-            <li class=""><a href="[data-tab-panel-2]">用户点评</a></li>
+            <li class=""><a href="[data-tab-panel-2]">使用说明</a></li>
         </ul>
         <div class="am-tabs-bd">
             <div data-tab-panel-0 class="am-tab-panel am-active">
-                【青春】那时候有多好，任雨打湿裙角。忍不住哼起，心爱的旋律。绿油油的树叶，自由地在说笑。燕子忙归巢，风铃在舞蹈。经过青春的草地，彩虹忽然升起。即使视线渐渐模糊，它也在我心里。就像爱过的旋律，没人能抹去。因为生命存在失望，歌唱，所以才要歌唱。
+                {$purchase->product_desc}
             </div>
             <div data-tab-panel-1 class="am-tab-panel ">
-                <div class="introduce">
-                    <div class="detail">
-                        <label>活动介绍:</label>
-                        <div class="clear"></div>
-                        <div class="con">
-                            中国三大石窟之一，历史悠久，开凿经历了多个朝代断续营造达500余年之中国三大石窟之一，历史悠久，开凿经历了多个朝代断续营造达500余年之中国三大石窟之一，历史悠久，开凿经历
-                            <div class="all_text" style="display:none;">
-                                中国三大石窟之一，历史悠久，开凿经历了多个朝代，断续营造达500余年之久，共有97000余尊佛像。这里东、西两山对峙，伊水中流，形似天然门阙，石窟密布于峭壁上，南北长达1公里。龙门石窟是洛阳最经典的景点，其中最震撼的是卢舍那大佛雕像群，有半山高。
-                            </div>
-                            <a class="more" href="javascript:void(0)">
-                                <i class="am-icon-angle-down" ></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {$purchase->price_desc}
             </div>
             <div data-tab-panel-2 class="am-tab-panel ">
-                <div class="all_comment">
-                    <div class="item">
-                        <span>点评（57）</span>
+                {$purchase->use_desc}
+            </div>
+        </div>
+        <div class="all_comment">
+            <div class="item">
+                <span>评论</span>
+            </div>
+            <ul>
+                {foreach $comment as $value}
+                <li>
+                    <div class="comment_list">
+                        <div class="message">
+                            <span class="writer">{$value->uname}</span>
+
+                            <div class="clear"></div>
+                        </div>
+                        <p>
+                            {$value->content}
+                        </p>
                     </div>
-                    <ul>
-                        <li>
-                            <div class="comment_list">
-                                <div class="message">
-                                    <span class="writer">心诚则灵July</span>
-                                    <span class="date">2015/01/25</span>
-                                    <div class="clear"></div>
-                                </div>
-                                <p>
-                                    中国三大石窟之一，历史悠久，开凿经历了多个朝代断续营造达500余年之中国三大石窟之一，历史悠久
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="more">
-                        <a href="{:url('index/comment/topurchase')}">查看全部评价</a>
-                    </div>
-                </div>
+                </li>
+                {/foreach}
+            </ul>
+            <div class="more">
+                <a href="{:url('index/comment/givepurchase',['id'=>$purchase->id])}">我也要发表评论</a>
             </div>
         </div>
     </div>
@@ -128,7 +117,7 @@
         <a class="call" href="#"> <img src="__STATIC_URL__/moban/images/call.png"/>
             <p>电话咨询</p>
         </a>
-        <a class="cur" href="{:url('index/users/sureorder')}">立即报名</a>
+        <a class="cur" href="{:url('index/users/sureorder',['id'=>$purchase->id])}">立即报名</a>
     </div>
 </div>
 </div>

@@ -7,13 +7,10 @@
  */
 namespace app\index\model;
 use think\Model;
-use traits\model\SoftDelete;
 
-class Comment extends Model
+
+class Look_notes_users extends Model
 {
-    use SoftDelete;
-    protected $autoWriteTimestamp = true;
-
 
 
 }
