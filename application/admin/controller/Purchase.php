@@ -14,14 +14,41 @@ use app\admin\model\Purchase as PurchaseModel;
 class Purchase extends Auth
 {
     protected $is_check_login = ['*'];
+
+    /**
+     * 验证锁
+     * Purchase constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * 展示添加商品第二步
+     * @return mixed
+     */
     public function step2()
     {
         return $this->fetch();
     }
+
+    /**
+     * 展示添加商品第三步
+     * @return mixed
+     */
     public function step3()
     {
         return $this->fetch();
     }
+
+    /**
+     * 处理添加商品
+     * Ajax提交数据 formData
+     * 将图片放到uploads/purchse下
+     * @param PurchaseModel $purchase
+     * @return string
+     */
     public function addPurchase(PurchaseModel $purchase)
     {
 
@@ -47,6 +74,12 @@ class Purchase extends Auth
         }
 
     }
+
+    /**
+     * 富文本编辑器上传图片信息
+     * 将商品富文本编辑器中的图片添加到upload/purchase下面   原名保存
+     * @return array
+     */
     public function upload()
     {
         $file = request()->file('image');
@@ -57,5 +90,18 @@ class Purchase extends Auth
         }else{
             return ['success'=>true,'msg'=>'上传成功','file_path'=>$file_path];
         }
+    }
+
+    /**
+     * 商品数据分析
+     * @return string
+     */
+    public function analyse()
+    {
+        $nobuy = PurchaseModel::where('buynum',0)->count();
+        $hot   = PurchaseModel::where('buynum','>',20)->count();
+        $buy1  = PurchaseModel::where('buynum' < 20)->count();
+        $cood  = $buy1 - $nobuy;
+        return json_encode(['hot'=>$hot,'cood'=>$cood,'nobuy'=>$nobuy]);
     }
 }

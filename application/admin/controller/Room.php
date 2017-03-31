@@ -14,6 +14,21 @@ use app\admin\model\Room as RoomModel;
 class Room extends Auth {
     protected $is_check_login = ['*'];
 
+    /**
+     * 验证锁
+     * Room constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * 添加房间
+     * Ajax提交数据
+     * @param RoomModel $roomModel
+     * @return array
+     */
     public function addRoom(RoomModel $roomModel)
     {
         $obj = input('post.');
@@ -30,10 +45,23 @@ class Room extends Auth {
             return ['error'=>20001,'msg'=>'添加失败'];
         }
     }
+
+    /**
+     * 展示添加房间的模板页面
+     * @return mixed
+     */
     public function addRoomPic()
     {
        return $this->fetch();
     }
+
+    /**
+     * 处理添加的房间图片
+     *  Ajax多上传
+     * 通过concat函数拼接房间的照片名称
+     * @param RoomModel $roomModel
+     * @return string
+     */
     public function doAddPic(RoomModel $roomModel)
     {
         $id = input('id');

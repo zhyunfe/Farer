@@ -21,11 +21,86 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        Register();
-        CaseChart();
+        //github提交统计
         github();
-        UserChart();
-        function Register()
+        //注册人数统计
+        register();
+        //用户数据统计
+        $.ajax({
+           method:'post',
+            url:"{:url('admin/users/analyse')}",
+            success:function (data) {
+                data = JSON.parse(data);
+                userChart(data);
+            }
+        });
+        //商品购买度数据统计
+        $.ajax({
+            method:'post',
+            url:"{:url('admin/purchase/analyse')}",
+            success:function (data) {
+                data = JSON.parse(data);
+                purchaseChart(data);
+            }
+        });
+        function github()
+        {
+            $('#github').highcharts({
+                chart: {
+                    type: 'areaspline'
+                },
+                title: {
+                    text: '《Farer》项目组Git提交统计'
+                },
+                subtitle:{
+                    text: '共计73次'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    verticalAlign: 'top',
+                    x: 150,
+                    y: 100,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                },
+                xAxis: {
+                    categories: [
+                        '18','19','20','21','22','23',
+                        '24','25','26','27','28','29','30','31'
+                    ]
+                },
+                yAxis: {
+                    title: {
+                        text: '提交次数'
+                    },
+                    categories: [
+                        '0','1','2','3','4','5','6','7','8','9','20'
+                    ]
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' 次数'
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    areaspline: {
+                        fillOpacity: 0.5
+                    }
+                },
+                series: [{
+                    name: 'zhyunfe',
+                    data: [1,2,1,4,4,4,1,4,8,0,5,4,4,2]
+                }, {
+                    name: 'HouserChang',
+                    data: [2,3,1,8,4,2,2,6,6,0,4,3,5,3]
+                }]
+            });
+        }
+        function register()
         {
             $('#Total').highcharts({
                 chart: {
@@ -98,61 +173,7 @@
                 }]
             });
         }
-        function github()
-        {
-            $('#github').highcharts({
-                chart: {
-                    type: 'areaspline'
-                },
-                title: {
-                    text: '《Farer》项目组Git提交统计'
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'left',
-                    verticalAlign: 'top',
-                    x: 150,
-                    y: 100,
-                    floating: true,
-                    borderWidth: 1,
-                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-                },
-                xAxis: {
-                    categories: [
-                        '18','19','20','21','22','23',
-                        '24','25','26','27','28','29','30'
-                    ]
-                },
-                yAxis: {
-                    title: {
-                        text: '提交次数'
-                    },
-                    categories: [
-                        '0','1','2','3','4','5','6','7','8','9','20'
-                    ]
-                },
-                tooltip: {
-                    shared: true,
-                    valueSuffix: ' 次数'
-                },
-                credits: {
-                    enabled: false
-                },
-                plotOptions: {
-                    areaspline: {
-                        fillOpacity: 0.5
-                    }
-                },
-                series: [{
-                    name: 'zhyunfe',
-                    data: [1,2,1,4,4,4,1,4,8,5,4,4,2]
-                }, {
-                    name: 'HouserChang',
-                    data: [2,3,1,8,4,2,2,6,6,4,3,5,3]
-                }]
-            });
-        }
-        function UserChart() {
+        function userChart(data) {
             $('#users').highcharts({
                 chart: {
                     plotBackgroundColor: null,
@@ -185,17 +206,17 @@
                     data: [
                         {
                             name: '性别女',
-                            y: 12.8,
+                            y: data.woman,
                             sliced: true,
                             selected: true
                         },
-                        ['性别男', 8.5],
-                        ['填写', 0.7]
+                        ['性别男', data.man],
+                        ['未完善', data.null]
                     ]
                 }]
             });
         }
-        function CaseChart(){
+        function purchaseChart(data){
             $('#case').highcharts({
                 chart: {
                     plotBackgroundColor: null,
@@ -224,16 +245,16 @@
                 },
                 series: [{
                     type: 'pie',
-                    name: '用户男女比例分析',
+                    name: '商品购买度分析',
                     data: [
                         {
                             name: '未被购买',
-                            y: 5,
+                            y: data.nobuy,
                             sliced: true,
                             selected: true
                         },
-                        ['热门',    0.2],
-                        ['非热门',   4.8]
+                        ['热门',    data.hot],
+                        ['非热门',   data.cood]
                     ]
                 }]
             });

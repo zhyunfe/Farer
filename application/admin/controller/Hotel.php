@@ -12,7 +12,10 @@ use app\admin\model\Hotel as HotelModel;
 
 class Hotel extends Auth {
     protected $is_check_login = ['*'];
-
+    public function __construct()
+    {
+        parent::__construct();
+    }
     /**
      * 新增酒店数据
      * 通过ajax提交formdata形式的数据
@@ -111,11 +114,23 @@ class Hotel extends Auth {
         $list = $this->fetch(APP_PATH."/admin/view/hotel/listFind.html");
         return ['tmp'=>$list,'pageCount'=>$count,'limit'=>5];
     }
+
+    /**
+     * 解析酒店类型
+     * @param $value
+     * @return mixed
+     */
     public function getStatusTextAttr($value)
     {
         $status = [0=>'经济型',1=>'豪华型',2=>'主题型'];
         return $status[$value];
     }
+
+    /**
+     * 通过id显示酒店详情页面
+     * @param HotelModel $hotel
+     * @return mixed
+     */
     public function hotelDetail(HotelModel $hotel)
     {
         $id = input('post.id');
@@ -123,6 +138,12 @@ class Hotel extends Auth {
         $this->assign('result',$result);
         return $this->fetch();
     }
+
+    /**
+     * 修改酒店信息
+     * @param HotelModel $hotel
+     * @return array
+     */
     public function hotelModify(HotelModel $hotel)
     {
         $key = input('post.key');
@@ -135,6 +156,12 @@ class Hotel extends Auth {
             return ['error'=>500001,'msg'=>'修改失败'];
         }
     }
+
+    /**
+     * 单独修改酒店门面图
+     * @param HotelModel $hotel
+     * @return array
+     */
     public function modifyPhoto(HotelModel $hotel)
     {
         $file = request()->file('file');

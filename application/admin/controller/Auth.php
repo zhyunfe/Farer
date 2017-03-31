@@ -16,20 +16,25 @@ use app\admin\model\Users;
 class Auth extends Controller
 {
     //存储需要验证登录的模块
-    protected $is_check_login = [];
+    protected $is_check_login = ['checkLogin','doLogin'];
 
     /**
      * 在初始化类的时候验证一下是否为要登录的界面
      * 如果没有登录，跳转到登录界面
      */
-//    public function _initialize()
-//    {
-//        if (!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*')) {
-//            $this->error('您还没有登录', url('admin/auth/login'));
-//        }
-//    }
 
-    /**
+    public function __construct()
+    {
+        parent::__construct();
+
+        if(!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*')) {
+
+            $this->login();
+
+        }
+    }
+
+            /**
      * 判断是否登录
      * @return mixed   session('user')
      *      存在  : 表示已经登录    返回   true

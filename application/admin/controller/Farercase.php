@@ -16,6 +16,10 @@ use app\admin\model\Farercase as FCase;
 class Farercase extends Auth
 {
     protected $is_check_login = ['*'];
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * 新增攻略
@@ -47,6 +51,12 @@ class Farercase extends Auth
             return json_encode(['error'=>30002,'msg'=>$file->getError()]);
         }
     }
+
+    /**
+     * 攻略删除
+     * @param FCase $case
+     * @return array
+     */
     public function lock(FCase $case)
     {
         $id    = $_POST['case_id'];
@@ -57,6 +67,12 @@ class Farercase extends Auth
             return ['error'=>1,'msg'=>'删除失败'];
         }
     }
+
+    /**
+     * 攻略恢复
+     * @param FCase $case
+     * @return array
+     */
     public function unlock(FCase $case)
     {
         $id = $_POST['case_id'];
@@ -67,6 +83,12 @@ class Farercase extends Auth
             return ['error'=>1,'msg'=>'恢复失败'];
         }
     }
+
+    /**
+     * 攻略编辑
+     * @param FCase $case
+     * @return mixed
+     */
     public function edit(FCase $case)
     {
         $case_id = input('post.case_id');
@@ -74,6 +96,12 @@ class Farercase extends Auth
         $this->assign('result',$result);
         return $this->fetch();
     }
+
+    /**
+     * 修改封面图片
+     * @param FCase $case
+     * @return array
+     */
     public function changePhoto(FCase $case)
     {
         $file = request()->file('file');
@@ -83,6 +111,12 @@ class Farercase extends Auth
         $result = $case->save(['header_image'=>$path],['case_id'=>$case_id]);
         return ['path'=>$path];
     }
+
+    /**
+     * 攻略保存修改
+     * @param FCase $case
+     * @return string
+     */
     public function caseSave(FCase $case)
     {
 
@@ -99,6 +133,11 @@ class Farercase extends Auth
             return json_encode(['error'=>30002,'msg'=>'保存失败']);
         }
     }
+
+    /**
+     * 显示攻略回收站
+     * @return mixed
+     */
     public function showTrash()
     {
         $result = FCase::onlyTrashed()->select();

@@ -9,11 +9,29 @@ class Index extends Auth
 {
     protected $is_check_login = ['*'];
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * 通过判断左侧栏的点击事件来分别进行不同的操作
+     * @param Farercase $caseModel
+     * @param Users $users
+     * @param Hotel $hotel
+     * @return mixed|string
+     */
     public function index(Farercase $caseModel,Users $users,Hotel $hotel)
     {
         if (isset($_POST['type'])) {
             switch ($_POST['type']) {
                 case 'index':
+                    $usersTotal = Users::count();
+                    $caseTotal  = Farercase::count();
+                    $hotelTotal = Hotel::count();
+                    $this->assign('usersTotal',$usersTotal);
+                    $this->assign('caseTotal',$caseTotal);
+                    $this->assign('hotelTotal',$hotelTotal);
                     return $this->fetch(APP_PATH."/admin/view/index/first.html");
                 break;
                 case 'data':
@@ -84,12 +102,23 @@ class Index extends Auth
                     break;
             }
         } else {
+            $usersTotal = Users::count();
+            $caseTotal  = Farercase::count();
+            $hotelTotal = Hotel::count();
+            $this->assign('usersTotal',$usersTotal);
+            $this->assign('caseTotal',$caseTotal);
+            $this->assign('hotelTotal',$hotelTotal);
             $this->assign('title','首页 - Farer后台管理系统');
             return $this->fetch();
         }
 
     }
 
+    /**
+     * 酒店中富文本编辑器图片上传方法
+     * 保存到upload下面    原名保存
+     * @return array
+     */
     public function upload(){
         $file = request()->file('image');
         $info = $file->move('uploads/public','');
@@ -100,6 +129,11 @@ class Index extends Auth
             return ['success'=>false,'msg'=>'上传失败','file_path'=>$file_path];
         }
     }
+
+    /**
+     * 攻略上传
+     * @return string
+     */
     public function caseUpload(){
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('file');
@@ -112,15 +146,15 @@ class Index extends Auth
             echo $file->getError();
         }
     }
+
+    /**
+     * 显示用户管理
+     * @return mixed
+     */
     public function user()
     {
         $this->assign('title','用户管理');
         return $this->fetch();
-    }
-    public function test()
-    {
-        $this->assign('title','测试界面');
-        var_dump($this->fetch());
     }
 
     /**
