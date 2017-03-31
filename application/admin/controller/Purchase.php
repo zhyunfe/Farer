@@ -25,7 +25,7 @@ class Purchase extends Auth
     public function addPurchase(PurchaseModel $purchase)
     {
 
-        //获取上传的封面图片，并将它移到/uploads/farercase中
+        //获取上传的封面图片，并将它移到/uploads/purchase
         $header_image = null;
         $file = request()->file('header_image');
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads/purchase');

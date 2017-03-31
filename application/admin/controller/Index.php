@@ -14,10 +14,10 @@ class Index extends Auth
         if (isset($_POST['type'])) {
             switch ($_POST['type']) {
                 case 'index':
-                    return '这个哈哈是首页';
+                    return $this->fetch(APP_PATH."/admin/view/index/first.html");
                 break;
                 case 'data':
-                    return '这个是数据页面';
+                    return $this->fetch(APP_PATH."/admin/view/index/chart.html");
                 break;
                 case 'hotel':
                     $count = $hotel->withTrashed()->count('id');

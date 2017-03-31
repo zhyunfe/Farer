@@ -116,4 +116,32 @@ class Hotel extends Auth {
         $status = [0=>'经济型',1=>'豪华型',2=>'主题型'];
         return $status[$value];
     }
+    public function hotelDetail(HotelModel $hotel)
+    {
+        $id = input('post.id');
+        $result = HotelModel::get($id);
+        $this->assign('result',$result);
+        return $this->fetch();
+    }
+    public function hotelModify(HotelModel $hotel)
+    {
+        $key = input('post.key');
+        $value = input('post.value');
+        $id = input('post.id');
+        $result = $hotel->save([$key=>$value],['id'=>$id]);
+        if($result) {
+            return ['error'=>0,"msg"=>'修改成功'];
+        } else {
+            return ['error'=>500001,'msg'=>'修改失败'];
+        }
+    }
+    public function modifyPhoto(HotelModel $hotel)
+    {
+        $file = request()->file('file');
+        $id  = input('post.id');
+        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads/hotel');
+        $path = $info->getSaveName();
+        $hotel->save(['header_image'=>$path],['id'=>$id]);
+        return ['path'=>$path];
+    }
 }

@@ -19,6 +19,7 @@ use app\admin\model\Place as PlaceModel;
 
 class Place extends Auth {
     protected $is_check_login = ['*'];
+
     public function addPlace(PlaceModel $placeModel)
     {
         $file = request()->file('image');

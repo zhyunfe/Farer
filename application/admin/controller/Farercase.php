@@ -99,4 +99,12 @@ class Farercase extends Auth
             return json_encode(['error'=>30002,'msg'=>'保存失败']);
         }
     }
+    public function showTrash()
+    {
+        $result = FCase::onlyTrashed()->select();
+        $count = count($result);
+        $this->assign('result',$result);
+        $tmp =  $this->fetch();
+        return $tmp;
+    }
 }

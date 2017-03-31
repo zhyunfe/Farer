@@ -1,0 +1,42 @@
+<div class="am-g">
+    <div class="tpl-table-images">
+        {foreach $result as $case}
+        <div class="am-u-sm-12 am-u-md-6 am-u-lg-4 am-animation-fade" id="case{$case->case_id}">
+            <div class="tpl-table-images-content" >
+                <div class="tpl-table-images-content-i-time">发布时间：{$case->create_time}</div>
+                <div class="tpl-i-title " >
+                    <b class="title{$case->case_id}">{$case->title}</b>
+                </div>
+                <a href="javascript:;" class="tpl-table-images-content-i">
+                    <div class="tpl-table-images-content-i-info">
+                        <span class="ico location{$case->case_id}">{$case->location}</span>
+                    </div>
+                    <span class="tpl-table-images-content-i-shadow"></span>
+                    <img src="http://www.farer.com/uploads/farercase/{$case->header_image}" class="img{$case->case_id}">
+                </a>
+                <div class="tpl-table-images-content-block">
+                    <div class="tpl-i-font href{$case->case_id}">
+                        {$case->href|mb_substr=0,10,'utf-8'}
+                    </div>
+                    <div class="tpl-i-more">
+                        <ul>
+                            <li><span class="am-icon-eye am-text-warning"> {$case->seecount}</span></li>
+                            <li><span class="am-icon-thumbs-o-up am-text-success"> {$case->user_star}</span></li>
+                            <li><span class="am-icon-user-md font-green"> 600+</span></li>
+                        </ul>
+                    </div>
+                    <div class="am-btn-toolbar" value={$case->case_id}>
+                        <div class="am-btn-group am-btn-group-xs tpl-edit-content-btn">
+                            <button    class="am-btn am-btn-default am-btn-success  case_see" value={$case->case_id}><span class="am-icon-plus"></span> 查看</button>
+                            <button   value={$case->case_id} class="am-btn am-btn-default am-btn-danger case_del"  tag={if $case->delete_time}0{else}1{/if}><span class="am-icon-trash-o"></span>
+                                {if $case->delete_time}恢复{else}删除{/if}</button>
+                            <button    class="am-btn am-btn-default am-btn-secondary case_edit " value={$case->case_id} disabled="disabled">
+                                <span class="am-icon-edit"></span> 编辑</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+</div>
