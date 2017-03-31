@@ -29,7 +29,7 @@ class Auth extends Controller
 
         if(!$this->checkLogin() && (in_array(Request::instance()->action(), $this->is_check_login) || $this->is_check_login[0] == '*')) {
 
-            $this->login();
+            $this->error();
 
         }
     }

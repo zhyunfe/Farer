@@ -7,7 +7,7 @@ use app\admin\model\Users;
 use app\admin\model\Hotel;
 class Index extends Auth
 {
-    protected $is_check_login = ['*'];
+    protected $is_check_login = [''];
 
     public function __construct()
     {
